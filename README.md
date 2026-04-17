@@ -10,15 +10,11 @@
 
 #
 
-<p align="center">
-  Estudante de <b>Desenvolvimento de Sistemas</b> no SENAI Luiz Vargas e <b>Eletroeletrônica</b> na ETEC Trajano Camargo. 
-  Atualmente focado em PHP para Back-End e apaixonado pela integração entre Hardware e Software (IoT). 
-  Sempre em busca de novos desafios e automações que facilitem o dia a dia.
-</p>
+<p align="center">Estudante de <b>Desenvolvimento de Sistemas</b> no SENAI Luiz Vargas e <b>Eletroeletrônica</b> na ETEC Trajano Camargo. Atualmente focado em PHP para Back-End e apaixonado pela integração entre Hardware e Software (IoT). Estou constantemente atualizando meus conhecimentos e buscando novos desafios na área de tecnologia.
   
 #
 
-<img align="right" alt="Study GIF" height="170px" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndnBqZ3BqZ3BqZ3BqZ3BqZ3BqZ3BqZ3BqZ3BqZ3BqZ3BqJmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/L1R1QHUR4YpGg/giphy.gif">
+<img align="right" alt="Study GIF" height="190px" src="https://media.giphy.com/media/L1R1QHUR4YpGg/giphy.gif">
 
 <h3 align="left">Vamos nos conectar!</h3>
 
@@ -30,21 +26,21 @@
 <h3 align="left">Minha Stack ~</h3>
 
 <div align="left">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" height="30" alt="html5 logo"  />
-  <img width="10" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" height="30" alt="css3 logo"  />
-  <img width="10" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg" height="30" alt="javascript logo"  />
-  <img width="10" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" height="30" alt="php logo"  />
-  <img width="10" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" height="30" alt="mysql logo"  />
-  <img width="10" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" height="30" alt="git logo"  />
-  <img width="10" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" height="30" alt="arduino logo"  />
-  <img width="10" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" height="30" alt="vscode logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" height="25" alt="html5 logo"  />
+  <img width="8" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" height="25" alt="css3 logo"  />
+  <img width="8" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg" height="25" alt="javascript logo"  />
+  <img width="8" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" height="25" alt="php logo"  />
+  <img width="8" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" height="25" alt="mysql logo"  />
+  <img width="8" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" height="25" alt="git logo"  />
+  <img width="8" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" height="25" alt="arduino logo"  />
+  <img width="8" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" height="25" alt="vscode logo"  />
 </div>
 
 #
@@ -52,15 +48,18 @@
 <div style="text-align: center;" align="center">
   <h3>* GitHub Stats *</h3>
   <br>
-  <img src="https://github-readme-stats.vercel.app/api?username=GustavoFrancoFPP&hide_title=true&show_icons=true&include_all_commits=true&count_private=true&line_height=25&hide=issues&bg_color=0D1117&title_color=00D9FF&text_color=FFF&border_radius=3&border_color=00D9FF&icon_color=00D9FF&theme=tokyonight" alt="GitHub stats">
+  <img src="https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api?username=GustavoFrancoFPP&hide_title=true&show_icons=true&include_all_commits=false&count_private=true&line_height=25&hide=issues&bg_color=000&title_color=00D9FF&text_color=FFF&border_radius=3&border_color=36123c&icon_color=00D9FF&theme=jolly" alt="GitHub stats">
 
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=GustavoFrancoFPP&line_height=10&card_width=290&layout=compact&hide_title=false&count_private=true&langs_count=4&show_icons=true&title_color=00D9FF&hide=html,scss,less&bg_color=0D1117&text_color=8B8B8B&border_radius=3&border_color=00D9FF&theme=tokyonight" alt="Most Used Languages">
+  <a href="https://github.com/GustavoFrancoFPP/github-readme-stats">
+    <img src="https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api/top-langs/?username=GustavoFrancoFPP&line_height=10&card_width=290&layout=compact&hide_title=false&count_private=true&langs_count=4&show_icons=true&title_color=00D9FF&hide=html,scss,less&bg_color=000&text_color=8B8B8B&border_radius=3&border_color=561760&count_private=true" alt="Most Used Languages">
+  </a>
 </div>
+
 
 #
 
 <picture align="center">
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/GustavoFrancoFPP/GustavoFrancoFPP/output/github-snake-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/GustavoFrancoFPP/GustavoFrancoFPP/output/github-snake.svg">
-  <img align="center" alt="github contribution grid snake animation" src="https://raw.githubusercontent.com/GustavoFrancoFPP/GustavoFrancoFPP/output/github-snake.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/GustavoFrancoFPP/GustavoFrancoFPP/output/github-contribution-grid-snake-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/GustavoFrancoFPP/GustavoFrancoFPP/output/github-contribution-grid-snake-dark.svg">
+  <img align="center" alt="github contribution grid snake animation" src="https://raw.githubusercontent.com/GustavoFrancoFPP/GustavoFrancoFPP/output/github-contribution-grid-snake.svg">
 </picture>
