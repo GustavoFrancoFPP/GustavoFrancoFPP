@@ -37,7 +37,7 @@
 
 ---
 
-## 🛠️ Stack
+##  Stack
 
 <div align="center">
   
