@@ -13,7 +13,6 @@
   
   • Estudante de **Desenvolvimento de Sistemas** – SENAI Luiz Vargas <br>
   • Estudante de **Eletroeletrônica** – ETEC Trajano Camargo <br>
-  • Especialização em **PHP para Back-End** <br>
   • Atuação em integração **Hardware e Software (IoT)** <br>
   • União entre lógica de programação e circuitos eletrônicos
 </p>
