@@ -1,5 +1,3 @@
-
-
 <div align="center">
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=32&pause=1000&color=00D9FF&center=true&vCenter=true&width=800&lines=👋+Olá%2C+eu+sou+o+Gustavo!;Desenvolvedor+Back-End+em+formação+🚀;Entusiasta+de+Hardware+%2B+Software+⚡;SENAI+%7C+ETEC+%7C+Dev+%2B+Tech" alt="Typing SVG" />
@@ -28,6 +26,14 @@ e integrador de soluções **Software + Hardware** em projetos práticos e inova
 - 📚 Código limpo, documentado e versionado com Git
 
 <br clear="right"/>
+
+---
+
+## 🐍 Minha Grade de Commits (Snake Game)
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/GustavoFrancoFPP/GustavoFrancoFPP/output/github-snake-dark.svg" alt="Snake Animation" />
+</div>
 
 ---
 
@@ -130,7 +136,3 @@ e integrador de soluções **Software + Hardware** em projetos práticos e inova
 <img src="https://media.giphy.com/media/LnQjpWaON8nhr21vNW/giphy.gif" width="60" alt="connect gif" />
 
 </div>
-
----
-
-
