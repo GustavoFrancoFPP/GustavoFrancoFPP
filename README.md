@@ -1,138 +1,66 @@
 <div align="center">
-
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=32&pause=1000&color=00D9FF&center=true&vCenter=true&width=800&lines=👋+Olá%2C+eu+sou+o+Gustavo!;Desenvolvedor+Back-End+em+formação+🚀;Entusiasta+de+Hardware+%2B+Software+⚡;SENAI+%7C+ETEC+%7C+Dev+%2B+Tech" alt="Typing SVG" />
-
-<img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="40px" alt="wave" />
-
+  <a href="https://git.io/typing-svg">
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=22&pause=1000&color=00D9FF&center=true&vCenter=true&random=false&width=524&lines=%E2%8A%B9+Bem-vindo+ao+meu+perfil!+%CB%99%E1%B5%95%CB%99+%E2%8A%B9" alt="Typing SVG">
+  </a>
 </div>
 
----
-
-<img align="right" src="https://media.giphy.com/media/M9gbBd9nbDrOTu1Mqx/giphy.gif" width="240" alt="coding gif" />
-
-## 🧑‍💻 Sobre Mim
-
-Sou um estudante apaixonado por tecnologia, atualmente cursando:
-- **Técnico em Desenvolvimento de Sistemas** no SENAI Luiz Vargas
-- **Técnico em Eletroeletrônica** na ETEC Trajano Camargo
-
-Especializado em desenvolvimento **Back-End** com **PHP**, criando experiências visuais com **HTML/CSS**,  
-e integrador de soluções **Software + Hardware** em projetos práticos e inovadores.
-
-**⚡ Minhas Prioridades:**
-- 🎯 Desenvolvimento Back-End robusto com PHP e lógica de sistemas
-- 🌐 Front-End limpo e responsivo com HTML5 e CSS3
-- 🔌 Automação com Arduino, Raspberry Pi e IoT
-- 📚 Código limpo, documentado e versionado com Git
-
-<br clear="right"/>
-
----
-
-## 🐍 Minha Grade de Commits (Snake Game)
-
 <div align="center">
-  <img src="https://raw.githubusercontent.com/GustavoFrancoFPP/GustavoFrancoFPP/output/github-snake-dark.svg" alt="Snake Animation" />
+  <img align="center" alt="Coding GIF" src="https://media.giphy.com/media/M9gbBd9nbDrOTu1Mqx/giphy.gif" width="400">
 </div>
 
----
+#
 
-## 🛠️ Minha Stack Tecnológica
-
-<div align="center">
-
-### 💻 Linguagens & Desenvolvimento Web
-<p>
-  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5"/>
-  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3"/>
-  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript"/>
-  <img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP"/>
+<p align="center">
+  Estudante de <b>Desenvolvimento de Sistemas</b> no SENAI Luiz Vargas e <b>Eletroeletrônica</b> na ETEC Trajano Camargo. 
+  Atualmente focado em PHP para Back-End e apaixonado pela integração entre Hardware e Software (IoT). 
+  Sempre em busca de novos desafios e automações que facilitem o dia a dia.
 </p>
+  
+#
 
-### 🔧 Controle de Versão & Ferramentas
-<p>
-  <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git"/>
-  <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
-  <img src="https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white" alt="VS Code"/>
-  <img src="https://img.shields.io/badge/Windows-0078D4?style=for-the-badge&logo=windows&logoColor=white" alt="Windows"/>
-</p>
+<img align="right" alt="Study GIF" height="170px" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndnBqZ3BqZ3BqZ3BqZ3BqZ3BqZ3BqZ3BqZ3BqZ3BqZ3BqJmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/L1R1QHUR4YpGg/giphy.gif">
 
-### ⚡ Hardware & Eletrônica
-<p>
-  <img src="https://img.shields.io/badge/Arduino-00979D?style=for-the-badge&logo=arduino&logoColor=white" alt="Arduino"/>
-  <img src="https://img.shields.io/badge/Raspberry_Pi-A22846?style=for-the-badge&logo=raspberry-pi&logoColor=white" alt="Raspberry Pi"/>
-  <img src="https://img.shields.io/badge/IoT-FF6B35?style=for-the-badge&logo=internetofthings&logoColor=white" alt="IoT"/>
-</p>
+<h3 align="left">Vamos nos conectar!</h3>
 
+[![LinkedIn](https://img.shields.io/badge/-LinkedIn-000?style=for-the-badge&logo=linkedin&logoColor=00D9FF&color:FFF)](https://www.linkedin.com/in/GustavoFrancoFPP)
+[![WhatsApp](https://img.shields.io/badge/-WhatsApp-000?style=for-the-badge&logo=whatsapp&logoColor=00D9FF&color:FFF)](https://wa.me/5519999999999)
+[![GitHub](https://img.shields.io/badge/-GitHub-000?style=for-the-badge&logo=github&logoColor=00D9FF&color:FFF)](https://github.com/GustavoFrancoFPP)
+
+
+<h3 align="left">Minha Stack ~</h3>
+
+<div align="left">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" height="30" alt="html5 logo"  />
+  <img width="10" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" height="30" alt="css3 logo"  />
+  <img width="10" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg" height="30" alt="javascript logo"  />
+  <img width="10" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" height="30" alt="php logo"  />
+  <img width="10" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" height="30" alt="mysql logo"  />
+  <img width="10" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" height="30" alt="git logo"  />
+  <img width="10" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" height="30" alt="arduino logo"  />
+  <img width="10" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" height="30" alt="vscode logo"  />
 </div>
 
----
+#
 
+<div style="text-align: center;" align="center">
+  <h3>* GitHub Stats *</h3>
+  <br>
+  <img src="https://github-readme-stats.vercel.app/api?username=GustavoFrancoFPP&hide_title=true&show_icons=true&include_all_commits=true&count_private=true&line_height=25&hide=issues&bg_color=0D1117&title_color=00D9FF&text_color=FFF&border_radius=3&border_color=00D9FF&icon_color=00D9FF&theme=tokyonight" alt="GitHub stats">
 
-## 📊 Estatísticas do GitHub
-
-<div align="center">
-
-<img height="180em" src="https://github-readme-stats.vercel.app/api?username=GustavoFrancoFPP&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true&hide_border=true&bg_color=0D1117&title_color=00D9FF&icon_color=FF6B35&text_color=FFFFFF&ring_color=00D9FF" alt="Estatísticas Gerais"/>
-
-<img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=GustavoFrancoFPP&layout=compact&langs_count=8&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00D9FF&text_color=FFFFFF" alt="Top Linguagens"/>
-
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=GustavoFrancoFPP&line_height=10&card_width=290&layout=compact&hide_title=false&count_private=true&langs_count=4&show_icons=true&title_color=00D9FF&hide=html,scss,less&bg_color=0D1117&text_color=8B8B8B&border_radius=3&border_color=00D9FF&theme=tokyonight" alt="Most Used Languages">
 </div>
 
-<div align="center">
+#
 
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=GustavoFrancoFPP&theme=tokyonight&hide_border=true&background=0D1117&stroke=00D9FF&ring=FF6B35&fire=FF6B35&currStreakLabel=00D9FF" alt="GitHub Streak"/>
-
-</div>
-
----
-
-## 📈 Gráfico de Atividade
-
-<div align="center">
-
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=GustavoFrancoFPP&bg_color=0D1117&color=00D9FF&line=FF6B35&point=FF6B35&area=true&hide_border=true&radius=16" alt="Contribution Graph"/>
-
-</div>
-
-<div align="center">
-
-<img src="https://github-profile-trophy.vercel.app/?username=GustavoFrancoFPP&theme=tokyonight&no-frame=true&column=7&margin-w=5&margin-h=5" alt="Trophy" />
-
-</div>
-
----
-
-## 🤝 Vamos nos Conectar!
-
-<div align="center">
-
-**Conecte-se comigo e vamos colaborar em projetos incríveis!** 🚀
-
-<a href="https://www.linkedin.com/in/GustavoFrancoFPP" target="_blank">
-  <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
-</a>
-<a href="https://github.com/GustavoFrancoFPP" target="_blank">
-  <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
-</a>
-<a href="https://wa.me/5511999999999" target="_blank">
-  <img src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp"/>
-</a>
-
-<br/><br/>
-
-</div>
-
----
-
-<div align="center">
-
-### ✨ Obrigado por visitar meu perfil! ✨
-
-<img src="https://komarev.com/ghpvc/?username=GustavoFrancoFPP&color=00D9FF&style=for-the-badge&label=VISITAS" alt="Profile Views"/>
-
-<br/>
-
-<img src="https://media.giphy.com/media/LnQjpWaON8nhr21vNW/giphy.gif" width="60" alt="connect gif" />
-
-</div>
+<picture align="center">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/GustavoFrancoFPP/GustavoFrancoFPP/output/github-snake-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/GustavoFrancoFPP/GustavoFrancoFPP/output/github-snake.svg">
+  <img align="center" alt="github contribution grid snake animation" src="https://raw.githubusercontent.com/GustavoFrancoFPP/GustavoFrancoFPP/output/github-snake.svg">
+</picture>
