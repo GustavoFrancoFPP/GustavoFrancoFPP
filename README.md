@@ -119,3 +119,5 @@ e interesse em integrar software com hardware em projetos práticos.
 
 
 </div>
+
+![Snake animation](https://github.com/GustavoFrancoFPP/GustavoFrancoFPP/blob/output/github-contribution-grid-snake-dark.svg)
