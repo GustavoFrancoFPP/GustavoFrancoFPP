@@ -24,13 +24,13 @@
 ##  Contato
 
 <div align="center">
-  <a href="https://www.linkedin.com/in/GustavoFrancoFPP" target="_blank">
+  <a href="https://www.linkedin.com/in/gustavo-franco-528298353" target="_blank">
     <img src="https://img.shields.io/badge/-LinkedIn-0A0A0A?style=for-the-badge&logo=linkedin&logoColor=B14BFF&logoWidth=25">
   </a>
-  <a href="mailto:seuemail@example.com" target="_blank">
+  <a href="mailto:gustavofpp@outlook.com" target="_blank">
     <img src="https://img.shields.io/badge/-E--mail-0A0A0A?style=for-the-badge&logo=gmail&logoColor=B14BFF&logoWidth=25">
   </a>
-  <a href="https://www.instagram.com/seuusuario" target="_blank">
+  <a href="https://www.instagram.com/gstv.franco" target="_blank">
     <img src="https://img.shields.io/badge/-Instagram-0A0A0A?style=for-the-badge&logo=instagram&logoColor=B14BFF&logoWidth=25">
   </a>
 </div>
