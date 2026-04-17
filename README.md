@@ -6,7 +6,7 @@
 
 ---
 
-## 👨‍💻 Perfil
+##  Perfil
 
 <p align="center">
   <img src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" width="250" align="right" alt="Coding">
@@ -21,7 +21,7 @@
 
 ---
 
-## 🌐 Contato
+##  Contato
 
 <div align="center">
   <a href="https://www.linkedin.com/in/GustavoFrancoFPP" target="_blank">
@@ -54,7 +54,7 @@
 
 ---
 
-## 📊 Estatísticas
+##  Estatísticas
 
 <div align="center">
   <img width="49%" height="195em" src="https://github-readme-stats.vercel.app/api?username=GustavoFrancoFPP&show_icons=true&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&icon_color=B14BFF&hide_border=true&include_all_commits=true&count_private=true&hide=issues&ring_color=B14BFF"/>
@@ -63,7 +63,7 @@
 
 ---
 
-## 📈 Atividade
+##  Atividade
 
 <div align="center">
   <img src="https://github-readme-activity-graph.vercel.app/graph?username=GustavoFrancoFPP&theme=react-dark&bg_color=0A0A0A&color=B14BFF&line=B14BFF&point=FFFFFF&area=true&hide_border=true" width="90%">
@@ -71,7 +71,7 @@
 
 ---
 
-## 🐍 Contribuições
+##  Contribuições
 
 <picture align="center">
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/GustavoFrancoFPP/GustavoFrancoFPP/output/github-contribution-grid-snake-dark.svg">
