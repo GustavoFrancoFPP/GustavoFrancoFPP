@@ -69,10 +69,10 @@
 
 <div align="center">
   
-  [![Metas](https://progress-bar.dev/70/?title=PHP%20Avan%C3%A7ado&width=300&color=00d9ff)](https://progress-bar.dev/)
-  [![Metas](https://progress-bar.dev/50/?title=Banco%20de%20Dados&width=300&color=00d9ff)](https://progress-bar.dev/)
-  [![Metas](https://progress-bar.dev/85/?title=IoT%20com%20Arduino&width=300&color=00d9ff)](https://progress-bar.dev/)
-  [![Metas](https://progress-bar.dev/40/?title=React%20%2F%20Vue.js&width=300&color=00d9ff)](https://progress-bar.dev/)
+  ![PHP Avançado](https://img.shields.io/badge/PHP%20Avan%C3%A7ado-70%25-00D9FF?style=for-the-badge)
+  ![Banco de Dados](https://img.shields.io/badge/Banco%20de%20Dados-50%25-00D9FF?style=for-the-badge)
+  ![IoT com Arduino](https://img.shields.io/badge/IoT%20com%20Arduino-85%25-00D9FF?style=for-the-badge)
+  ![React/Vue.js](https://img.shields.io/badge/React%20%2F%20Vue.js-40%25-00D9FF?style=for-the-badge)
   
 </div>
 
@@ -86,14 +86,9 @@
 
 ---
 
-## 🎮 Quando estou livre...
-
-<div align="center">
-  
-  ```mermaid
-  graph LR
-      A[Codificando] --> B{Café?}
-      B -->|Sim| C[Continue Coding]
-      B -->|Não| D[Pegue café ☕]
-      D --> A
-      C --> E[✨ Projeto Incrível ✨]
+</div>
+🐍 Minhas Contribuições
+<picture align="center"> <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/GustavoFrancoFPP/GustavoFrancoFPP/output/github-contribution-grid-snake-dark.svg"> <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/GustavoFrancoFPP/GustavoFrancoFPP/output/github-contribution-grid-snake.svg"> <img alt="Snake animation" src="https://raw.githubusercontent.com/GustavoFrancoFPP/GustavoFrancoFPP/output/github-contribution-grid-snake-dark.svg"> </picture>
+✨ Frase do Momento
+<div align="center"> <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=dark&quote=A%20tecnologia%20move%20o%20mundo%20e%20a%20educação%20move%20a%20tecnologia&author=Gustavo%20Franco&bg_color=0A0A0A&text_color=00D9FF"> </div>
+<div align="center"> <img src="https://capsule-render.vercel.app/api?type=waving&color=00D9FF&height=100&section=footer&animation=twinkling" width="100%"> <sub>⚡ "Transformando ideias em código e circuitos em soluções."</sub> <br><br> <img src="https://komarev.com/ghpvc/?username=GustavoFrancoFPP&color=00D9FF&style=flat&label=👁️+Visualizações"> </div> ```
