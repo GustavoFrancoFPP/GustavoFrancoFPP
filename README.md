@@ -4,9 +4,6 @@
   </a>
 </div>
 
-<div align="center">
-  <img align="center" alt="Coding GIF" src="https://media.giphy.com/media/M9gbBd9nbDrOTu1Mqx/giphy.gif" width="400">
-</div>
 
 #
 
