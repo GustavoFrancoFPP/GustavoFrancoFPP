@@ -11,10 +11,8 @@
 <p align="center">
   <img src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" width="250" align="right" alt="Coding">
   
-  • Estudante de **Desenvolvimento de Sistemas** – SENAI Luiz Vargas <br>
+  • Estudante de **Desenvolvimento de Sistemas** – SENAI Luiz Varga <br>
   • Estudante de **Eletroeletrônica** – ETEC Trajano Camargo <br>
-  • Atuação em integração **Hardware e Software (IoT)** <br>
-  • União entre lógica de programação e circuitos eletrônicos
 </p>
 
 <br clear="right">
