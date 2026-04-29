@@ -13,6 +13,7 @@
   
   • Estudante de **Desenvolvimento de Sistemas** – SENAI Luiz Varga <br>
   • Estudante de **Eletroeletrônica** – ETEC Trajano Camargo <br>
+  • Aprendiz – Ajinomoto do Brasil <br>
 </p>
 
 <br clear="right">
