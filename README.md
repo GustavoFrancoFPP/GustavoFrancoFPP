@@ -80,24 +80,6 @@
 
 ---
 
-##  Habilidades Técnicas
-
-<div align="center">
-
-| 🎯 Categoria | Habilidades |
-|-----------|------------|
-| **💻 Linguagens** | PHP, JavaScript, Dart, Python, C, C++ |
-| **🎨 Front-End** | HTML5, CSS3, Bootstrap, Flutter, Responsive Design |
-| **⚙️ Back-End** | PHP, Laravel, Node.js, RESTful APIs |
-| **💾 Bancos de Dados** | MySQL, MariaDB, SQL |
-| **🔌 IoT & Embarcados** | Arduino, C/C++, Microcontroladores |
-| **🛠️ Ferramentas** | Git/GitHub, VSCode, Windows, DevTools |
-| **🧠 Soft Skills** | Resolução de Problemas, Trabalho em Equipe, Aprendizado Contínuo |
-
-</div>
-
----
-
 ##  🚀 Estatísticas Avançadas
 
 <div align="center">
@@ -141,28 +123,7 @@
 
 ---
 
----
 
-##  ⚡ Quick Stats
-
-<table align="center">
-  <tr>
-    <td>
-      <strong>Repositórios Públicos</strong><br>
-      <img src="https://img.shields.io/endpoint?url=https://api.github.com/repos/GustavoFrancoFPP/GustavoFrancoFPP&label=Repos&color=B14BFF&style=flat-square">
-    </td>
-    <td>
-      <strong>Linguagem Favorita</strong><br>
-      <img src="https://img.shields.io/badge/PHP-B14BFF?style=flat-square&logo=php&logoColor=white">
-    </td>
-    <td>
-      <strong>Dedicado a</strong><br>
-      <img src="https://img.shields.io/badge/IoT%20%26%20Backend-B14BFF?style=flat-square&logo=code&logoColor=white">
-    </td>
-  </tr>
-</table>
-
----
 
 ---
 
