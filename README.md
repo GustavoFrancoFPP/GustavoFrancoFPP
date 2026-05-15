@@ -63,11 +63,16 @@
 ##  📊 Estatísticas & Métricas
 
 <div align="center">
-  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=GustavoFrancoFPP&show_icons=true&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&icon_color=B14BFF&hide_border=true&include_all_commits=true&count_private=true&hide=issues" alt="GitHub Stats">
-</div>
-
-<div align="center">
-  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=GustavoFrancoFPP&layout=compact&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&hide_border=true&langs_count=10" alt="Linguagens mais usadas">
+  <table>
+    <tr>
+      <td width="50%">
+        <img height="180em" src="https://github-readme-stats.vercel.app/api?username=GustavoFrancoFPP&show_icons=true&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&icon_color=B14BFF&hide_border=true&include_all_commits=true&count_private=true" alt="GitHub Stats">
+      </td>
+      <td width="50%">
+        <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=GustavoFrancoFPP&layout=compact&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&hide_border=true&langs_count=8" alt="Linguagens mais usadas">
+      </td>
+    </tr>
+  </table>
 </div>
 
 <div align="center">
@@ -88,6 +93,31 @@
 
 <div align="center">
   <img src="https://activity-graph.herokuapp.com/graph?username=GustavoFrancoFPP&theme=react-dark&bg_color=0A0A0A&color=B14BFF&line=B14BFF&point=FFFFFF&area=true&hide_border=true" alt="Contribution Graph">
+</div>
+
+---
+
+##  🦖 Jogo do Dinossauro
+
+<div align="center">
+  <p><strong>Jogos Disponíveis:</strong></p>
+  
+  [![Jogo Customizado](https://img.shields.io/badge/Jogar%20Versão%20Customizada-B14BFF?style=for-the-badge&logo=gamepad&logoColor=FFFFFF)](https://github.com/GustavoFrancoFPP/GustavoFrancoFPP/blob/main/dino-game.html)
+  
+  [![Jogo Original](https://img.shields.io/badge/Jogo%20do%20Google%20Chrome-B14BFF?style=for-the-badge&logo=google&logoColor=FFFFFF)](https://chromedino.com/)
+  
+  <details>
+  <summary><b>🎮 Informações do Jogo</b></summary>
+  
+  ```
+  Controles:
+  • ESPAÇO / SETA PARA CIMA - Pular
+  • CLIQUE - Pular (versão mobile)
+  • Nível aumenta a cada 10 pontos
+  • Seu recorde é salvo automaticamente
+  ```
+  
+  </details>
 </div>
 
 ---

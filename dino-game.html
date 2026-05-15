@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦖 Jogo do Dinossauro - Gustavo Franco</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0A0A0A 0%, #1a0a2e 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+            color: #B14BFF;
+        }
+
+        .container {
+            background: rgba(20, 20, 40, 0.8);
+            border: 2px solid #B14BFF;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 0 30px rgba(177, 75, 255, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #B14BFF;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: #B14BFF;
+            opacity: 0.8;
+        }
+
+        #gameContainer {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 100%);
+            border: 2px solid #B14BFF;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 20px rgba(177, 75, 255, 0.1);
+        }
+
+        .ground {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="20"><line x1="0" y1="10" x2="40" y2="10" stroke="%23333" stroke-width="2"/><circle cx="10" cy="14" r="2" fill="%23666"/><circle cx="25" cy="15" r="1.5" fill="%23666"/></svg>') repeat-x;
+            background-size: 40px 20px;
+            border-top: 3px solid #333;
+        }
+
+        #dino {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            bottom: 60px;
+            left: 50px;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .dino-img {
+            width: 100%;
+            height: 100%;
+            fill: #333;
+        }
+
+        .obstacle {
+            position: absolute;
+            bottom: 60px;
+            width: 25px;
+            height: 60px;
+            background: #333;
+            border-radius: 3px;
+        }
+
+        .cloud {
+            position: absolute;
+            width: 80px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            top: 40px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .stat-item {
+            background: rgba(177, 75, 255, 0.1);
+            padding: 10px 20px;
+            border: 1px solid #B14BFF;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-item .label {
+            font-size: 0.9em;
+            color: #B14BFF;
+            opacity: 0.7;
+        }
+
+        .stat-item .value {
+            font-size: 1.8em;
+            color: #B14BFF;
+            font-weight: bold;
+        }
+
+        .controls {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .controls p {
+            margin-bottom: 15px;
+            color: #B14BFF;
+        }
+
+        button {
+            background: linear-gradient(135deg, #B14BFF 0%, #7c3aed 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(177, 75, 255, 0.5);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        .game-over {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            z-index: 100;
+            border: 3px solid #B14BFF;
+            box-shadow: 0 0 30px rgba(177, 75, 255, 0.5);
+        }
+
+        .game-over h2 {
+            font-size: 2.5em;
+            color: #B14BFF;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #B14BFF;
+        }
+
+        .game-over p {
+            color: #fff;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .info {
+            background: rgba(177, 75, 255, 0.1);
+            border: 1px solid #B14BFF;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            color: #B14BFF;
+            text-align: left;
+            font-size: 0.95em;
+        }
+
+        .info strong {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            #gameContainer {
+                height: 300px;
+            }
+
+            .game-over {
+                padding: 20px;
+            }
+
+            .game-over h2 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🦖 Dinossauro Game</h1>
+            <p>Criado por Gustavo Franco</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="label">Pontuação</div>
+                <div class="value" id="score">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="label">Recorde</div>
+                <div class="value" id="highScore">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="label">Nível</div>
+                <div class="value" id="level">1</div>
+            </div>
+        </div>
+
+        <div id="gameContainer">
+            <div class="ground"></div>
+            <div id="dino">
+                <svg class="dino-img" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Corpo -->
+                    <ellipse cx="35" cy="30" rx="15" ry="12" fill="#333"/>
+                    <!-- Pescoço -->
+                    <rect x="28" y="18" width="8" height="12" fill="#333" rx="2"/>
+                    <!-- Cabeça -->
+                    <circle cx="32" cy="15" r="8" fill="#333"/>
+                    <!-- Olho -->
+                    <circle cx="34" cy="13" r="2" fill="#B14BFF"/>
+                    <!-- Bico -->
+                    <polygon points="40,15 44,14 40,18" fill="#333"/>
+                    <!-- Pernas -->
+                    <rect x="20" y="38" width="4" height="15" fill="#333" rx="2"/>
+                    <rect x="30" y="38" width="4" height="15" fill="#333" rx="2"/>
+                    <!-- Cauda -->
+                    <path d="M 15 28 Q 5 25 8 35" stroke="#333" stroke-width="4" fill="none" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="game-over" id="gameOverScreen">
+                <h2>Game Over!</h2>
+                <p id="finalScore">Pontuação Final: 0</p>
+                <button onclick="location.reload()">Jogar Novamente</button>
+            </div>
+        </div>
+
+        <div class="controls">
+            <p><strong>Controles:</strong> Pressione <code style="background: rgba(177,75,255,0.2); padding: 3px 8px; border-radius: 3px;">ESPAÇO</code> ou <code style="background: rgba(177,75,255,0.2); padding: 3px 8px; border-radius: 3px;">SETA PARA CIMA</code> para pular</p>
+            <button onclick="startGame()">Iniciar Jogo</button>
+            <button onclick="location.reload()">Reiniciar</button>
+        </div>
+
+        <div class="info">
+            <strong>📖 Como Jogar:</strong>
+            <p>
+                1. Clique em "Iniciar Jogo" ou pressione ESPAÇO<br>
+                2. Use ESPAÇO ou SETA PARA CIMA para fazer o dinossauro pular<br>
+                3. Evite os obstáculos que vêm pela frente<br>
+                4. A dificuldade aumenta conforme você marca pontos<br>
+                5. Tente bater seu recorde pessoal!
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let score = 0;
+        let highScore = localStorage.getItem('dinoHighScore') || 0;
+        let level = 1;
+        let gameRunning = false;
+        let gameOver = false;
+        let dinoY = 0;
+        let dinoVelocity = 0;
+        let gravity = 0.6;
+        let jumpPower = -15;
+        const dino = document.getElementById('dino');
+        const gameContainer = document.getElementById('gameContainer');
+        const scoreDisplay = document.getElementById('score');
+        const highScoreDisplay = document.getElementById('highScore');
+        const levelDisplay = document.getElementById('level');
+        const gameOverScreen = document.getElementById('gameOverScreen');
+
+        highScoreDisplay.textContent = highScore;
+
+        function startGame() {
+            if (!gameRunning && !gameOver) {
+                gameRunning = true;
+                gameLoop();
+                spawnObstacles();
+            } else if (gameRunning && !gameOver) {
+                alert('Jogo já está em andamento!');
+            }
+        }
+
+        function gameLoop() {
+            if (!gameRunning) return;
+
+            // Física do pulo
+            dinoVelocity += gravity;
+            dinoY += dinoVelocity;
+
+            const groundLevel = 60;
+            if (dinoY + 50 >= groundLevel) {
+                dinoY = groundLevel - 50;
+                dinoVelocity = 0;
+            }
+
+            dino.style.bottom = dinoY + 'px';
+
+            // Verificar colisões
+            checkCollisions();
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        function jump() {
+            if (gameRunning && dinoY + 50 >= 60) {
+                dinoVelocity = jumpPower;
+            }
+        }
+
+        function spawnObstacles() {
+            if (!gameRunning) return;
+
+            const obstacle = document.createElement('div');
+            obstacle.className = 'obstacle';
+            obstacle.style.right = '-25px';
+            gameContainer.appendChild(obstacle);
+
+            let obstacleX = 0;
+            const speed = 6 + level * 0.5;
+
+            const obstacleInterval = setInterval(() => {
+                if (!gameRunning) {
+                    clearInterval(obstacleInterval);
+                    obstacle.remove();
+                    return;
+                }
+
+                obstacleX += speed;
+                obstacle.style.right = obstacleX + 'px';
+
+                if (obstacleX > gameContainer.offsetWidth) {
+                    clearInterval(obstacleInterval);
+                    obstacle.remove();
+                    score += 1;
+                    scoreDisplay.textContent = score;
+
+                    if (score % 10 === 0) {
+                        level++;
+                        levelDisplay.textContent = level;
+                    }
+                }
+            }, 30);
+
+            // Próximo obstáculo
+            const nextSpawnTime = 1500 - level * 100;
+            setTimeout(spawnObstacles, Math.max(1000, nextSpawnTime));
+        }
+
+        function checkCollisions() {
+            const obstacles = document.querySelectorAll('.obstacle');
+            const dinoRect = {
+                left: 50,
+                right: 100,
+                top: dinoY + 100,
+                bottom: dinoY + 150,
+                width: 50,
+                height: 50
+            };
+
+            obstacles.forEach(obstacle => {
+                const obstacleX = gameContainer.offsetWidth - parseInt(obstacle.style.right);
+                const obstacleRect = {
+                    left: obstacleX,
+                    right: obstacleX + 25,
+                    top: 340,
+                    bottom: 400,
+                    width: 25,
+                    height: 60
+                };
+
+                if (!(dinoRect.right < obstacleRect.left || 
+                      dinoRect.left > obstacleRect.right || 
+                      dinoRect.bottom < obstacleRect.top || 
+                      dinoRect.top > obstacleRect.bottom)) {
+                    endGame();
+                }
+            });
+        }
+
+        function endGame() {
+            gameRunning = false;
+            gameOver = true;
+
+            if (score > highScore) {
+                highScore = score;
+                localStorage.setItem('dinoHighScore', highScore);
+                highScoreDisplay.textContent = highScore;
+            }
+
+            gameOverScreen.style.display = 'block';
+            document.getElementById('finalScore').textContent = `Pontuação Final: ${score}`;
+        }
+
+        // Controles
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' || e.code === 'ArrowUp') {
+                e.preventDefault();
+                if (!gameRunning && !gameOver) {
+                    startGame();
+                } else if (gameRunning) {
+                    jump();
+                }
+            }
+        });
+
+        // Para touch/mobile
+        gameContainer.addEventListener('click', () => {
+            if (!gameRunning && !gameOver) {
+                startGame();
+            } else if (gameRunning) {
+                jump();
+            }
+        });
+    </script>
+</body>
+</html>
