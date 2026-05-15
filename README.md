@@ -42,32 +42,40 @@
   
   **Front-End & Web**
   
-  <img src="https://skillicons.dev/icons?i=html,css,js,bootstrap" />
+  <img src="https://skillicons.dev/icons?i=html,css,js,bootstrap,flutter,dart" />
   
   **Back-End & Bancos de Dados**
   
-  <img src="https://skillicons.dev/icons?i=php,mysql,nodejs,python" />
+  <img src="https://skillicons.dev/icons?i=php,laravel,mysql,nodejs,python" />
   
   **Sistemas Embarcados & IoT**
   
-  <img src="https://skillicons.dev/icons?i=arduino,raspberrypi,c,cpp" />
+  <img src="https://skillicons.dev/icons?i=arduino,c,cpp" />
   
   **Ferramentas & Versionamento**
   
-  <img src="https://skillicons.dev/icons?i=git,github,vscode,linux,windows" />
+  <img src="https://skillicons.dev/icons?i=git,github,vscode,windows" />
   
 </div>
 
 ---
 
-##  Estatísticas & Métricas
+##  📊 Estatísticas & Métricas
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=GustavoFrancoFPP&show_icons=true&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&icon_color=B14BFF&hide_border=true&include_all_commits=true&count_private=true&hide=issues&ring_color=B14BFF&locale=pt-br" alt="GitHub Stats">
+  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=GustavoFrancoFPP&show_icons=true&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&icon_color=B14BFF&hide_border=true&include_all_commits=true&count_private=true&hide=issues" alt="GitHub Stats">
 </div>
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=GustavoFrancoFPP&layout=compact&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&hide_border=true&langs_count=10&card_width=320&locale=pt-br" alt="Linguagens mais usadas">
+  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=GustavoFrancoFPP&layout=compact&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&hide_border=true&langs_count=10" alt="Linguagens mais usadas">
+</div>
+
+<div align="center">
+  <img src="https://github-readme-streak-stats.herokuapp.com?user=GustavoFrancoFPP&theme=dark&background=0A0A0A&stroke=B14BFF&ring=B14BFF&fire=B14BFF&currStreakLabel=B14BFF&sideLabels=B14BFF" alt="GitHub Streak">
+</div>
+
+<div align="center">
+  <img src="https://github-profile-trophy.vercel.app/?username=GustavoFrancoFPP&theme=dark_dimmed&background=0A0A0A&title_color=B14BFF&text_color=FFFFFF&no-frame=false&row=1&column=7" alt="Troféus do GitHub">
 </div>
 
 ---
@@ -76,21 +84,48 @@
 
 <div align="center">
 
-| Categoria | Habilidades |
+| 🎯 Categoria | Habilidades |
 |-----------|------------|
-| **Linguagens** | PHP, JavaScript, Python, C, C++ |
-| **Front-End** | HTML5, CSS3, Bootstrap, Responsive Design |
-| **Back-End** | PHP, Node.js, RESTful APIs |
-| **Bancos de Dados** | MySQL, MariaDB, SQL |
-| **IoT & Embarcados** | Arduino, Raspberry Pi, C/C++ |
-| **Ferramentas** | Git/GitHub, VSCode, Linux, Windows |
-| **Soft Skills** | Resolução de Problemas, Trabalho em Equipe, Aprendizado Contínuo |
+| **💻 Linguagens** | PHP, JavaScript, Dart, Python, C, C++ |
+| **🎨 Front-End** | HTML5, CSS3, Bootstrap, Flutter, Responsive Design |
+| **⚙️ Back-End** | PHP, Laravel, Node.js, RESTful APIs |
+| **💾 Bancos de Dados** | MySQL, MariaDB, SQL |
+| **🔌 IoT & Embarcados** | Arduino, C/C++, Microcontroladores |
+| **🛠️ Ferramentas** | Git/GitHub, VSCode, Windows, DevTools |
+| **🧠 Soft Skills** | Resolução de Problemas, Trabalho em Equipe, Aprendizado Contínuo |
 
 </div>
 
 ---
 
-##  Sobre Mim
+##  🚀 Estatísticas Avançadas
+
+<div align="center">
+  <img src="https://github-readme-stats.vercel.app/api/wakatime?username=GustavoFrancoFPP&layout=compact&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&hide_border=true" alt="Wakatime Stats">
+</div>
+
+<div align="center">
+  <img src="https://activity-graph.herokuapp.com/graph?username=GustavoFrancoFPP&theme=react-dark&bg_color=0A0A0A&color=B14BFF&line=B14BFF&point=FFFFFF&area=true&hide_border=true" alt="Contribution Graph">
+</div>
+
+---
+
+##  💎 Badges de Proficiência
+
+<div align="center">
+  
+  ![PHP](https://img.shields.io/badge/PHP-Expert-B14BFF?style=for-the-badge&logo=php&logoColor=white)
+  ![JavaScript](https://img.shields.io/badge/JavaScript-Advanced-B14BFF?style=for-the-badge&logo=javascript&logoColor=white)
+  ![MySQL](https://img.shields.io/badge/MySQL-Expert-B14BFF?style=for-the-badge&logo=mysql&logoColor=white)
+  ![Laravel](https://img.shields.io/badge/Laravel-Advanced-B14BFF?style=for-the-badge&logo=laravel&logoColor=white)
+  ![Arduino](https://img.shields.io/badge/Arduino-Advanced-B14BFF?style=for-the-badge&logo=arduino&logoColor=white)
+  ![Flutter](https://img.shields.io/badge/Flutter-Learning-B14BFF?style=for-the-badge&logo=flutter&logoColor=white)
+  ![Python](https://img.shields.io/badge/Python-Intermediate-B14BFF?style=for-the-badge&logo=python&logoColor=white)
+  ![Node.js](https://img.shields.io/badge/Node.js-Advanced-B14BFF?style=for-the-badge&logo=node.js&logoColor=white)
+
+</div>
+
+---
 
 <div align="center">
   
@@ -106,9 +141,28 @@
 
 ---
 
-<div align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=GustavoFrancoFPP&theme=react-dark&bg_color=0A0A0A&color=B14BFF&line=B14BFF&point=FFFFFF&area=true&hide_border=true" width="90%">
-</div>
+---
+
+##  ⚡ Quick Stats
+
+<table align="center">
+  <tr>
+    <td>
+      <strong>Repositórios Públicos</strong><br>
+      <img src="https://img.shields.io/endpoint?url=https://api.github.com/repos/GustavoFrancoFPP/GustavoFrancoFPP&label=Repos&color=B14BFF&style=flat-square">
+    </td>
+    <td>
+      <strong>Linguagem Favorita</strong><br>
+      <img src="https://img.shields.io/badge/PHP-B14BFF?style=flat-square&logo=php&logoColor=white">
+    </td>
+    <td>
+      <strong>Dedicado a</strong><br>
+      <img src="https://img.shields.io/badge/IoT%20%26%20Backend-B14BFF?style=flat-square&logo=code&logoColor=white">
+    </td>
+  </tr>
+</table>
+
+---
 
 ---
 
