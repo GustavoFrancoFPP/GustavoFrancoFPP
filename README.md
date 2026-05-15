@@ -88,11 +88,11 @@
 ##  🚀 Estatísticas Avançadas
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api/wakatime?username=GustavoFrancoFPP&layout=compact&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&hide_border=true" alt="Wakatime Stats">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=GustavoFrancoFPP&theme=react-dark&bg_color=0A0A0A&color=B14BFF&line=B14BFF&point=FFFFFF&area=true&hide_border=true" alt="Contribution Graph">
 </div>
 
 <div align="center">
-  <img src="https://activity-graph.herokuapp.com/graph?username=GustavoFrancoFPP&theme=react-dark&bg_color=0A0A0A&color=B14BFF&line=B14BFF&point=FFFFFF&area=true&hide_border=true" alt="Contribution Graph">
+  <img src="https://github-readme-stats.vercel.app/api/wakatime?username=GustavoFrancoFPP&layout=compact&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&hide_border=true&custom_title=Estatísticas%20do%20WakaTime" alt="Wakatime Stats">
 </div>
 
 ---
@@ -100,14 +100,12 @@
 ##  🦖 Jogo do Dinossauro
 
 <div align="center">
-  <p><strong>Jogos Disponíveis:</strong></p>
+  <p><strong>Clique abaixo para jogar agora:</strong></p>
   
-  [![Jogo Customizado](https://img.shields.io/badge/Jogar%20Versão%20Customizada-B14BFF?style=for-the-badge&logo=gamepad&logoColor=FFFFFF)](https://github.com/GustavoFrancoFPP/GustavoFrancoFPP/blob/main/dino-game.html)
-  
-  [![Jogo Original](https://img.shields.io/badge/Jogo%20do%20Google%20Chrome-B14BFF?style=for-the-badge&logo=google&logoColor=FFFFFF)](https://chromedino.com/)
+  [![Jogar Agora](https://img.shields.io/badge/🎮%20JOGAR%20AGORA-B14BFF?style=for-the-badge&logo=gamepad&logoColor=FFFFFF)](https://htmlpreview.github.io/?https://github.com/GustavoFrancoFPP/GustavoFrancoFPP/blob/main/dino-game.html)
   
   <details>
-  <summary><b>🎮 Informações do Jogo</b></summary>
+  <summary><b>📖 Como Jogar</b></summary>
   
   ```
   Controles:
@@ -115,6 +113,8 @@
   • CLIQUE - Pular (versão mobile)
   • Nível aumenta a cada 10 pontos
   • Seu recorde é salvo automaticamente
+  
+  Objetivo: Desvie dos obstáculos e conquiste o maior score!
   ```
   
   </details>
