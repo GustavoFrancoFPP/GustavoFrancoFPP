@@ -74,10 +74,6 @@
   <img src="https://github-readme-streak-stats.herokuapp.com?user=GustavoFrancoFPP&theme=dark&background=0A0A0A&stroke=B14BFF&ring=B14BFF&fire=B14BFF&currStreakLabel=B14BFF&sideLabels=B14BFF" alt="GitHub Streak">
 </div>
 
-<div align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=GustavoFrancoFPP&theme=dark_dimmed&background=0A0A0A&title_color=B14BFF&text_color=FFFFFF&no-frame=false&row=1&column=7" alt="Troféus do GitHub">
-</div>
-
 ---
 
 ##  Habilidades Técnicas
@@ -101,11 +97,13 @@
 ##  🚀 Estatísticas Avançadas
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api/wakatime?username=GustavoFrancoFPP&layout=compact&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&hide_border=true" alt="Wakatime Stats">
+  
+  > **🏆 Troféus & Achievements**
+  
 </div>
 
 <div align="center">
-  <img src="https://activity-graph.herokuapp.com/graph?username=GustavoFrancoFPP&theme=react-dark&bg_color=0A0A0A&color=B14BFF&line=B14BFF&point=FFFFFF&area=true&hide_border=true" alt="Contribution Graph">
+  <img src="https://github-profile-trophy.vercel.app/?username=GustavoFrancoFPP&theme=dark_dimmed&background=0A0A0A&title_color=B14BFF&text_color=FFFFFF&no-frame=false&row=2&column=4" alt="Troféus do GitHub">
 </div>
 
 ---
@@ -124,22 +122,6 @@
   ![Node.js](https://img.shields.io/badge/Node.js-Advanced-B14BFF?style=for-the-badge&logo=node.js&logoColor=white)
 
 </div>
-
----
-
-<div align="center">
-  
-🎯 **Objetivo**: Desenvolver soluções inovadoras que integrem software e hardware
-  
-💡 **Paixão**: IoT, Back-End Development e Eletrônica
-  
-📚 **Formação Contínua**: Sempre buscando aprender novas tecnologias e melhores práticas
-  
-🤝 **Colaboração**: Aberto a oportunidades de trabalho em equipe e novos desafios
-
-</div>
-
----
 
 ---
 
@@ -166,6 +148,25 @@
 
 ---
 
+##  🎮 Diversão - Jogue comigo!
+
+<div align="center">
+  
+  **Quer jogar um jogo do dinossauro? Clique abaixo! 👇**
+  
+  [![Play Dino Game](https://img.shields.io/badge/🦕%20Play%20Dino%20Game-Click%20Here-B14BFF?style=for-the-badge&logo=google-chrome&logoColor=white)](https://chromedino.com/)
+  
+  ```
+  ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+    🦕 Dinossauro correndo em busca de desafios!
+    💨 Assim como eu em busca de inovação e conhecimento
+  ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+  ```
+  
+</div>
+
+---
+
 ##  Contribuições
 
 <picture align="center">
@@ -173,6 +174,24 @@
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/GustavoFrancoFPP/GustavoFrancoFPP/output/github-contribution-grid-snake.svg">
   <img alt="Snake animation" src="https://raw.githubusercontent.com/GustavoFrancoFPP/GustavoFrancoFPP/output/github-contribution-grid-snake-dark.svg">
 </picture>
+
+---
+
+---
+
+##  Sobre Mim
+
+<div align="center">
+  
+🎯 **Objetivo**: Desenvolver soluções inovadoras que integrem software e hardware
+  
+💡 **Paixão**: IoT, Back-End Development e Eletrônica
+  
+📚 **Formação Contínua**: Sempre buscando aprender novas tecnologias e melhores práticas
+  
+🤝 **Colaboração**: Aberto a oportunidades de trabalho em equipe e novos desafios
+
+</div>
 
 ---
 
