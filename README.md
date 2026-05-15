@@ -11,9 +11,9 @@
 <p align="center">
   <img src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" width="250" align="right" alt="Coding">
   
-  â€¢ Estudante de **Desenvolvimento de Sistemas** â€“ SENAI Luiz Varga <br>
-  â€¢ Estudante de **EletroeletrÃ´nica** â€“ ETEC Trajano Camargo <br>
-  â€¢ Aprendiz â€“ Ajinomoto do Brasil <br>
+  • Estudante de **Desenvolvimento de Sistemas** – SENAI Luiz Varga <br>
+  • Estudante de **Eletroeletrônica** – ETEC Trajano Camargo <br>
+  • Aprendiz – Ajinomoto do Brasil <br>
 </p>
 
 <br clear="right">
@@ -36,7 +36,7 @@
 
 ---
 
-##  Stack TecnolÃ³gico
+##  Stack Tecnológico
 
 <div align="center">
   
@@ -60,7 +60,7 @@
 
 ---
 
-##  ðŸ“Š EstatÃ­sticas & MÃ©tricas
+##  📊 Estatísticas & Métricas
 
 <div align="center">
   <img height="180em" src="https://github-readme-stats.vercel.app/api?username=GustavoFrancoFPP&show_icons=true&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&icon_color=B14BFF&hide_border=true&include_all_commits=true&count_private=true&hide=issues" alt="GitHub Stats">
@@ -74,23 +74,43 @@
   <img src="https://github-readme-streak-stats.herokuapp.com?user=GustavoFrancoFPP&theme=dark&background=0A0A0A&stroke=B14BFF&ring=B14BFF&fire=B14BFF&currStreakLabel=B14BFF&sideLabels=B14BFF" alt="GitHub Streak">
 </div>
 
----
-
-##  ðŸš€ EstatÃ­sticas AvanÃ§adas
-
 <div align="center">
-  
-  > **ðŸ† TrofÃ©us & Achievements**
-  
-</div>
-
-<div align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=GustavoFrancoFPP&theme=dark_dimmed&background=0A0A0A&title_color=B14BFF&text_color=FFFFFF&no-frame=false&row=2&column=4" alt="TrofÃ©us do GitHub">
+  <img src="https://github-profile-trophy.vercel.app/?username=GustavoFrancoFPP&theme=dark_dimmed&background=0A0A0A&title_color=B14BFF&text_color=FFFFFF&no-frame=false&row=1&column=7" alt="Troféus do GitHub">
 </div>
 
 ---
 
-##  ðŸ’Ž Badges de ProficiÃªncia
+##  Habilidades Técnicas
+
+<div align="center">
+
+| 🎯 Categoria | Habilidades |
+|-----------|------------|
+| **💻 Linguagens** | PHP, JavaScript, Dart, Python, C, C++ |
+| **🎨 Front-End** | HTML5, CSS3, Bootstrap, Flutter, Responsive Design |
+| **⚙️ Back-End** | PHP, Laravel, Node.js, RESTful APIs |
+| **💾 Bancos de Dados** | MySQL, MariaDB, SQL |
+| **🔌 IoT & Embarcados** | Arduino, C/C++, Microcontroladores |
+| **🛠️ Ferramentas** | Git/GitHub, VSCode, Windows, DevTools |
+| **🧠 Soft Skills** | Resolução de Problemas, Trabalho em Equipe, Aprendizado Contínuo |
+
+</div>
+
+---
+
+##  🚀 Estatísticas Avançadas
+
+<div align="center">
+  <img src="https://github-readme-stats.vercel.app/api/wakatime?username=GustavoFrancoFPP&layout=compact&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&hide_border=true" alt="Wakatime Stats">
+</div>
+
+<div align="center">
+  <img src="https://activity-graph.herokuapp.com/graph?username=GustavoFrancoFPP&theme=react-dark&bg_color=0A0A0A&color=B14BFF&line=B14BFF&point=FFFFFF&area=true&hide_border=true" alt="Contribution Graph">
+</div>
+
+---
+
+##  💎 Badges de Proficiência
 
 <div align="center">
   
@@ -107,12 +127,28 @@
 
 ---
 
-##  âš¡ Quick Stats
+<div align="center">
+  
+🎯 **Objetivo**: Desenvolver soluções inovadoras que integrem software e hardware
+  
+💡 **Paixão**: IoT, Back-End Development e Eletrônica
+  
+📚 **Formação Contínua**: Sempre buscando aprender novas tecnologias e melhores práticas
+  
+🤝 **Colaboração**: Aberto a oportunidades de trabalho em equipe e novos desafios
+
+</div>
+
+---
+
+---
+
+##  ⚡ Quick Stats
 
 <table align="center">
   <tr>
     <td>
-      <strong>RepositÃ³rios PÃºblicos</strong><br>
+      <strong>Repositórios Públicos</strong><br>
       <img src="https://img.shields.io/endpoint?url=https://api.github.com/repos/GustavoFrancoFPP/GustavoFrancoFPP&label=Repos&color=B14BFF&style=flat-square">
     </td>
     <td>
@@ -130,28 +166,7 @@
 
 ---
 
-##  ðŸŽ® DiversÃ£o - Jogue comigo!
-
-<div align="center">
-  
-  **Quer jogar um jogo do dinossauro? Clique abaixo! ðŸ‘‡**
-  
-  [![Play Dino Game](https://img.shields.io/badge/ðŸ¦•%20Play%20Dino%20Game-Click%20Here-B14BFF?style=for-the-badge&logo=google-chrome&logoColor=white)](https://chromedino.com/)
-  
-  ```
-  â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬
-    ðŸ¦• Dinossauro correndo em busca de desafios!
-    ðŸ’¨ Assim como eu em busca de inovaÃ§Ã£o e conhecimento
-  â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬
-  ```
-  
-</div>
-
----
-
-=======
->>>>>>> 207f02306fa11ecc58b29b98d5ea36839f4085e5
-##  ContribuiÃ§Ãµes
+##  Contribuições
 
 <picture align="center">
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/GustavoFrancoFPP/GustavoFrancoFPP/output/github-contribution-grid-snake-dark.svg">
@@ -161,31 +176,22 @@
 
 ---
 
----
-
-##  Sobre Mim
-
-<div align="center">
-  
-ðŸŽ¯ **Objetivo**: Desenvolver soluÃ§Ãµes inovadoras que integrem software e hardware
-  
-ðŸ’¡ **PaixÃ£o**: IoT, Back-End Development e EletrÃ´nica
-  
-ðŸ“š **FormaÃ§Ã£o ContÃ­nua**: Sempre buscando aprender novas tecnologias e melhores prÃ¡ticas
-  
-ðŸ¤ **ColaboraÃ§Ã£o**: Aberto a oportunidades de trabalho em equipe e novos desafios
-
-</div>
-
----
-
 <div align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=6B21A5&height=100&section=footer&animation=twinkling" width="100%">
   
   <br><br>
   
-  <img src="https://komarev.com/ghpvc/?username=GustavoFrancoFPP&color=B14BFF&style=flat&label=ðŸ‘ï¸+VisualizaÃ§Ãµes">
+  <img src="https://komarev.com/ghpvc/?username=GustavoFrancoFPP&color=B14BFF&style=flat&label=👁️+Visualizações">
   
   <br><br>
+  
+  **Estatísticas do Perfil**
+  
+  ![GitHub followers](https://img.shields.io/github/followers/GustavoFrancoFPP?style=social)
+  ![GitHub Stars](https://img.shields.io/github/stars/GustavoFrancoFPP?style=social)
+  
+  <br><br>
+  
+  *Desenvolvido com ❤️ por Gustavo Franco*
+  
 </div>
-
