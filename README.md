@@ -92,41 +92,6 @@
 
 ---
 
-##  💎 Badges de Proficiência
-
-<div align="center">
-  
-  ![PHP](https://img.shields.io/badge/PHP-Expert-B14BFF?style=for-the-badge&logo=php&logoColor=white)
-  ![JavaScript](https://img.shields.io/badge/JavaScript-Advanced-B14BFF?style=for-the-badge&logo=javascript&logoColor=white)
-  ![MySQL](https://img.shields.io/badge/MySQL-Expert-B14BFF?style=for-the-badge&logo=mysql&logoColor=white)
-  ![Laravel](https://img.shields.io/badge/Laravel-Advanced-B14BFF?style=for-the-badge&logo=laravel&logoColor=white)
-  ![Arduino](https://img.shields.io/badge/Arduino-Advanced-B14BFF?style=for-the-badge&logo=arduino&logoColor=white)
-  ![Flutter](https://img.shields.io/badge/Flutter-Learning-B14BFF?style=for-the-badge&logo=flutter&logoColor=white)
-  ![Python](https://img.shields.io/badge/Python-Intermediate-B14BFF?style=for-the-badge&logo=python&logoColor=white)
-  ![Node.js](https://img.shields.io/badge/Node.js-Advanced-B14BFF?style=for-the-badge&logo=node.js&logoColor=white)
-
-</div>
-
----
-
-<div align="center">
-  
-🎯 **Objetivo**: Desenvolver soluções inovadoras que integrem software e hardware
-  
-💡 **Paixão**: IoT, Back-End Development e Eletrônica
-  
-📚 **Formação Contínua**: Sempre buscando aprender novas tecnologias e melhores práticas
-  
-🤝 **Colaboração**: Aberto a oportunidades de trabalho em equipe e novos desafios
-
-</div>
-
----
-
-
-
----
-
 ##  Contribuições
 
 <picture align="center">
