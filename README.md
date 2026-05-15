@@ -63,38 +63,12 @@
 ##  📊 Estatísticas & Métricas
 
 <div align="center">
-  <table>
-    <tr>
-      <td width="50%">
-        <img height="180em" src="https://github-readme-stats.vercel.app/api?username=GustavoFrancoFPP&show_icons=true&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&icon_color=B14BFF&hide_border=true&include_all_commits=true&count_private=true" alt="GitHub Stats">
-      </td>
-      <td width="50%">
-        <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=GustavoFrancoFPP&layout=compact&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&hide_border=true&langs_count=8" alt="Linguagens mais usadas">
-      </td>
-    </tr>
-  </table>
-</div>
-
-<div align="center">
   <img src="https://github-readme-streak-stats.herokuapp.com?user=GustavoFrancoFPP&theme=dark&background=0A0A0A&stroke=B14BFF&ring=B14BFF&fire=B14BFF&currStreakLabel=B14BFF&sideLabels=B14BFF" alt="GitHub Streak">
 </div>
 
 <div align="center">
   <img src="https://github-profile-trophy.vercel.app/?username=GustavoFrancoFPP&theme=dark_dimmed&background=0A0A0A&title_color=B14BFF&text_color=FFFFFF&no-frame=false&row=1&column=7" alt="Troféus do GitHub">
 </div>
-
----
-
-##  🚀 Estatísticas Avançadas
-
-<div align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=GustavoFrancoFPP&theme=react-dark&bg_color=0A0A0A&color=B14BFF&line=B14BFF&point=FFFFFF&area=true&hide_border=true" alt="Contribution Graph">
-</div>
-
-<div align="center">
-  <img src="https://github-readme-stats.vercel.app/api/wakatime?username=GustavoFrancoFPP&layout=compact&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&hide_border=true&custom_title=Estatísticas%20do%20WakaTime" alt="Wakatime Stats">
-</div>
-
 ---
 
 ##  🦖 Jogo do Dinossauro
