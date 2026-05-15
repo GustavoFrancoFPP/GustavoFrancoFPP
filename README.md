@@ -36,33 +36,75 @@
 
 ---
 
-##  Stack
+##  Stack Tecnológico
 
 <div align="center">
   
-  ### Front-End
-  <img src="https://skillicons.dev/icons?i=html,css,js" />
+  **Front-End & Web**
   
-  ### Back-End
-  <img src="https://skillicons.dev/icons?i=php,mysql" />
+  <img src="https://skillicons.dev/icons?i=html,css,js,bootstrap" />
   
-  ### Ferramentas & IoT
-  <img src="https://skillicons.dev/icons?i=git,arduino,vscode" />
+  **Back-End & Bancos de Dados**
+  
+  <img src="https://skillicons.dev/icons?i=php,mysql,nodejs,python" />
+  
+  **Sistemas Embarcados & IoT**
+  
+  <img src="https://skillicons.dev/icons?i=arduino,raspberrypi,c,cpp" />
+  
+  **Ferramentas & Versionamento**
+  
+  <img src="https://skillicons.dev/icons?i=git,github,vscode,linux,windows" />
   
 </div>
 
 ---
 
-##  Estatísticas
+##  Estatísticas & Métricas
 
 <div align="center">
-  <img width="49%" height="195em" src="https://github-readme-stats.vercel.app/api?username=GustavoFrancoFPP&show_icons=true&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&icon_color=B14BFF&hide_border=true&include_all_commits=true&count_private=true&hide=issues&ring_color=B14BFF"/>
-  <img width="41%" height="195em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=GustavoFrancoFPP&layout=compact&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&hide_border=true&langs_count=8&card_width=320"/>
+  <img src="https://github-readme-stats.vercel.app/api?username=GustavoFrancoFPP&show_icons=true&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&icon_color=B14BFF&hide_border=true&include_all_commits=true&count_private=true&hide=issues&ring_color=B14BFF&locale=pt-br" alt="GitHub Stats">
+</div>
+
+<div align="center">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=GustavoFrancoFPP&layout=compact&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&hide_border=true&langs_count=10&card_width=320&locale=pt-br" alt="Linguagens mais usadas">
 </div>
 
 ---
 
-##  Atividade
+##  Habilidades Técnicas
+
+<div align="center">
+
+| Categoria | Habilidades |
+|-----------|------------|
+| **Linguagens** | PHP, JavaScript, Python, C, C++ |
+| **Front-End** | HTML5, CSS3, Bootstrap, Responsive Design |
+| **Back-End** | PHP, Node.js, RESTful APIs |
+| **Bancos de Dados** | MySQL, MariaDB, SQL |
+| **IoT & Embarcados** | Arduino, Raspberry Pi, C/C++ |
+| **Ferramentas** | Git/GitHub, VSCode, Linux, Windows |
+| **Soft Skills** | Resolução de Problemas, Trabalho em Equipe, Aprendizado Contínuo |
+
+</div>
+
+---
+
+##  Sobre Mim
+
+<div align="center">
+  
+🎯 **Objetivo**: Desenvolver soluções inovadoras que integrem software e hardware
+  
+💡 **Paixão**: IoT, Back-End Development e Eletrônica
+  
+📚 **Formação Contínua**: Sempre buscando aprender novas tecnologias e melhores práticas
+  
+🤝 **Colaboração**: Aberto a oportunidades de trabalho em equipe e novos desafios
+
+</div>
+
+---
 
 <div align="center">
   <img src="https://github-readme-activity-graph.vercel.app/graph?username=GustavoFrancoFPP&theme=react-dark&bg_color=0A0A0A&color=B14BFF&line=B14BFF&point=FFFFFF&area=true&hide_border=true" width="90%">
@@ -82,6 +124,20 @@
 
 <div align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=6B21A5&height=100&section=footer&animation=twinkling" width="100%">
+  
   <br><br>
+  
   <img src="https://komarev.com/ghpvc/?username=GustavoFrancoFPP&color=B14BFF&style=flat&label=👁️+Visualizações">
+  
+  <br><br>
+  
+  **Estatísticas do Perfil**
+  
+  ![GitHub followers](https://img.shields.io/github/followers/GustavoFrancoFPP?style=social)
+  ![GitHub Stars](https://img.shields.io/github/stars/GustavoFrancoFPP?style=social)
+  
+  <br><br>
+  
+  *Desenvolvido com ❤️ por Gustavo Franco*
+  
 </div>
