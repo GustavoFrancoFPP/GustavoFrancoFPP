@@ -80,24 +80,6 @@
 
 ---
 
-##  Habilidades Técnicas
-
-<div align="center">
-
-| 🎯 Categoria | Habilidades |
-|-----------|------------|
-| **💻 Linguagens** | PHP, JavaScript, Dart, Python, C, C++ |
-| **🎨 Front-End** | HTML5, CSS3, Bootstrap, Flutter, Responsive Design |
-| **⚙️ Back-End** | PHP, Laravel, Node.js, RESTful APIs |
-| **💾 Bancos de Dados** | MySQL, MariaDB, SQL |
-| **🔌 IoT & Embarcados** | Arduino, C/C++, Microcontroladores |
-| **🛠️ Ferramentas** | Git/GitHub, VSCode, Windows, DevTools |
-| **🧠 Soft Skills** | Resolução de Problemas, Trabalho em Equipe, Aprendizado Contínuo |
-
-</div>
-
----
-
 ##  🚀 Estatísticas Avançadas
 
 <div align="center">
@@ -107,62 +89,6 @@
 <div align="center">
   <img src="https://activity-graph.herokuapp.com/graph?username=GustavoFrancoFPP&theme=react-dark&bg_color=0A0A0A&color=B14BFF&line=B14BFF&point=FFFFFF&area=true&hide_border=true" alt="Contribution Graph">
 </div>
-
----
-
-##  💎 Badges de Proficiência
-
-<div align="center">
-  
-  ![PHP](https://img.shields.io/badge/PHP-Expert-B14BFF?style=for-the-badge&logo=php&logoColor=white)
-  ![JavaScript](https://img.shields.io/badge/JavaScript-Advanced-B14BFF?style=for-the-badge&logo=javascript&logoColor=white)
-  ![MySQL](https://img.shields.io/badge/MySQL-Expert-B14BFF?style=for-the-badge&logo=mysql&logoColor=white)
-  ![Laravel](https://img.shields.io/badge/Laravel-Advanced-B14BFF?style=for-the-badge&logo=laravel&logoColor=white)
-  ![Arduino](https://img.shields.io/badge/Arduino-Advanced-B14BFF?style=for-the-badge&logo=arduino&logoColor=white)
-  ![Flutter](https://img.shields.io/badge/Flutter-Learning-B14BFF?style=for-the-badge&logo=flutter&logoColor=white)
-  ![Python](https://img.shields.io/badge/Python-Intermediate-B14BFF?style=for-the-badge&logo=python&logoColor=white)
-  ![Node.js](https://img.shields.io/badge/Node.js-Advanced-B14BFF?style=for-the-badge&logo=node.js&logoColor=white)
-
-</div>
-
----
-
-<div align="center">
-  
-🎯 **Objetivo**: Desenvolver soluções inovadoras que integrem software e hardware
-  
-💡 **Paixão**: IoT, Back-End Development e Eletrônica
-  
-📚 **Formação Contínua**: Sempre buscando aprender novas tecnologias e melhores práticas
-  
-🤝 **Colaboração**: Aberto a oportunidades de trabalho em equipe e novos desafios
-
-</div>
-
----
-
----
-
-##  ⚡ Quick Stats
-
-<table align="center">
-  <tr>
-    <td>
-      <strong>Repositórios Públicos</strong><br>
-      <img src="https://img.shields.io/endpoint?url=https://api.github.com/repos/GustavoFrancoFPP/GustavoFrancoFPP&label=Repos&color=B14BFF&style=flat-square">
-    </td>
-    <td>
-      <strong>Linguagem Favorita</strong><br>
-      <img src="https://img.shields.io/badge/PHP-B14BFF?style=flat-square&logo=php&logoColor=white">
-    </td>
-    <td>
-      <strong>Dedicado a</strong><br>
-      <img src="https://img.shields.io/badge/IoT%20%26%20Backend-B14BFF?style=flat-square&logo=code&logoColor=white">
-    </td>
-  </tr>
-</table>
-
----
 
 ---
 
@@ -184,14 +110,6 @@
   <img src="https://komarev.com/ghpvc/?username=GustavoFrancoFPP&color=B14BFF&style=flat&label=👁️+Visualizações">
   
   <br><br>
-  
-  **Estatísticas do Perfil**
-  
-  ![GitHub followers](https://img.shields.io/github/followers/GustavoFrancoFPP?style=social)
-  ![GitHub Stars](https://img.shields.io/github/stars/GustavoFrancoFPP?style=social)
-  
-  <br><br>
-  
-  *Desenvolvido com ❤️ por Gustavo Franco*
+
   
 </div>
