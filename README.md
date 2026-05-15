@@ -1,4 +1,4 @@
-<div align="center">
+﻿<div align="center">
   <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&duration=3000&pause=800&color=B14BFF&center=true&vCenter=true&random=false&width=600&lines=%E2%8A%B9+Gustavo+Franco+%CB%99%E1%B5%95%CB%99+%E2%8A%B9;%E2%8A%B9+Back-End+Development+%7C+IoT+%E2%8A%B9;%E2%8A%B9+PHP+%7C+MySQL+%7C+Arduino+%E2%8A%B9" alt="Typing SVG">
   
   <img src="https://capsule-render.vercel.app/api?type=waving&color=6B21A5&height=120&section=header&fontColor=FFFFFF&animation=twinkling" width="100%">
@@ -11,9 +11,9 @@
 <p align="center">
   <img src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" width="250" align="right" alt="Coding">
   
-  • Estudante de **Desenvolvimento de Sistemas** – SENAI Luiz Varga <br>
-  • Estudante de **Eletroeletrônica** – ETEC Trajano Camargo <br>
-  • Aprendiz – Ajinomoto do Brasil <br>
+  â€¢ Estudante de **Desenvolvimento de Sistemas** â€“ SENAI Luiz Varga <br>
+  â€¢ Estudante de **EletroeletrÃ´nica** â€“ ETEC Trajano Camargo <br>
+  â€¢ Aprendiz â€“ Ajinomoto do Brasil <br>
 </p>
 
 <br clear="right">
@@ -36,7 +36,7 @@
 
 ---
 
-##  Stack Tecnológico
+##  Stack TecnolÃ³gico
 
 <div align="center">
   
@@ -60,7 +60,7 @@
 
 ---
 
-##  📊 Estatísticas & Métricas
+##  ðŸ“Š EstatÃ­sticas & MÃ©tricas
 
 <div align="center">
   <img height="180em" src="https://github-readme-stats.vercel.app/api?username=GustavoFrancoFPP&show_icons=true&theme=dark&bg_color=0A0A0A&title_color=B14BFF&text_color=FFFFFF&icon_color=B14BFF&hide_border=true&include_all_commits=true&count_private=true&hide=issues" alt="GitHub Stats">
@@ -76,39 +76,21 @@
 
 ---
 
-##  Habilidades Técnicas
-
-<div align="center">
-
-| 🎯 Categoria | Habilidades |
-|-----------|------------|
-| **💻 Linguagens** | PHP, JavaScript, Dart, Python, C, C++ |
-| **🎨 Front-End** | HTML5, CSS3, Bootstrap, Flutter, Responsive Design |
-| **⚙️ Back-End** | PHP, Laravel, Node.js, RESTful APIs |
-| **💾 Bancos de Dados** | MySQL, MariaDB, SQL |
-| **🔌 IoT & Embarcados** | Arduino, C/C++, Microcontroladores |
-| **🛠️ Ferramentas** | Git/GitHub, VSCode, Windows, DevTools |
-| **🧠 Soft Skills** | Resolução de Problemas, Trabalho em Equipe, Aprendizado Contínuo |
-
-</div>
-
----
-
-##  🚀 Estatísticas Avançadas
+##  ðŸš€ EstatÃ­sticas AvanÃ§adas
 
 <div align="center">
   
-  > **🏆 Troféus & Achievements**
+  > **ðŸ† TrofÃ©us & Achievements**
   
 </div>
 
 <div align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=GustavoFrancoFPP&theme=dark_dimmed&background=0A0A0A&title_color=B14BFF&text_color=FFFFFF&no-frame=false&row=2&column=4" alt="Troféus do GitHub">
+  <img src="https://github-profile-trophy.vercel.app/?username=GustavoFrancoFPP&theme=dark_dimmed&background=0A0A0A&title_color=B14BFF&text_color=FFFFFF&no-frame=false&row=2&column=4" alt="TrofÃ©us do GitHub">
 </div>
 
 ---
 
-##  💎 Badges de Proficiência
+##  ðŸ’Ž Badges de ProficiÃªncia
 
 <div align="center">
   
@@ -125,12 +107,12 @@
 
 ---
 
-##  ⚡ Quick Stats
+##  âš¡ Quick Stats
 
 <table align="center">
   <tr>
     <td>
-      <strong>Repositórios Públicos</strong><br>
+      <strong>RepositÃ³rios PÃºblicos</strong><br>
       <img src="https://img.shields.io/endpoint?url=https://api.github.com/repos/GustavoFrancoFPP/GustavoFrancoFPP&label=Repos&color=B14BFF&style=flat-square">
     </td>
     <td>
@@ -148,26 +130,28 @@
 
 ---
 
-##  🎮 Diversão - Jogue comigo!
+##  ðŸŽ® DiversÃ£o - Jogue comigo!
 
 <div align="center">
   
-  **Quer jogar um jogo do dinossauro? Clique abaixo! 👇**
+  **Quer jogar um jogo do dinossauro? Clique abaixo! ðŸ‘‡**
   
-  [![Play Dino Game](https://img.shields.io/badge/🦕%20Play%20Dino%20Game-Click%20Here-B14BFF?style=for-the-badge&logo=google-chrome&logoColor=white)](https://chromedino.com/)
+  [![Play Dino Game](https://img.shields.io/badge/ðŸ¦•%20Play%20Dino%20Game-Click%20Here-B14BFF?style=for-the-badge&logo=google-chrome&logoColor=white)](https://chromedino.com/)
   
   ```
-  ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-    🦕 Dinossauro correndo em busca de desafios!
-    💨 Assim como eu em busca de inovação e conhecimento
-  ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+  â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬
+    ðŸ¦• Dinossauro correndo em busca de desafios!
+    ðŸ’¨ Assim como eu em busca de inovaÃ§Ã£o e conhecimento
+  â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬
   ```
   
 </div>
 
 ---
 
-##  Contribuições
+=======
+>>>>>>> 207f02306fa11ecc58b29b98d5ea36839f4085e5
+##  ContribuiÃ§Ãµes
 
 <picture align="center">
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/GustavoFrancoFPP/GustavoFrancoFPP/output/github-contribution-grid-snake-dark.svg">
@@ -183,13 +167,13 @@
 
 <div align="center">
   
-🎯 **Objetivo**: Desenvolver soluções inovadoras que integrem software e hardware
+ðŸŽ¯ **Objetivo**: Desenvolver soluÃ§Ãµes inovadoras que integrem software e hardware
   
-💡 **Paixão**: IoT, Back-End Development e Eletrônica
+ðŸ’¡ **PaixÃ£o**: IoT, Back-End Development e EletrÃ´nica
   
-📚 **Formação Contínua**: Sempre buscando aprender novas tecnologias e melhores práticas
+ðŸ“š **FormaÃ§Ã£o ContÃ­nua**: Sempre buscando aprender novas tecnologias e melhores prÃ¡ticas
   
-🤝 **Colaboração**: Aberto a oportunidades de trabalho em equipe e novos desafios
+ðŸ¤ **ColaboraÃ§Ã£o**: Aberto a oportunidades de trabalho em equipe e novos desafios
 
 </div>
 
@@ -200,17 +184,8 @@
   
   <br><br>
   
-  <img src="https://komarev.com/ghpvc/?username=GustavoFrancoFPP&color=B14BFF&style=flat&label=👁️+Visualizações">
+  <img src="https://komarev.com/ghpvc/?username=GustavoFrancoFPP&color=B14BFF&style=flat&label=ðŸ‘ï¸+VisualizaÃ§Ãµes">
   
   <br><br>
-  
-  **Estatísticas do Perfil**
-  
-  ![GitHub followers](https://img.shields.io/github/followers/GustavoFrancoFPP?style=social)
-  ![GitHub Stars](https://img.shields.io/github/stars/GustavoFrancoFPP?style=social)
-  
-  <br><br>
-  
-  *Desenvolvido com ❤️ por Gustavo Franco*
-  
 </div>
+
