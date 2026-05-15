@@ -184,14 +184,4 @@
   <img src="https://komarev.com/ghpvc/?username=GustavoFrancoFPP&color=B14BFF&style=flat&label=👁️+Visualizações">
   
   <br><br>
-  
-  **Estatísticas do Perfil**
-  
-  ![GitHub followers](https://img.shields.io/github/followers/GustavoFrancoFPP?style=social)
-  ![GitHub Stars](https://img.shields.io/github/stars/GustavoFrancoFPP?style=social)
-  
-  <br><br>
-  
-  *Desenvolvido com ❤️ por Gustavo Franco*
-  
 </div>
