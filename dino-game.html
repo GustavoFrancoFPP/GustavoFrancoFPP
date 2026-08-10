@@ -252,13 +252,96 @@
 
       const imageData = weaponCtx.getImageData(0, 0, offscreen.width, offscreen.height);
       const data = imageData.data;
+      const width = offscreen.width;
+      const height = offscreen.height;
+      const visited = new Uint8Array(width * height);
+      const stack = [];
+      const isNearBlack = (x, y) => {
+        const index = (y * width + x) * 4;
+        return data[index + 3] > 0 && data[index] < 18 && data[index + 1] < 18 && data[index + 2] < 18;
+      };
+      const queueEdgePixel = (x, y) => {
+        const index = y * width + x;
+        if (!visited[index] && isNearBlack(x, y)) {
+          visited[index] = 1;
+          stack.push([x, y]);
+        }
+      };
+
+      for (let x = 0; x < width; x++) {
+        queueEdgePixel(x, 0);
+        queueEdgePixel(x, height - 1);
+      }
+      for (let y = 0; y < height; y++) {
+        queueEdgePixel(0, y);
+        queueEdgePixel(width - 1, y);
+      }
+
+      while (stack.length) {
+        const [x, y] = stack.pop();
+        const neighbors = [[x + 1, y], [x - 1, y], [x, y + 1], [x, y - 1]];
+        neighbors.forEach(([nx, ny]) => {
+          if (nx < 0 || ny < 0 || nx >= width || ny >= height) return;
+          const index = ny * width + nx;
+          if (!visited[index] && isNearBlack(nx, ny)) {
+            visited[index] = 1;
+            stack.push([nx, ny]);
+          }
+        });
+      }
+
       for (let i = 0; i < data.length; i += 4) {
-        if (data[i] < 12 && data[i + 1] < 12 && data[i + 2] < 12) {
+        if (visited[i / 4]) {
           data[i + 3] = 0;
+        } else if (data[i + 3] > 0) {
+          data[i] = Math.min(255, data[i] * 1.35 + 22);
+          data[i + 1] = Math.min(255, data[i + 1] * 1.35 + 22);
+          data[i + 2] = Math.min(255, data[i + 2] * 1.35 + 22);
         }
       }
       weaponCtx.putImageData(imageData, 0, 0);
-      return offscreen;
+
+      const cropped = cropVisibleCanvas(offscreen, 6);
+      return cropped || createFallbackWeaponSprite();
+    }
+
+    function cropVisibleCanvas(source, padding = 0) {
+      const cropCtx = source.getContext('2d');
+      const imageData = cropCtx.getImageData(0, 0, source.width, source.height);
+      const data = imageData.data;
+      let minX = source.width;
+      let minY = source.height;
+      let maxX = -1;
+      let maxY = -1;
+
+      for (let y = 0; y < source.height; y++) {
+        for (let x = 0; x < source.width; x++) {
+          const alpha = data[(y * source.width + x) * 4 + 3];
+          if (alpha > 0) {
+            minX = Math.min(minX, x);
+            minY = Math.min(minY, y);
+            maxX = Math.max(maxX, x);
+            maxY = Math.max(maxY, y);
+          }
+        }
+      }
+
+      if (maxX < minX || maxY < minY) return null;
+
+      minX = Math.max(0, minX - padding);
+      minY = Math.max(0, minY - padding);
+      maxX = Math.min(source.width - 1, maxX + padding);
+      maxY = Math.min(source.height - 1, maxY + padding);
+
+      const cropped = document.createElement('canvas');
+      cropped.width = maxX - minX + 1;
+      cropped.height = maxY - minY + 1;
+      cropped.getContext('2d').drawImage(
+        source,
+        minX, minY, cropped.width, cropped.height,
+        0, 0, cropped.width, cropped.height
+      );
+      return cropped;
     }
 
     // Sprites auxiliares para obstáculos (Cacto / Pterodáctilo em Pixel Art)
@@ -319,6 +402,8 @@
     let superCharge = 0;
     let superActiveFrames = 0;
     let muzzleFlashes = [];
+    let smokePuffs = [];
+    let shellCasings = [];
 
     // --- PERSONAGEM (MICHAEL JACKSON) ---
     const mj = {
@@ -394,17 +479,24 @@
         if (!akSprite || gameOver || this.isDucking) return;
 
         const bob = this.isJumping ? 0 : Math.sin(frameCount / 5) * 1.5;
-        const weaponWidth = this.isJumping ? 88 : 96;
+        const weaponWidth = this.isJumping ? 128 : 140;
         const weaponHeight = weaponWidth * (akSprite.height / akSprite.width);
-        const weaponX = this.x + 16;
-        const weaponY = this.y + (this.isJumping ? 22 : 30) + bob;
+        const weaponX = this.x + 6;
+        const weaponY = this.y + (this.isJumping ? 21 : 31) + bob;
 
         ctx.save();
         ctx.translate(weaponX, weaponY);
         ctx.rotate(this.isJumping ? -0.08 : 0.03);
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.filter = 'brightness(1.8) contrast(1.35)';
         ctx.shadowColor = '#f1c40f';
-        ctx.shadowBlur = 5;
+        ctx.shadowBlur = 10;
+        ctx.globalAlpha = 0.45;
+        ctx.drawImage(akSprite, -2, -weaponHeight / 2 - 2, weaponWidth + 4, weaponHeight + 4);
+        ctx.globalAlpha = 1;
+        ctx.filter = 'brightness(1.25) contrast(1.2)';
         ctx.drawImage(akSprite, 0, -weaponHeight / 2, weaponWidth, weaponHeight);
+        ctx.filter = 'none';
         ctx.shadowBlur = 0;
 
         if (superActiveFrames > 0 && frameCount % 4 < 2) {
@@ -498,6 +590,8 @@
       superActiveFrames = SUPER_DURATION_FRAMES;
       obstacles = [];
       muzzleFlashes = [];
+      smokePuffs = [];
+      shellCasings = [];
       playSound('super');
       updateSuperButton();
     }
@@ -519,29 +613,71 @@
     }
 
     function drawSuperShot() {
-      if (superActiveFrames <= 0) return;
+      if (superActiveFrames <= 0 && muzzleFlashes.length === 0 && smokePuffs.length === 0 && shellCasings.length === 0) return;
 
-      const originX = mj.x + 92;
-      const originY = mj.y + (mj.isJumping ? 22 : 30);
+      const originX = mj.x + 134;
+      const originY = mj.y + (mj.isJumping ? 20 : 29);
 
-      if (frameCount % 2 === 0) {
+      if (superActiveFrames > 0 && frameCount % 2 === 0) {
         const spreads = [
-          0 + (Math.random() - 0.5) * 0.75,
-          Math.PI + (Math.random() - 0.5) * 0.75,
-          -Math.PI / 2 + (Math.random() - 0.5) * 1.2
+          0 + (Math.random() - 0.5) * 0.95,
+          Math.PI + (Math.random() - 0.5) * 0.95,
+          -Math.PI / 2 + (Math.random() - 0.5) * 1.45,
+          -Math.PI / 4 + (Math.random() - 0.5) * 0.7
         ];
 
         spreads.forEach(angle => {
-          const speed = 9 + Math.random() * 7;
+          const speed = 15 + Math.random() * 14;
           muzzleFlashes.push({
-            x: originX,
-            y: originY,
+            x: originX + Math.random() * 8 - 4,
+            y: originY + Math.random() * 8 - 4,
             dx: Math.cos(angle) * speed,
             dy: Math.sin(angle) * speed,
-            length: 10 + Math.random() * 18,
-            life: 16 + Math.floor(Math.random() * 10)
+            length: 32 + Math.random() * 52,
+            thickness: 2 + Math.random() * 4,
+            life: 10 + Math.floor(Math.random() * 8)
           });
         });
+
+        for (let i = 0; i < 5; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = 0.8 + Math.random() * 2.4;
+          smokePuffs.push({
+            x: originX + Math.random() * 10 - 5,
+            y: originY + Math.random() * 10 - 5,
+            dx: Math.cos(angle) * speed,
+            dy: Math.sin(angle) * speed - 0.9,
+            radius: 4 + Math.random() * 7,
+            life: 26 + Math.floor(Math.random() * 20)
+          });
+        }
+
+        for (let i = 0; i < 3; i++) {
+          shellCasings.push({
+            x: mj.x + 68,
+            y: mj.y + 26,
+            dx: -3 - Math.random() * 4,
+            dy: -4 - Math.random() * 4,
+            spin: Math.random() * Math.PI,
+            life: 32 + Math.floor(Math.random() * 14)
+          });
+        }
+      }
+
+      if (superActiveFrames > 0) {
+        const flashRadius = 22 + Math.random() * 12;
+        const gradient = ctx.createRadialGradient(originX, originY, 1, originX, originY, flashRadius);
+        gradient.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
+        gradient.addColorStop(0.28, 'rgba(255, 223, 97, 0.9)');
+        gradient.addColorStop(0.65, 'rgba(231, 76, 60, 0.45)');
+        gradient.addColorStop(1, 'rgba(231, 76, 60, 0)');
+        ctx.save();
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(originX, originY, flashRadius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
       }
 
       muzzleFlashes.forEach(flash => {
@@ -549,18 +685,58 @@
         ctx.save();
         ctx.translate(flash.x, flash.y);
         ctx.rotate(angle);
-        ctx.globalAlpha = Math.min(1, flash.life / 12);
-        ctx.fillStyle = flash.life > 9 ? '#fff6a3' : '#e74c3c';
-        ctx.fillRect(0, -2, flash.length, 4);
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, -1, flash.length * 0.55, 2);
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.globalAlpha = Math.min(1, flash.life / 9);
+        ctx.fillStyle = 'rgba(255, 227, 94, 0.85)';
+        ctx.fillRect(0, -flash.thickness / 2, flash.length, flash.thickness);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+        ctx.fillRect(0, -1, flash.length * 0.62, 2);
+        ctx.fillStyle = 'rgba(255, 102, 55, 0.7)';
+        ctx.fillRect(flash.length * 0.58, -flash.thickness, flash.length * 0.35, flash.thickness * 2);
         ctx.restore();
 
         flash.x += flash.dx;
         flash.y += flash.dy;
-        flash.dy += 0.25;
+        flash.dx *= 0.98;
+        flash.dy = flash.dy * 0.98 + 0.18;
         flash.life--;
       });
+
+      smokePuffs.forEach(puff => {
+        const alpha = Math.min(0.28, puff.life / 120);
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = '#d7d7d7';
+        ctx.beginPath();
+        ctx.arc(puff.x, puff.y, puff.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        puff.x += puff.dx;
+        puff.y += puff.dy;
+        puff.radius += 0.35;
+        puff.dx *= 0.97;
+        puff.dy *= 0.96;
+        puff.life--;
+      });
+
+      shellCasings.forEach(shell => {
+        ctx.save();
+        ctx.translate(shell.x, shell.y);
+        ctx.rotate(shell.spin);
+        ctx.fillStyle = '#d9a441';
+        ctx.fillRect(-3, -1, 7, 3);
+        ctx.fillStyle = '#fff1a8';
+        ctx.fillRect(2, -1, 2, 3);
+        ctx.restore();
+
+        shell.x += shell.dx;
+        shell.y += shell.dy;
+        shell.dy += 0.45;
+        shell.spin += 0.45;
+        shell.life--;
+      });
+
       muzzleFlashes = muzzleFlashes.filter(flash =>
         flash.life > 0 &&
         flash.x > -80 &&
@@ -568,6 +744,8 @@
         flash.y > -80 &&
         flash.y < canvas.height + 80
       );
+      smokePuffs = smokePuffs.filter(puff => puff.life > 0);
+      shellCasings = shellCasings.filter(shell => shell.life > 0 && shell.y < canvas.height + 40);
     }
 
     // --- CONTROLES TECLADO E TOQUE ---
@@ -621,6 +799,8 @@
       superCharge = 0;
       superActiveFrames = 0;
       muzzleFlashes = [];
+      smokePuffs = [];
+      shellCasings = [];
       obstacles = [];
       mj.reset();
       document.getElementById('startBtn').blur();
@@ -715,11 +895,11 @@
         }
       });
 
-      // Rajada do super
-      drawSuperShot();
-
       // Michael Jackson
       mj.draw(ctx, frameCount);
+
+      // Rajada do super
+      drawSuperShot();
 
       // Placar
       ctx.font = '12px "Press Start 2P"';
