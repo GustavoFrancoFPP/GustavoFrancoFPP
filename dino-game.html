@@ -72,6 +72,10 @@
 
     .btn-container {
       margin-top: 15px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     button {
@@ -91,6 +95,12 @@
       background-color: #f39c12;
       transform: scale(1.05);
     }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+      transform: none;
+    }
   </style>
 </head>
 
@@ -105,12 +115,14 @@
 
     <div class="btn-container">
       <button id="startBtn" disabled>CARREGANDO...</button>
+      <button id="superBtn" disabled>SUPER</button>
     </div>
 
     <div class="controls-hint">
       <p><strong>Controles:</strong></p>
       <p> Pular: <code>ESPAÇO</code> / <code>SETA CIMA</code> / <code>TOQUE</code></p>
       <p> Agachar / Cair Rápido: <code>SETA BAIXO</code></p>
+      <p> Super: <code>E</code> / <code>BOTAO SUPER</code></p>
     </div>
   </div>
 
@@ -152,6 +164,15 @@
           gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
           osc.start(now);
           osc.stop(now + 0.25);
+        } else if (type === 'super') {
+          osc.type = 'square';
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
+          osc.frequency.exponentialRampToValueAtTime(110, now + 0.35);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.linearRampToValueAtTime(0.01, now + 0.35);
+          osc.start(now);
+          osc.stop(now + 0.35);
         }
       } catch (e) { }
     }
@@ -161,13 +182,16 @@
     const imgJump = new Image(); imgJump.src = 'jump.png'; // 3 frames lado a lado
     const imgDead = new Image(); imgDead.src = 'dead.png';
     const imgDuck = new Image(); imgDuck.src = 'duck.png';
+    const imgAk = new Image(); imgAk.src = 'ak.png';
+    let akSprite = null;
 
     // Aguarda todas as imagens carregarem antes de habilitar o jogo
-    const assetList = [imgWalk, imgJump, imgDead, imgDuck];
+    const assetList = [imgWalk, imgJump, imgDead, imgDuck, imgAk];
     let assetLoaded = 0;
     assetList.forEach(img => {
       img.onload = () => {
         assetLoaded++;
+        if (img === imgAk) akSprite = createTransparentWeaponSprite(imgAk);
         if (assetLoaded === assetList.length) {
           const btn = document.getElementById('startBtn');
           btn.disabled = false;
@@ -179,6 +203,24 @@
         console.warn('Erro ao carregar imagem:', img.src);
       };
     });
+
+    function createTransparentWeaponSprite(source) {
+      const offscreen = document.createElement('canvas');
+      offscreen.width = source.width;
+      offscreen.height = source.height;
+      const weaponCtx = offscreen.getContext('2d');
+      weaponCtx.drawImage(source, 0, 0);
+
+      const imageData = weaponCtx.getImageData(0, 0, offscreen.width, offscreen.height);
+      const data = imageData.data;
+      for (let i = 0; i < data.length; i += 4) {
+        if (data[i] < 12 && data[i + 1] < 12 && data[i + 2] < 12) {
+          data[i + 3] = 0;
+        }
+      }
+      weaponCtx.putImageData(imageData, 0, 0);
+      return offscreen;
+    }
 
     // Sprites auxiliares para obstáculos (Cacto / Pterodáctilo em Pixel Art)
     const SPRITES_DEF = {
@@ -233,6 +275,11 @@
     let score = 0;
     let highScore = parseInt(localStorage.getItem('mj_hi') || '0', 10) || 0;
     let frameCount = 0;
+    const SUPER_CHARGE_FRAMES = 420;
+    const SUPER_DURATION_FRAMES = 210;
+    let superCharge = 0;
+    let superActiveFrames = 0;
+    let muzzleFlashes = [];
 
     // --- PERSONAGEM (MICHAEL JACKSON) ---
     const mj = {
@@ -304,6 +351,29 @@
         };
       },
 
+      drawWeapon(ctx) {
+        if (!akSprite || gameOver || this.isDucking) return;
+
+        const bob = this.isJumping ? 0 : Math.sin(frameCount / 5) * 1.5;
+        const weaponWidth = this.isJumping ? 62 : 66;
+        const weaponHeight = weaponWidth * (akSprite.height / akSprite.width);
+        const weaponX = this.x + 25;
+        const weaponY = this.y + (this.isJumping ? 23 : 27) + bob;
+
+        ctx.save();
+        ctx.translate(weaponX, weaponY);
+        ctx.rotate(this.isJumping ? -0.08 : 0.03);
+        ctx.drawImage(akSprite, 0, -weaponHeight / 2, weaponWidth, weaponHeight);
+
+        if (superActiveFrames > 0 && frameCount % 4 < 2) {
+          ctx.fillStyle = '#fff6a3';
+          ctx.fillRect(weaponWidth - 2, -5, 14, 4);
+          ctx.fillStyle = '#e74c3c';
+          ctx.fillRect(weaponWidth + 10, -3, 8, 2);
+        }
+        ctx.restore();
+      },
+
       draw(ctx, frameCount) {
         if (gameOver) {
           // Exibe pose de caído
@@ -320,6 +390,7 @@
             jumpFrame * frameWidth, 0, frameWidth, imgJump.height,
             this.x, this.y, this.width, this.height
           );
+          this.drawWeapon(ctx);
         } else if (this.isDucking) {
           // Pose de ajoelhado/agachado (Imagem 4)
           ctx.drawImage(imgDuck, this.x, this.y, this.width, this.height);
@@ -334,6 +405,7 @@
             currentFrame * frameWidth, 0, frameWidth, imgWalk.height,
             this.x, this.y, this.width, this.height
           );
+          this.drawWeapon(ctx);
         }
       }
     };
@@ -341,6 +413,8 @@
     let obstacles = [];
 
     function spawnObstacle() {
+      if (superActiveFrames > 0) return;
+
       const minGap = 220;
       const lastObs = obstacles[obstacles.length - 1];
       if (lastObs && (canvas.width - lastObs.x) < minGap) return;
@@ -371,15 +445,79 @@
       }
     }
 
+    function canUseSuper() {
+      return gameRunning && superCharge >= SUPER_CHARGE_FRAMES && superActiveFrames <= 0;
+    }
+
+    function useSuper() {
+      if (!canUseSuper()) return;
+
+      superCharge = 0;
+      superActiveFrames = SUPER_DURATION_FRAMES;
+      obstacles = [];
+      muzzleFlashes = [];
+      playSound('super');
+      updateSuperButton();
+    }
+
+    function updateSuperButton() {
+      const superBtn = document.getElementById('superBtn');
+      const percent = Math.min(100, Math.floor((superCharge / SUPER_CHARGE_FRAMES) * 100));
+
+      if (superActiveFrames > 0) {
+        superBtn.textContent = 'SUPER!';
+        superBtn.disabled = true;
+      } else if (percent >= 100) {
+        superBtn.textContent = 'SUPER PRONTO';
+        superBtn.disabled = !gameRunning;
+      } else {
+        superBtn.textContent = `SUPER ${percent}%`;
+        superBtn.disabled = true;
+      }
+    }
+
+    function drawSuperShot() {
+      if (superActiveFrames <= 0) return;
+
+      const beamY = mj.y + (mj.isJumping ? 23 : 27);
+      ctx.save();
+      ctx.globalAlpha = 0.65 + Math.sin(frameCount / 2) * 0.2;
+      ctx.fillStyle = '#fff6a3';
+      ctx.fillRect(mj.x + 92, beamY - 3, canvas.width - mj.x - 92, 3);
+      ctx.fillStyle = '#e74c3c';
+      ctx.fillRect(mj.x + 92, beamY + 1, canvas.width - mj.x - 92, 2);
+      ctx.restore();
+
+      if (frameCount % 3 === 0) {
+        muzzleFlashes.push({
+          x: mj.x + 120,
+          y: beamY + Math.random() * 18 - 9,
+          life: 14
+        });
+      }
+
+      muzzleFlashes.forEach(flash => {
+        ctx.fillStyle = flash.life > 7 ? '#fff6a3' : '#e74c3c';
+        ctx.fillRect(flash.x, flash.y, flash.life, 3);
+        flash.x += 10;
+        flash.life--;
+      });
+      muzzleFlashes = muzzleFlashes.filter(flash => flash.life > 0 && flash.x < canvas.width);
+    }
+
     // --- CONTROLES TECLADO E TOQUE ---
     window.addEventListener('keydown', (e) => {
       if (e.code === 'Space' || e.code === 'ArrowUp') {
         e.preventDefault();
         if (!gameRunning) {
-          if (assetLoaded === 4) resetAndStart();
+          if (assetLoaded === assetList.length) resetAndStart();
         } else {
           mj.jump();
         }
+      }
+      if (e.code === 'KeyE') {
+        e.preventDefault();
+        useSuper();
       }
       if (e.code === 'ArrowDown') {
         e.preventDefault();
@@ -394,12 +532,17 @@
     });
 
     canvas.addEventListener('click', () => {
-      if (assetLoaded !== 4) return;
+      if (assetLoaded !== assetList.length) return;
       if (!gameRunning) {
         resetAndStart();
       } else {
         mj.jump();
       }
+    });
+
+    document.getElementById('superBtn').addEventListener('click', () => {
+      useSuper();
+      document.getElementById('superBtn').blur();
     });
 
     // --- LÓGICA PRINCIPAL E LOOP ---
@@ -410,9 +553,13 @@
       distance = 0;
       score = 0;
       frameCount = 0;
+      superCharge = 0;
+      superActiveFrames = 0;
+      muzzleFlashes = [];
       obstacles = [];
       mj.reset();
       document.getElementById('startBtn').blur();
+      updateSuperButton();
       requestAnimationFrame(gameLoop);
     }
 
@@ -431,6 +578,17 @@
       frameCount++;
       distance += gameSpeed * 0.025;
       const newScore = Math.floor(distance);
+
+      if (superActiveFrames > 0) {
+        superActiveFrames--;
+        obstacles = [];
+      } else if (superCharge < SUPER_CHARGE_FRAMES) {
+        superCharge++;
+      }
+
+      if (frameCount % 10 === 0 || superActiveFrames === SUPER_DURATION_FRAMES - 1) {
+        updateSuperButton();
+      }
 
       if (newScore > score) {
         score = newScore;
@@ -492,6 +650,9 @@
         }
       });
 
+      // Rajada do super
+      drawSuperShot();
+
       // Michael Jackson
       mj.draw(ctx, frameCount);
 
@@ -501,12 +662,26 @@
       const padScore = (num) => String(num).padStart(5, '0');
       ctx.fillText(`HI ${padScore(highScore)}  ${padScore(score)}`, 520, 30);
 
+      const superRatio = superActiveFrames > 0
+        ? superActiveFrames / SUPER_DURATION_FRAMES
+        : Math.min(1, superCharge / SUPER_CHARGE_FRAMES);
+      ctx.fillStyle = '#3a3a3a';
+      ctx.fillRect(20, 18, 130, 10);
+      ctx.fillStyle = superActiveFrames > 0 ? '#e74c3c' : '#f1c40f';
+      ctx.fillRect(20, 18, 130 * superRatio, 10);
+      ctx.strokeStyle = '#f1c40f';
+      ctx.strokeRect(20, 18, 130, 10);
+      ctx.font = '8px "Press Start 2P"';
+      ctx.fillStyle = '#e8eaed';
+      ctx.fillText(superActiveFrames > 0 ? 'SUPER ATIVO' : 'SUPER', 20, 42);
+
       requestAnimationFrame(gameLoop);
     }
 
     function triggerGameOver() {
       gameRunning = false;
       gameOver = true;
+      updateSuperButton();
       playSound('hit');
 
       if (score > highScore) {
