@@ -200,9 +200,7 @@
       img.onerror = () => {
         assetTried++;
         console.warn('Erro ao carregar imagem:', img.src);
-        if (img === imgAk) {
-          // leave akSprite null but continue
-        }
+        if (img === imgAk) akSprite = createFallbackWeaponSprite();
         if (assetTried === assetList.length) enableStartIfReady();
       };
     });
@@ -224,6 +222,26 @@
         enableStartIfReady();
       }
     }, 4000);
+
+    function createFallbackWeaponSprite() {
+      const fallback = document.createElement('canvas');
+      fallback.width = 96;
+      fallback.height = 28;
+      const gunCtx = fallback.getContext('2d');
+
+      gunCtx.fillStyle = '#111';
+      gunCtx.fillRect(4, 10, 76, 8);
+      gunCtx.fillRect(70, 8, 20, 5);
+      gunCtx.fillRect(18, 18, 12, 7);
+      gunCtx.fillRect(45, 18, 10, 9);
+      gunCtx.fillStyle = '#5b3926';
+      gunCtx.fillRect(0, 13, 22, 9);
+      gunCtx.fillRect(56, 9, 18, 9);
+      gunCtx.fillStyle = '#c9c9c9';
+      gunCtx.fillRect(28, 8, 24, 4);
+      gunCtx.fillRect(78, 11, 16, 3);
+      return fallback;
+    }
 
     function createTransparentWeaponSprite(source) {
       const offscreen = document.createElement('canvas');
@@ -296,7 +314,7 @@
     let score = 0;
     let highScore = parseInt(localStorage.getItem('mj_hi') || '0', 10) || 0;
     let frameCount = 0;
-    const SUPER_CHARGE_FRAMES = 420;
+    const SUPER_CHARGE_FRAMES = 900;
     const SUPER_DURATION_FRAMES = 210;
     let superCharge = 0;
     let superActiveFrames = 0;
@@ -376,15 +394,18 @@
         if (!akSprite || gameOver || this.isDucking) return;
 
         const bob = this.isJumping ? 0 : Math.sin(frameCount / 5) * 1.5;
-        const weaponWidth = this.isJumping ? 62 : 66;
+        const weaponWidth = this.isJumping ? 88 : 96;
         const weaponHeight = weaponWidth * (akSprite.height / akSprite.width);
-        const weaponX = this.x + 25;
-        const weaponY = this.y + (this.isJumping ? 23 : 27) + bob;
+        const weaponX = this.x + 16;
+        const weaponY = this.y + (this.isJumping ? 22 : 30) + bob;
 
         ctx.save();
         ctx.translate(weaponX, weaponY);
         ctx.rotate(this.isJumping ? -0.08 : 0.03);
+        ctx.shadowColor = '#f1c40f';
+        ctx.shadowBlur = 5;
         ctx.drawImage(akSprite, 0, -weaponHeight / 2, weaponWidth, weaponHeight);
+        ctx.shadowBlur = 0;
 
         if (superActiveFrames > 0 && frameCount % 4 < 2) {
           ctx.fillStyle = '#fff6a3';
@@ -500,30 +521,53 @@
     function drawSuperShot() {
       if (superActiveFrames <= 0) return;
 
-      const beamY = mj.y + (mj.isJumping ? 23 : 27);
-      ctx.save();
-      ctx.globalAlpha = 0.65 + Math.sin(frameCount / 2) * 0.2;
-      ctx.fillStyle = '#fff6a3';
-      ctx.fillRect(mj.x + 92, beamY - 3, canvas.width - mj.x - 92, 3);
-      ctx.fillStyle = '#e74c3c';
-      ctx.fillRect(mj.x + 92, beamY + 1, canvas.width - mj.x - 92, 2);
-      ctx.restore();
+      const originX = mj.x + 92;
+      const originY = mj.y + (mj.isJumping ? 22 : 30);
 
-      if (frameCount % 3 === 0) {
-        muzzleFlashes.push({
-          x: mj.x + 120,
-          y: beamY + Math.random() * 18 - 9,
-          life: 14
+      if (frameCount % 2 === 0) {
+        const spreads = [
+          0 + (Math.random() - 0.5) * 0.75,
+          Math.PI + (Math.random() - 0.5) * 0.75,
+          -Math.PI / 2 + (Math.random() - 0.5) * 1.2
+        ];
+
+        spreads.forEach(angle => {
+          const speed = 9 + Math.random() * 7;
+          muzzleFlashes.push({
+            x: originX,
+            y: originY,
+            dx: Math.cos(angle) * speed,
+            dy: Math.sin(angle) * speed,
+            length: 10 + Math.random() * 18,
+            life: 16 + Math.floor(Math.random() * 10)
+          });
         });
       }
 
       muzzleFlashes.forEach(flash => {
-        ctx.fillStyle = flash.life > 7 ? '#fff6a3' : '#e74c3c';
-        ctx.fillRect(flash.x, flash.y, flash.life, 3);
-        flash.x += 10;
+        const angle = Math.atan2(flash.dy, flash.dx);
+        ctx.save();
+        ctx.translate(flash.x, flash.y);
+        ctx.rotate(angle);
+        ctx.globalAlpha = Math.min(1, flash.life / 12);
+        ctx.fillStyle = flash.life > 9 ? '#fff6a3' : '#e74c3c';
+        ctx.fillRect(0, -2, flash.length, 4);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, -1, flash.length * 0.55, 2);
+        ctx.restore();
+
+        flash.x += flash.dx;
+        flash.y += flash.dy;
+        flash.dy += 0.25;
         flash.life--;
       });
-      muzzleFlashes = muzzleFlashes.filter(flash => flash.life > 0 && flash.x < canvas.width);
+      muzzleFlashes = muzzleFlashes.filter(flash =>
+        flash.life > 0 &&
+        flash.x > -80 &&
+        flash.x < canvas.width + 80 &&
+        flash.y > -80 &&
+        flash.y < canvas.height + 80
+      );
     }
 
     // --- CONTROLES TECLADO E TOQUE ---
