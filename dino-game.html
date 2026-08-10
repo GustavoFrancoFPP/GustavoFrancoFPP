@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🦖 Jogo do Dinossauro - Gustavo Franco</title>
+  <title>🕺 Michael Jackson Game - Gustavo Franco</title>
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
@@ -16,19 +16,14 @@
     }
 
     body {
-      background-color: #f7f7f7;
-      color: #535353;
+      background-color: #121212;
+      color: #e8eaed;
       font-family: 'Press Start 2P', monospace;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       transition: background-color 0.5s, color 0.5s;
-    }
-
-    body.dark-mode {
-      background-color: #202124;
-      color: #e8eaed;
     }
 
     .wrapper {
@@ -46,31 +41,30 @@
     }
 
     .header h1 {
-      font-size: 1.4em;
+      font-size: 1.3em;
       margin-bottom: 8px;
+      color: #f1c40f;
+      text-shadow: 0 0 10px rgba(241, 196, 15, 0.4);
     }
 
     .header p {
-      font-size: 0.7em;
+      font-size: 0.65em;
       opacity: 0.7;
     }
 
     #gameCanvas {
-      background-color: transparent;
-      border-bottom: 2px solid #535353;
+      background-color: #1a1a1a;
+      border-bottom: 3px solid #f1c40f;
       width: 100%;
       max-width: 800px;
       height: auto;
       cursor: pointer;
-    }
-
-    body.dark-mode #gameCanvas {
-      border-bottom-color: #e8eaed;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
     }
 
     .controls-hint {
       margin-top: 20px;
-      font-size: 0.65em;
+      font-size: 0.6em;
       line-height: 1.6;
       text-align: center;
       opacity: 0.8;
@@ -83,27 +77,19 @@
     button {
       font-family: 'Press Start 2P', monospace;
       font-size: 0.7em;
-      padding: 10px 20px;
-      background-color: #535353;
-      color: #fff;
+      padding: 12px 24px;
+      background-color: #f1c40f;
+      color: #121212;
       border: none;
       border-radius: 4px;
       cursor: pointer;
+      font-weight: bold;
       transition: transform 0.1s, background-color 0.2s;
     }
 
     button:hover {
-      background-color: #333;
-      transform: scale(1.03);
-    }
-
-    body.dark-mode button {
-      background-color: #e8eaed;
-      color: #202124;
-    }
-
-    body.dark-mode button:hover {
-      background-color: #fff;
+      background-color: #f39c12;
+      transform: scale(1.05);
     }
   </style>
 </head>
@@ -111,7 +97,7 @@
 <body>
   <div class="wrapper">
     <div class="header">
-      <h1>🦖 DINOSSAURO GAME</h1>
+      <h1>🕺 MOONWALKER GAME</h1>
       <p>Desenvolvido por Gustavo Franco</p>
     </div>
 
@@ -129,7 +115,7 @@
   </div>
 
   <script>
-    // --- SINTETIZADOR DE ÁUDIO (Web Audio API) ---
+    // --- SINTETIZADOR DE ÁUDIO ---
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
     let audioCtx = null;
 
@@ -145,12 +131,12 @@
         const now = audioCtx.currentTime;
 
         if (type === 'jump') {
-          osc.frequency.setValueAtTime(150, now);
-          osc.frequency.exponentialRampToValueAtTime(600, now + 0.12);
+          osc.frequency.setValueAtTime(200, now);
+          osc.frequency.exponentialRampToValueAtTime(800, now + 0.15);
           gain.gain.setValueAtTime(0.1, now);
-          gain.gain.linearRampToValueAtTime(0.01, now + 0.12);
+          gain.gain.linearRampToValueAtTime(0.01, now + 0.15);
           osc.start(now);
-          osc.stop(now + 0.12);
+          osc.stop(now + 0.15);
         } else if (type === 'score') {
           osc.frequency.setValueAtTime(523.25, now);
           osc.frequency.setValueAtTime(659.25, now + 0.08);
@@ -160,254 +146,46 @@
           osc.stop(now + 0.2);
         } else if (type === 'hit') {
           osc.type = 'sawtooth';
-          osc.frequency.setValueAtTime(120, now);
-          osc.frequency.exponentialRampToValueAtTime(40, now + 0.22);
+          osc.frequency.setValueAtTime(150, now);
+          osc.frequency.exponentialRampToValueAtTime(30, now + 0.25);
           gain.gain.setValueAtTime(0.15, now);
-          gain.gain.linearRampToValueAtTime(0.01, now + 0.22);
+          gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
           osc.start(now);
-          osc.stop(now + 0.22);
+          osc.stop(now + 0.25);
         }
       } catch (e) { }
     }
 
-    // --- SPRITES EM MATRIZ DE PIXELS ---
+    // --- CARREGAMENTO DAS IMAGENS DAS ANIMAÇÕES ---
+    const imgWalk = new Image();
+    imgWalk.src = 'data:image/png;base64,iVBORw0KGgoAAAANSU68UHAAAAA...'; // Imagem 1: Passos (Walk/Moonwalk)
+
+    const imgJump = new Image();
+    imgJump.src = 'data:image/png;base64,iVBORw0KGgoAAAANSU68UHAAAAA...'; // Imagem 2: Pulo
+
+    const imgDead = new Image();
+    imgDead.src = 'data:image/png;base64,iVBORw0KGgoAAAANSU68UHAAAAA...'; // Imagem 3: Derrotado
+
+    const imgDuck = new Image();
+    imgDuck.src = 'data:image/png;base64,iVBORw0KGgoAAAANSU68UHAAAAA...'; // Imagem 4: Agachado
+
+    // Sprites auxiliares para obstáculos (Cacto / Pterodáctilo em Pixel Art)
     const SPRITES_DEF = {
-      dinoStand: [
-        "                  XXXXXX",
-        "                  X XXXXX",
-        "                  XXXXXX",
-        "                  XXXXXX",
-        "                  XXXXXX",
-        "                  XXX",
-        "                 XXXXXXX",
-        "X               XXXXXXXX",
-        "XX             XXXXXXXXX",
-        "XXX           XXXXXXXXXX",
-        "XXXX         XXXXXXXXXXX",
-        "XXXXX       XXXXXXXXXXXX",
-        "XXXXXX     XXXXXXXXXXXXX",
-        " XXXXXXXXXX XXXXXXXXXXX",
-        "  XXXXXXXXXXXXXXXXXXXX",
-        "   XXXXXXXXXXXXXXXXXX",
-        "    XXXXXXXXXXXXXXXX",
-        "     XXXXXXXXXXXXXX",
-        "      XXXXXXXXXXXX",
-        "       XXXXXXXXXX",
-        "        XXXXXXXX",
-        "        XX    XX",
-        "        X      X",
-        "        XX     XX"
-      ],
-      dinoRun1: [
-        "                  XXXXXX",
-        "                  X XXXXX",
-        "                  XXXXXX",
-        "                  XXXXXX",
-        "                  XXXXXX",
-        "                  XXX",
-        "                 XXXXXXX",
-        "X               XXXXXXXX",
-        "XX             XXXXXXXXX",
-        "XXX           XXXXXXXXXX",
-        "XXXX         XXXXXXXXXXX",
-        "XXXXX       XXXXXXXXXXXX",
-        "XXXXXX     XXXXXXXXXXXXX",
-        " XXXXXXXXXX XXXXXXXXXXX",
-        "  XXXXXXXXXXXXXXXXXXXX",
-        "   XXXXXXXXXXXXXXXXXX",
-        "    XXXXXXXXXXXXXXXX",
-        "     XXXXXXXXXXXXXX",
-        "      XXXXXXXXXXXX",
-        "       XXXXXXXXXX",
-        "        XXXXXXXX",
-        "        XX    XXX",
-        "        X       ",
-        "        XX      "
-      ],
-      dinoRun2: [
-        "                  XXXXXX",
-        "                  X XXXXX",
-        "                  XXXXXX",
-        "                  XXXXXX",
-        "                  XXXXXX",
-        "                  XXX",
-        "                 XXXXXXX",
-        "X               XXXXXXXX",
-        "XX             XXXXXXXXX",
-        "XXX           XXXXXXXXXX",
-        "XXXX         XXXXXXXXXXX",
-        "XXXXX       XXXXXXXXXXXX",
-        "XXXXXX     XXXXXXXXXXXXX",
-        " XXXXXXXXXX XXXXXXXXXXX",
-        "  XXXXXXXXXXXXXXXXXXXX",
-        "   XXXXXXXXXXXXXXXXXX",
-        "    XXXXXXXXXXXXXXXX",
-        "     XXXXXXXXXXXXXX",
-        "      XXXXXXXXXXXX",
-        "       XXXXXXXXXX",
-        "        XXXXXXXX",
-        "         XXX  XX",
-        "               X",
-        "              XX"
-      ],
-      dinoDuck1: [
-        "                     XXXXXXXXXXXXXXXXXXXX",
-        "                     X XXXXXXXXXXXXXXXXXX",
-        "                     XXXXXXXXXXXXXXXXXXXX",
-        "                     XXXXXXXXXXXXXXXXXXXX",
-        "                     XXXXXXXXXXXXXXXXXXXX",
-        "X                   XXXXXXXXX",
-        "XX                 XXXXXXXXXX",
-        "XXX               XXXXXXXXXXX",
-        "XXXX             XXXXXXXXXXXX",
-        "XXXXX           XXXXXXXXXXXXX",
-        "XXXXXX         XXXXXXXXXXXXXX",
-        " XXXXXXXXXX   XXXXXXXXXXXXXXX",
-        "  XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-        "   XXXXXXXXXXXXXXXXXXXXXXXXX",
-        "    XXXXXXXXXXXXXXXXXXXXXXX",
-        "     XXXXXXXXXXXXXXXXX",
-        "      XXXXXXXXXXXXXXX",
-        "       XXXXXXXXXXXXX",
-        "        XXXXXXXXXXX",
-        "        XX        XXX",
-        "        X            ",
-        "        XX           "
-      ],
-      dinoDuck2: [
-        "                     XXXXXXXXXXXXXXXXXXXX",
-        "                     X XXXXXXXXXXXXXXXXXX",
-        "                     XXXXXXXXXXXXXXXXXXXX",
-        "                     XXXXXXXXXXXXXXXXXXXX",
-        "                     XXXXXXXXXXXXXXXXXXXX",
-        "X                   XXXXXXXXX",
-        "XX                 XXXXXXXXXX",
-        "XXX               XXXXXXXXXXX",
-        "XXXX             XXXXXXXXXXXX",
-        "XXXXX           XXXXXXXXXXXXX",
-        "XXXXXX         XXXXXXXXXXXXXX",
-        " XXXXXXXXXX   XXXXXXXXXXXXXXX",
-        "  XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-        "   XXXXXXXXXXXXXXXXXXXXXXXXX",
-        "    XXXXXXXXXXXXXXXXXXXXXXX",
-        "     XXXXXXXXXXXXXXXXX",
-        "      XXXXXXXXXXXXXXX",
-        "       XXXXXXXXXXXXX",
-        "        XXXXXXXXXXX",
-        "         XXX      XX",
-        "                   X",
-        "                  XX"
-      ],
-      dinoDead: [
-        "                  XXXXXX",
-        "                  X  X X",
-        "                  XX X X",
-        "                  XXXXXX",
-        "                  XXXXXX",
-        "                  XXX",
-        "                 XXXXXXX",
-        "X               XXXXXXXX",
-        "XX             XXXXXXXXX",
-        "XXX           XXXXXXXXXX",
-        "XXXX         XXXXXXXXXXX",
-        "XXXXX       XXXXXXXXXXXX",
-        "XXXXXX     XXXXXXXXXXXXX",
-        " XXXXXXXXXX XXXXXXXXXXX",
-        "  XXXXXXXXXXXXXXXXXXXX",
-        "   XXXXXXXXXXXXXXXXXX",
-        "    XXXXXXXXXXXXXXXX",
-        "     XXXXXXXXXXXXXX",
-        "      XXXXXXXXXXXX",
-        "       XXXXXXXXXX",
-        "        XXXXXXXX",
-        "        XX    XX",
-        "        X      X",
-        "        XX     XX"
-      ],
       cactusSmall: [
-        "    XX    ",
-        "    XX    ",
-        "  X XX    ",
-        "  X XX  X ",
-        "  X XX  X ",
-        "  XXXXXXX ",
-        "    XX    ",
-        "    XX    ",
-        "    XX    ",
-        "    XX    ",
-        "    XX    ",
-        "    XX    ",
-        "    XX    "
-      ],
-      cactusLarge: [
-        "     XXX     ",
-        "     XXX     ",
-        "     XXX     ",
-        "  XX XXX     ",
-        "  XX XXX  XX ",
-        "  XX XXX  XX ",
-        "  XXXXXXXXXX ",
-        "     XXX     ",
-        "     XXX     ",
-        "     XXX     ",
-        "     XXX     ",
-        "     XXX     ",
-        "     XXX     ",
-        "     XXX     ",
-        "     XXX     "
+        "    XX    ", "    XX    ", "  X XX    ", "  X XX  X ", "  X XX  X ",
+        "  XXXXXXX ", "    XX    ", "    XX    ", "    XX    ", "    XX    "
       ],
       pterodactyl1: [
-        "        XXXX",
-        "       XXXXXX",
-        "      XXXXXXXX",
-        "     XXXXXXXXXX",
-        "    XXXXXXXXXXXX",
-        "   XXXXXXXXXXXXXX",
-        "  XXXXXXXXXXXXXXXX",
-        " XXXXXXXXXXXXXXXXXX",
-        "XXXXXXXXXXXXXXXXXXXX",
-        "      XXXXXXXX      ",
-        "       XXXXXX       ",
-        "        XXXX        ",
-        "  XXXXXXXXXXXXXXXXX ",
-        " XXXXXXXXXXXXXXXXXXX",
-        "XXXXXXXXXXXXXXXXXXXX"
+        "        XXXX", "       XXXXXX", "      XXXXXXXX", "     XXXXXXXXXX",
+        "  XXXXXXXXXXXXXXXX", " XXXXXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXXXXXXX"
       ],
       pterodactyl2: [
-        "  XXXXXXXXXXXXXXXXX ",
-        " XXXXXXXXXXXXXXXXXXX",
-        "XXXXXXXXXXXXXXXXXXXX",
-        "      XXXXXXXX      ",
-        "       XXXXXX       ",
-        "        XXXX        ",
-        "    XXXXXXXXXXXX",
-        "   XXXXXXXXXXXXXX",
-        "  XXXXXXXXXXXXXXXX",
-        " XXXXXXXXXXXXXXXXXX",
-        "XXXXXXXXXXXXXXXXXXXX",
-        "     XXXXXXXXXX",
-        "      XXXXXXXX",
-        "       XXXXXX",
-        "        XXXX"
-      ],
-      star: [
-        "  X  ",
-        " XXX ",
-        "XXXXX",
-        " XXX ",
-        "  X  "
-      ],
-      moon: [
-        "  XXXX",
-        " XX   ",
-        "XX    ",
-        "XX    ",
-        " XX   ",
-        "  XXXX"
+        "  XXXXXXXXXXXXXXXXX ", " XXXXXXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXXXXXXX",
+        "    XXXXXXXXXXXX", "   XXXXXXXXXXXXXX", "  XXXXXXXXXXXXXXXX"
       ]
     };
 
-    function generateBitmap(matrix, pixelSize = 2, color = '#535353') {
+    function generateBitmap(matrix, pixelSize = 2, color = '#f1c40f') {
       const height = matrix.length;
       const width = Math.max(...matrix.map(row => row.length));
       const canvas = document.createElement('canvas');
@@ -425,50 +203,42 @@
       return canvas;
     }
 
+    const obsSprites = {
+      cactusSmall: generateBitmap(SPRITES_DEF.cactusSmall, 2, '#e74c3c'),
+      ptero1: generateBitmap(SPRITES_DEF.pterodactyl1, 2, '#e67e22'),
+      ptero2: generateBitmap(SPRITES_DEF.pterodactyl2, 2, '#e67e22')
+    };
+
     // --- CONFIGURAÇÕES DE JOGO E CANVAS ---
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
+    ctx.imageSmoothingEnabled = false; // Preserva o estilo pixel art
 
-    let spritesLight = {};
-    let spritesDark = {};
-
-    function initSprites() {
-      for (let key in SPRITES_DEF) {
-        spritesLight[key] = generateBitmap(SPRITES_DEF[key], 2, '#535353');
-        spritesDark[key] = generateBitmap(SPRITES_DEF[key], 2, '#e8eaed');
-      }
-    }
-    initSprites();
-
-    const GROUND_Y = 170;
+    const GROUND_Y = 165;
     let gameRunning = false;
     let gameOver = false;
     let gameSpeed = 6;
     let distance = 0;
     let score = 0;
-    let highScore = localStorage.getItem('dino_hi_score') || 0;
+    let highScore = localStorage.getItem('mj_hi_score') || 0;
     let frameCount = 0;
-    let isNight = false;
 
-    let flashScoreTimer = 0;
-
-    // --- OBJETOS DO JOGO ---
-    const dino = {
-      x: 50,
-      y: GROUND_Y - 48,
-      width: 44,
-      height: 48,
+    // --- PERSONAGEM (MICHAEL JACKSON) ---
+    const mj = {
+      x: 60,
+      y: GROUND_Y - 55,
+      width: 45,
+      height: 55,
       vy: 0,
       gravity: 0.6,
       jumpForce: -11.5,
       isJumping: false,
       isDucking: false,
-      animFrame: 0,
 
       reset() {
-        this.y = GROUND_Y - 48;
-        this.width = 44;
-        this.height = 48;
+        this.y = GROUND_Y - 55;
+        this.width = 45;
+        this.height = 55;
         this.vy = 0;
         this.isJumping = false;
         this.isDucking = false;
@@ -484,18 +254,18 @@
 
       duck(enable) {
         if (this.isJumping && enable) {
-          this.vy += 2.5; // Descida rápida no ar
+          this.vy += 2.5;
         }
         if (!this.isJumping) {
           this.isDucking = enable;
           if (enable) {
-            this.height = 30;
-            this.y = GROUND_Y - 30;
-            this.width = 58;
+            this.height = 35;
+            this.y = GROUND_Y - 35;
+            this.width = 40;
           } else {
-            this.height = 48;
-            this.y = GROUND_Y - 48;
-            this.width = 44;
+            this.height = 55;
+            this.y = GROUND_Y - 55;
+            this.width = 45;
           }
         }
       },
@@ -505,7 +275,7 @@
           this.y += this.vy;
           this.vy += this.gravity;
 
-          const currentHeight = this.isDucking ? 30 : 48;
+          const currentHeight = this.isDucking ? 35 : 55;
           if (this.y >= GROUND_Y - currentHeight) {
             this.y = GROUND_Y - currentHeight;
             this.isJumping = false;
@@ -516,25 +286,48 @@
 
       getBox() {
         return {
-          x: this.x + 4,
+          x: this.x + 6,
           y: this.y + 4,
-          width: this.width - 8,
+          width: this.width - 12,
           height: this.height - 6
         };
+      },
+
+      draw(ctx, frameCount) {
+        if (gameOver) {
+          // Exibe pose de caído
+          ctx.drawImage(imgDead, this.x - 10, GROUND_Y - 25, 65, 25);
+          return;
+        }
+
+        if (this.isJumping) {
+          // Alterna entre as sub-poses de pulo da Imagem 2
+          const jumpFrame = Math.floor(frameCount / 10) % 3;
+          const frameWidth = imgJump.width / 3;
+          ctx.drawImage(
+            imgJump,
+            jumpFrame * frameWidth, 0, frameWidth, imgJump.height,
+            this.x, this.y, this.width, this.height
+          );
+        } else if (this.isDucking) {
+          // Pose de ajoelhado/agachado (Imagem 4)
+          ctx.drawImage(imgDuck, this.x, this.y, this.width, this.height);
+        } else {
+          // Animação de caminhada/Moonwalk (Imagem 1 com 7 quadros)
+          const totalFrames = 7;
+          const frameWidth = imgWalk.width / totalFrames;
+          const currentFrame = Math.floor(frameCount / 5) % totalFrames;
+
+          ctx.drawImage(
+            imgWalk,
+            currentFrame * frameWidth, 0, frameWidth, imgWalk.height,
+            this.x, this.y, this.width, this.height
+          );
+        }
       }
     };
 
     let obstacles = [];
-    let clouds = [];
-    let stars = [];
-    let groundTicks = [];
-
-    // Preenche irregularidades do chão
-    for (let i = 0; i < 800; i += 15) {
-      if (Math.random() > 0.6) {
-        groundTicks.push({ x: i, width: Math.random() * 3 + 1 });
-      }
-    }
 
     function spawnObstacle() {
       const minGap = 220;
@@ -542,85 +335,50 @@
       if (lastObs && (canvas.width - lastObs.x) < minGap) return;
 
       const rand = Math.random();
-      let type = 'cactusSmall';
 
-      // Pterodáctilos aparecem a partir dos 150 pontos
-      if (score > 150 && rand < 0.3) {
-        const heights = [GROUND_Y - 30, GROUND_Y - 52, GROUND_Y - 75];
+      if (score > 120 && rand < 0.35) {
+        const heights = [GROUND_Y - 32, GROUND_Y - 55, GROUND_Y - 75];
         const chosenY = heights[Math.floor(Math.random() * heights.length)];
         obstacles.push({
-          type: 'pterodactyl',
+          type: 'ptero',
           x: canvas.width,
           y: chosenY,
           width: 40,
-          height: 30,
+          height: 25,
           animFrame: 0
         });
-      } else if (rand < 0.65) {
-        const count = Math.floor(Math.random() * 3) + 1;
+      } else {
+        const count = Math.floor(Math.random() * 2) + 1;
         obstacles.push({
-          type: 'cactusSmall',
+          type: 'cactus',
           x: canvas.width,
           y: GROUND_Y - 28,
           width: 20 * count,
           height: 28,
           count: count
         });
-      } else {
-        const count = Math.floor(Math.random() * 2) + 1;
-        obstacles.push({
-          type: 'cactusLarge',
-          x: canvas.width,
-          y: GROUND_Y - 34,
-          width: 26 * count,
-          height: 34,
-          count: count
-        });
       }
     }
-
-    function spawnCloud() {
-      if (clouds.length < 3 && Math.random() < 0.01) {
-        clouds.push({
-          x: canvas.width,
-          y: Math.random() * 60 + 20,
-          speed: Math.random() * 0.5 + 0.5
-        });
-      }
-    }
-
-    function initStars() {
-      stars = [];
-      for (let i = 0; i < 6; i++) {
-        stars.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * 80 + 10
-        });
-      }
-    }
-    initStars();
 
     // --- CONTROLES TECLADO E TOQUE ---
-    const keys = {};
-
     window.addEventListener('keydown', (e) => {
       if (e.code === 'Space' || e.code === 'ArrowUp') {
         e.preventDefault();
         if (!gameRunning) {
           resetAndStart();
         } else {
-          dino.jump();
+          mj.jump();
         }
       }
       if (e.code === 'ArrowDown') {
         e.preventDefault();
-        if (gameRunning) dino.duck(true);
+        if (gameRunning) mj.duck(true);
       }
     });
 
     window.addEventListener('keyup', (e) => {
       if (e.code === 'ArrowDown') {
-        if (gameRunning) dino.duck(false);
+        if (gameRunning) mj.duck(false);
       }
     });
 
@@ -628,7 +386,7 @@
       if (!gameRunning) {
         resetAndStart();
       } else {
-        dino.jump();
+        mj.jump();
       }
     });
 
@@ -641,10 +399,7 @@
       score = 0;
       frameCount = 0;
       obstacles = [];
-      clouds = [];
-      isNight = false;
-      document.body.classList.remove('dark-mode');
-      dino.reset();
+      mj.reset();
       document.getElementById('startBtn').blur();
       requestAnimationFrame(gameLoop);
     }
@@ -667,63 +422,34 @@
 
       if (newScore > score) {
         score = newScore;
-        // Som e efeito visual a cada 100 pontos
-        if (score > 0 && score % 100 === 0) {
-          playSound('score');
-          flashScoreTimer = 30;
-        }
-        // Alterna dia/noite a cada 700 pontos
-        if (score > 0 && score % 700 === 0 && frameCount % 10 === 0) {
-          isNight = !isNight;
-          if (isNight) document.body.classList.add('dark-mode');
-          else document.body.classList.remove('dark-mode');
-        }
+        if (score > 0 && score % 100 === 0) playSound('score');
       }
 
-      // Aumento gradual da velocidade
       gameSpeed = Math.min(13, 6 + score * 0.005);
-
-      // Atualiza Dinossauro
-      dino.update();
-
-      // Gerencia Nuvens
-      spawnCloud();
-      clouds.forEach(c => c.x -= c.speed);
-      clouds = clouds.filter(c => c.x > -60);
-
-      // Gerencia Chão
-      groundTicks.forEach(t => {
-        t.x -= gameSpeed;
-        if (t.x < 0) t.x += canvas.width;
-      });
+      mj.update();
 
       // Gerencia Obstáculos
       if (frameCount % Math.max(40, Math.floor(90 - gameSpeed * 3)) === 0) {
         spawnObstacle();
       }
 
-      const activeSprites = isNight ? spritesDark : spritesLight;
-
-      // Colisões e atualização de obstáculos
       for (let i = 0; i < obstacles.length; i++) {
         const obs = obstacles[i];
         obs.x -= gameSpeed;
 
-        // Animação do Pterodáctilo
-        if (obs.type === 'pterodactyl' && frameCount % 12 === 0) {
+        if (obs.type === 'ptero' && frameCount % 12 === 0) {
           obs.animFrame = obs.animFrame === 0 ? 1 : 0;
         }
 
-        // Checagem de Colisão
-        const dinoBox = dino.getBox();
+        const mjBox = mj.getBox();
         const obsBox = {
-          x: obs.x + 3,
-          y: obs.y + 3,
-          width: obs.width - 6,
-          height: obs.height - 6
+          x: obs.x + 2,
+          y: obs.y + 2,
+          width: obs.width - 4,
+          height: obs.height - 4
         };
 
-        if (checkCollision(dinoBox, obsBox)) {
+        if (checkCollision(mjBox, obsBox)) {
           triggerGameOver();
           return;
         }
@@ -734,81 +460,34 @@
       // --- RENDERIZAÇÃO ---
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Lua e Estrelas no Modo Noturno
-      if (isNight) {
-        ctx.drawImage(activeSprites.moon, 700, 30);
-        stars.forEach(s => ctx.drawImage(activeSprites.star, s.x, s.y));
-      }
-
-      // Nuvens
-      clouds.forEach(c => {
-        ctx.fillStyle = isNight ? '#535353' : '#d3d3d3';
-        ctx.fillRect(c.x, c.y, 40, 12);
-        ctx.fillRect(c.x + 10, c.y - 6, 20, 6);
-      });
-
-      // Chão
-      ctx.strokeStyle = isNight ? '#e8eaed' : '#535353';
+      // Linha do Chão
+      ctx.strokeStyle = '#f1c40f';
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.moveTo(0, GROUND_Y);
       ctx.lineTo(canvas.width, GROUND_Y);
       ctx.stroke();
 
-      ctx.fillStyle = isNight ? '#e8eaed' : '#535353';
-      groundTicks.forEach(t => {
-        ctx.fillRect(t.x, GROUND_Y + 4, t.width, 2);
-      });
-
-      // Desenha Obstáculos
+      // Obstáculos
       obstacles.forEach(obs => {
-        if (obs.type === 'pterodactyl') {
-          const spriteKey = obs.animFrame === 0 ? 'pterodactyl1' : 'pterodactyl2';
-          ctx.drawImage(activeSprites[spriteKey], obs.x, obs.y);
-        } else if (obs.type === 'cactusSmall') {
+        if (obs.type === 'ptero') {
+          const sprite = obs.animFrame === 0 ? obsSprites.ptero1 : obsSprites.ptero2;
+          ctx.drawImage(sprite, obs.x, obs.y);
+        } else {
           for (let c = 0; c < obs.count; c++) {
-            ctx.drawImage(activeSprites.cactusSmall, obs.x + (c * 20), obs.y);
-          }
-        } else if (obs.type === 'cactusLarge') {
-          for (let c = 0; c < obs.count; c++) {
-            ctx.drawImage(activeSprites.cactusLarge, obs.x + (c * 26), obs.y);
+            ctx.drawImage(obsSprites.cactusSmall, obs.x + (c * 20), obs.y);
           }
         }
       });
 
-      // Desenha Dinossauro
-      let dinoSprite = activeSprites.dinoStand;
-      if (dino.isJumping) {
-        dinoSprite = activeSprites.dinoStand;
-      } else if (dino.isDucking) {
-        const leg = Math.floor(frameCount / 6) % 2;
-        dinoSprite = leg === 0 ? activeSprites.dinoDuck1 : activeSprites.dinoDuck2;
-      } else {
-        const leg = Math.floor(frameCount / 6) % 2;
-        dinoSprite = leg === 0 ? activeSprites.dinoRun1 : activeSprites.dinoRun2;
-      }
+      // Michael Jackson
+      mj.draw(ctx, frameCount);
 
-      ctx.drawImage(dinoSprite, dino.x, dino.y);
-
-      // Placar e Recorde (HI 00000 00000)
+      // Placar
       ctx.font = '12px "Press Start 2P"';
-      ctx.fillStyle = isNight ? '#e8eaed' : '#535353';
-
+      ctx.fillStyle = '#f1c40f';
       const padScore = (num) => String(num).padStart(5, '0');
-      const hiText = `HI ${padScore(highScore)}  `;
-      const currentScoreText = padScore(score);
-
-      ctx.fillText(hiText, 520, 30);
-
-      // Efeito pisca no placar ao atingir centenas
-      if (flashScoreTimer > 0) {
-        flashScoreTimer--;
-        if (Math.floor(flashScoreTimer / 6) % 2 === 0) {
-          ctx.fillText(currentScoreText, 700, 30);
-        }
-      } else {
-        ctx.fillText(currentScoreText, 700, 30);
-      }
+      ctx.fillText(`HI ${padScore(highScore)}  ${padScore(score)}`, 520, 30);
 
       requestAnimationFrame(gameLoop);
     }
@@ -820,46 +499,31 @@
 
       if (score > highScore) {
         highScore = score;
-        localStorage.setItem('dino_hi_score', highScore);
+        localStorage.setItem('mj_hi_score', highScore);
       }
 
-      const activeSprites = isNight ? spritesDark : spritesLight;
-
-      // Desenha Dino Derrotado
-      ctx.fillStyle = isNight ? '#202124' : '#f7f7f7';
-      ctx.fillRect(dino.x, dino.y, dino.width, dino.height);
-      ctx.drawImage(activeSprites.dinoDead, dino.x, dino.y);
-
-      // Texto de Game Over
-      ctx.font = '16px "Press Start 2P"';
-      ctx.fillStyle = isNight ? '#e8eaed' : '#535353';
-      ctx.textAlign = 'center';
-      ctx.fillText('G A M E   O V E R', canvas.width / 2, 90);
-
-      // Ícone de Recomeçar
-      ctx.font = '10px "Press Start 2P"';
-      ctx.fillText('PRESSIONE ESPAÇO PARA JOGAR', canvas.width / 2, 120);
-      ctx.textAlign = 'left';
-    }
-
-    // Tela Inicial estática
-    function renderInitialState() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.strokeStyle = '#535353';
+
+      // Redesenha chão e jogo congelado
+      ctx.strokeStyle = '#f1c40f';
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.moveTo(0, GROUND_Y);
       ctx.lineTo(canvas.width, GROUND_Y);
       ctx.stroke();
 
-      ctx.drawImage(spritesLight.dinoStand, dino.x, dino.y);
+      mj.draw(ctx, frameCount);
 
-      ctx.font = '12px "Press Start 2P"';
-      ctx.fillStyle = '#535353';
-      ctx.fillText(`HI ${String(highScore).padStart(5, '0')}  00000`, 520, 30);
+      ctx.font = '16px "Press Start 2P"';
+      ctx.fillStyle = '#e74c3c';
+      ctx.textAlign = 'center';
+      ctx.fillText('G A M E   O V E R', canvas.width / 2, 80);
+
+      ctx.font = '10px "Press Start 2P"';
+      ctx.fillStyle = '#f1c40f';
+      ctx.fillText('PRESSIONE ESPAÇO PARA JOGAR', canvas.width / 2, 115);
+      ctx.textAlign = 'left';
     }
-
-    renderInitialState();
   </script>
 </body>
 </html>
