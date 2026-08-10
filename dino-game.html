@@ -104,7 +104,7 @@
     <canvas id="gameCanvas" width="800" height="200"></canvas>
 
     <div class="btn-container">
-      <button id="startBtn" onclick="resetAndStart()">INICIAR JOGO</button>
+      <button id="startBtn" disabled>CARREGANDO...</button>
     </div>
 
     <div class="controls-hint">
@@ -156,18 +156,29 @@
       } catch (e) { }
     }
 
-    // --- CARREGAMENTO DAS IMAGENS DAS ANIMAÇÕES ---
-    const imgWalk = new Image();
-    imgWalk.src = 'data:image/png;base64,iVBORw0KGgoAAAANSU68UHAAAAA...'; // Imagem 1: Passos (Walk/Moonwalk)
+    // --- CARREGAMENTO DAS IMAGENS DAS ANIMAÇÕES (arquivos locais) ---
+    const imgWalk = new Image(); imgWalk.src = 'walk.png'; // 7 frames lado a lado
+    const imgJump = new Image(); imgJump.src = 'jump.png'; // 3 frames lado a lado
+    const imgDead = new Image(); imgDead.src = 'dead.png';
+    const imgDuck = new Image(); imgDuck.src = 'duck.png';
 
-    const imgJump = new Image();
-    imgJump.src = 'data:image/png;base64,iVBORw0KGgoAAAANSU68UHAAAAA...'; // Imagem 2: Pulo
-
-    const imgDead = new Image();
-    imgDead.src = 'data:image/png;base64,iVBORw0KGgoAAAANSU68UHAAAAA...'; // Imagem 3: Derrotado
-
-    const imgDuck = new Image();
-    imgDuck.src = 'data:image/png;base64,iVBORw0KGgoAAAANSU68UHAAAAA...'; // Imagem 4: Agachado
+    // Aguarda todas as imagens carregarem antes de habilitar o jogo
+    const assetList = [imgWalk, imgJump, imgDead, imgDuck];
+    let assetLoaded = 0;
+    assetList.forEach(img => {
+      img.onload = () => {
+        assetLoaded++;
+        if (assetLoaded === assetList.length) {
+          const btn = document.getElementById('startBtn');
+          btn.disabled = false;
+          btn.textContent = 'INICIAR JOGO';
+          btn.addEventListener('click', resetAndStart);
+        }
+      };
+      img.onerror = () => {
+        console.warn('Erro ao carregar imagem:', img.src);
+      };
+    });
 
     // Sprites auxiliares para obstáculos (Cacto / Pterodáctilo em Pixel Art)
     const SPRITES_DEF = {
@@ -220,7 +231,7 @@
     let gameSpeed = 6;
     let distance = 0;
     let score = 0;
-    let highScore = localStorage.getItem('mj_hi_score') || 0;
+    let highScore = parseInt(localStorage.getItem('mj_hi') || '0', 10) || 0;
     let frameCount = 0;
 
     // --- PERSONAGEM (MICHAEL JACKSON) ---
@@ -365,7 +376,7 @@
       if (e.code === 'Space' || e.code === 'ArrowUp') {
         e.preventDefault();
         if (!gameRunning) {
-          resetAndStart();
+          if (assetLoaded === 4) resetAndStart();
         } else {
           mj.jump();
         }
@@ -383,6 +394,7 @@
     });
 
     canvas.addEventListener('click', () => {
+      if (assetLoaded !== 4) return;
       if (!gameRunning) {
         resetAndStart();
       } else {
@@ -499,7 +511,7 @@
 
       if (score > highScore) {
         highScore = score;
-        localStorage.setItem('mj_hi_score', highScore);
+        localStorage.setItem('mj_hi', highScore);
       }
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
