@@ -187,22 +187,43 @@
 
     // Aguarda todas as imagens carregarem antes de habilitar o jogo
     const assetList = [imgWalk, imgJump, imgDead, imgDuck, imgAk];
-    let assetLoaded = 0;
+    let assetLoaded = 0; // counts successful loads
+    let assetTried = 0;  // counts loads + errors
+    let assetsReady = false;
     assetList.forEach(img => {
       img.onload = () => {
         assetLoaded++;
+        assetTried++;
         if (img === imgAk) akSprite = createTransparentWeaponSprite(imgAk);
-        if (assetLoaded === assetList.length) {
-          const btn = document.getElementById('startBtn');
-          btn.disabled = false;
-          btn.textContent = 'INICIAR JOGO';
-          btn.addEventListener('click', resetAndStart);
-        }
+        if (assetTried === assetList.length) enableStartIfReady();
       };
       img.onerror = () => {
+        assetTried++;
         console.warn('Erro ao carregar imagem:', img.src);
+        if (img === imgAk) {
+          // leave akSprite null but continue
+        }
+        if (assetTried === assetList.length) enableStartIfReady();
       };
     });
+
+    function enableStartIfReady() {
+      // mark assetsReady even if some images failed, but log which ones
+      assetsReady = true;
+      const btn = document.getElementById('startBtn');
+      btn.disabled = false;
+      btn.textContent = 'INICIAR JOGO';
+      btn.onclick = resetAndStart;
+      if (typeof updateSuperButton === 'function') updateSuperButton();
+    }
+
+    // Safety fallback: if loading hangs, enable start after 4 seconds
+    setTimeout(() => {
+      if (!assetsReady) {
+        console.warn('Asset loading timeout — enabling start anyway');
+        enableStartIfReady();
+      }
+    }, 4000);
 
     function createTransparentWeaponSprite(source) {
       const offscreen = document.createElement('canvas');
@@ -510,7 +531,7 @@
       if (e.code === 'Space' || e.code === 'ArrowUp') {
         e.preventDefault();
         if (!gameRunning) {
-          if (assetLoaded === assetList.length) resetAndStart();
+          if (assetsReady) resetAndStart();
         } else {
           mj.jump();
         }
@@ -532,7 +553,7 @@
     });
 
     canvas.addEventListener('click', () => {
-      if (assetLoaded !== assetList.length) return;
+      if (!assetsReady) return;
       if (!gameRunning) {
         resetAndStart();
       } else {
