@@ -6,604 +6,860 @@
   <title>🦖 Jogo do Dinossauro - Gustavo Franco</title>
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      user-select: none;
     }
 
     body {
-      background: linear-gradient(135deg, #0A0A0A 0%, #1a0a2e 100%);
+      background-color: #f7f7f7;
+      color: #535353;
+      font-family: 'Press Start 2P', monospace;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      font-family: Arial, sans-serif;
-      color: #B14BFF;
+      transition: background-color 0.5s, color 0.5s;
     }
 
-    .container {
-      background: rgba(20, 20, 40, 0.8);
-      border: 2px solid #B14BFF;
-      border-radius: 15px;
-      padding: 30px;
-      max-width: 800px;
+    body.dark-mode {
+      background-color: #202124;
+      color: #e8eaed;
+    }
+
+    .wrapper {
       width: 100%;
-      box-shadow: 0 0 30px rgba(177, 75, 255, 0.3);
+      max-width: 840px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .header {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     .header h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-      text-shadow: 0 0 10px #B14BFF;
+      font-size: 1.4em;
+      margin-bottom: 8px;
     }
 
     .header p {
-      font-size: 1.1em;
-      opacity: 0.8;
-    }
-
-    #gameContainer {
-      position: relative;
-      width: 100%;
-      height: 400px;
-      background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 100%);
-      border: 2px solid #B14BFF;
-      border-radius: 10px;
-      overflow: hidden;
-      margin-bottom: 20px;
-      box-shadow: inset 0 0 20px rgba(177, 75, 255, 0.1);
-    }
-
-    .ground {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 60px;
-      background: #d6b889;
-      border-top: 3px solid #333;
-      z-index: 2;
-    }
-
-    .ground::before {
-      content: "";
-      position: absolute;
-      top: 10px;
-      left: 0;
-      width: 200%;
-      height: 20px;
-      background-image: repeating-linear-gradient(
-        90deg,
-        #333 0px,
-        #333 20px,
-        transparent 20px,
-        transparent 40px
-      );
-      opacity: 0.4;
-      animation: groundMove 1s linear infinite;
-    }
-
-    @keyframes groundMove {
-      from {
-        transform: translateX(0);
-      }
-
-      to {
-        transform: translateX(-40px);
-      }
-    }
-
-    #dino {
-      position: absolute;
-      width: 55px;
-      height: 55px;
-      bottom: 60px;
-      left: 55px;
-      z-index: 10;
-    }
-
-    .dino-img {
-      width: 100%;
-      height: 100%;
-      filter: drop-shadow(0 0 6px #B14BFF);
-    }
-
-    .obstacle {
-      position: absolute;
-      bottom: 60px;
-      width: 28px;
-      height: 60px;
-      background: #333;
-      border-radius: 4px 4px 0 0;
-      z-index: 5;
-      box-shadow: 0 0 8px #333;
-    }
-
-    .obstacle::before {
-      content: "";
-      position: absolute;
-      width: 12px;
-      height: 20px;
-      background: #333;
-      left: -8px;
-      top: 18px;
-      border-radius: 4px;
-    }
-
-    .obstacle::after {
-      content: "";
-      position: absolute;
-      width: 12px;
-      height: 25px;
-      background: #333;
-      right: -8px;
-      top: 10px;
-      border-radius: 4px;
-    }
-
-    .cloud {
-      position: absolute;
-      width: 80px;
-      height: 30px;
-      background: rgba(255, 255, 255, 0.5);
-      border-radius: 20px;
-      top: 40px;
-      right: -100px;
-      animation: cloudMove 12s linear infinite;
-    }
-
-    .cloud::before {
-      content: "";
-      position: absolute;
-      width: 35px;
-      height: 35px;
-      background: rgba(255, 255, 255, 0.5);
-      border-radius: 50%;
-      top: -15px;
-      left: 10px;
-    }
-
-    .cloud::after {
-      content: "";
-      position: absolute;
-      width: 45px;
-      height: 45px;
-      background: rgba(255, 255, 255, 0.5);
-      border-radius: 50%;
-      top: -20px;
-      right: 10px;
-    }
-
-    @keyframes cloudMove {
-      from {
-        right: -120px;
-      }
-
-      to {
-        right: 900px;
-      }
-    }
-
-    .stats {
-      display: flex;
-      justify-content: space-around;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .stat-item {
-      background: rgba(177, 75, 255, 0.1);
-      padding: 10px 20px;
-      border: 1px solid #B14BFF;
-      border-radius: 8px;
-      text-align: center;
-      min-width: 120px;
-    }
-
-    .stat-item .label {
-      font-size: 0.9em;
+      font-size: 0.7em;
       opacity: 0.7;
     }
 
-    .stat-item .value {
-      font-size: 1.8em;
-      color: #B14BFF;
-      font-weight: bold;
+    #gameCanvas {
+      background-color: transparent;
+      border-bottom: 2px solid #535353;
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      cursor: pointer;
     }
 
-    .controls {
-      text-align: center;
+    body.dark-mode #gameCanvas {
+      border-bottom-color: #e8eaed;
+    }
+
+    .controls-hint {
       margin-top: 20px;
+      font-size: 0.65em;
+      line-height: 1.6;
+      text-align: center;
+      opacity: 0.8;
     }
 
-    .controls p {
-      margin-bottom: 15px;
-    }
-
-    code {
-      background: rgba(177, 75, 255, 0.2);
-      padding: 3px 8px;
-      border-radius: 3px;
+    .btn-container {
+      margin-top: 15px;
     }
 
     button {
-      background: linear-gradient(135deg, #B14BFF 0%, #7c3aed 100%);
-      color: white;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.7em;
+      padding: 10px 20px;
+      background-color: #535353;
+      color: #fff;
       border: none;
-      padding: 12px 30px;
-      font-size: 1.1em;
-      border-radius: 8px;
+      border-radius: 4px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      margin: 5px;
-      font-weight: bold;
+      transition: transform 0.1s, background-color 0.2s;
     }
 
     button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(177, 75, 255, 0.5);
+      background-color: #333;
+      transform: scale(1.03);
     }
 
-    button:active {
-      transform: scale(0.95);
+    body.dark-mode button {
+      background-color: #e8eaed;
+      color: #202124;
     }
 
-    .game-over {
-      display: none;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0, 0, 0, 0.95);
-      padding: 40px;
-      border-radius: 15px;
-      text-align: center;
-      z-index: 100;
-      border: 3px solid #B14BFF;
-      box-shadow: 0 0 30px rgba(177, 75, 255, 0.5);
-    }
-
-    .game-over h2 {
-      font-size: 2.5em;
-      color: #B14BFF;
-      margin-bottom: 20px;
-      text-shadow: 0 0 10px #B14BFF;
-    }
-
-    .game-over p {
-      color: #fff;
-      font-size: 1.2em;
-      margin-bottom: 20px;
-    }
-
-    .info {
-      background: rgba(177, 75, 255, 0.1);
-      border: 1px solid #B14BFF;
-      border-radius: 8px;
-      padding: 15px;
-      margin-top: 20px;
-      color: #B14BFF;
-      text-align: left;
-      font-size: 0.95em;
-    }
-
-    .info strong {
-      display: block;
-      margin-bottom: 10px;
-      font-size: 1.1em;
-    }
-
-    @media (max-width: 600px) {
-      .container {
-        padding: 15px;
-      }
-
-      .header h1 {
-        font-size: 1.8em;
-      }
-
-      #gameContainer {
-        height: 300px;
-      }
-
-      .game-over {
-        padding: 20px;
-      }
-
-      .game-over h2 {
-        font-size: 1.8em;
-      }
-
-      #dino {
-        left: 35px;
-      }
+    body.dark-mode button:hover {
+      background-color: #fff;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
+  <div class="wrapper">
     <div class="header">
-      <h1>🦖 Dinossauro Game</h1>
-      <p>Criado por Gustavo Franco</p>
+      <h1>🦖 DINOSSAURO GAME</h1>
+      <p>Desenvolvido por Gustavo Franco</p>
     </div>
 
-    <div class="stats">
-      <div class="stat-item">
-        <div class="label">Pontuação</div>
-        <div class="value" id="score">0</div>
-      </div>
+    <canvas id="gameCanvas" width="800" height="200"></canvas>
 
-      <div class="stat-item">
-        <div class="label">Recorde</div>
-        <div class="value" id="highScore">0</div>
-      </div>
-
-      <div class="stat-item">
-        <div class="label">Nível</div>
-        <div class="value" id="level">1</div>
-      </div>
+    <div class="btn-container">
+      <button id="startBtn" onclick="resetAndStart()">INICIAR JOGO</button>
     </div>
 
-    <div id="gameContainer">
-      <div class="cloud"></div>
-
-      <div id="dino">
-        <svg class="dino-img" viewBox="0 0 55 55" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="35" cy="32" rx="15" ry="12" fill="#333"/>
-          <rect x="28" y="19" width="8" height="14" fill="#333" rx="2"/>
-          <circle cx="32" cy="15" r="8" fill="#333"/>
-          <circle cx="35" cy="13" r="2" fill="#B14BFF"/>
-          <polygon points="40,15 46,14 40,19" fill="#333"/>
-          <rect x="22" y="40" width="5" height="13" fill="#333" rx="2"/>
-          <rect x="32" y="40" width="5" height="13" fill="#333" rx="2"/>
-          <path d="M 20 32 Q 6 28 8 40" stroke="#333" stroke-width="5" fill="none" stroke-linecap="round"/>
-        </svg>
-      </div>
-
-      <div class="ground"></div>
-
-      <div class="game-over" id="gameOverScreen">
-        <h2>Game Over!</h2>
-        <p id="finalScore">Pontuação Final: 0</p>
-        <button onclick="restartGame()">Jogar Novamente</button>
-      </div>
-    </div>
-
-    <div class="controls">
-      <p>
-        <strong>Controles:</strong>
-        Pressione <code>ESPAÇO</code> ou <code>SETA PARA CIMA</code> para pular
-      </p>
-
-      <button onclick="startGame()">Iniciar Jogo</button>
-      <button onclick="restartGame()">Reiniciar</button>
-    </div>
-
-    <div class="info">
-      <strong>📖 Como Jogar:</strong>
-      <p>
-        1. Clique em "Iniciar Jogo" ou pressione ESPAÇO<br>
-        2. Use ESPAÇO ou SETA PARA CIMA para fazer o dinossauro pular<br>
-        3. Evite os cactos<br>
-        4. A dificuldade aumenta conforme você marca pontos<br>
-        5. Tente bater seu recorde pessoal!
-      </p>
+    <div class="controls-hint">
+      <p><strong>Controles:</strong></p>
+      <p> Pular: <code>ESPAÇO</code> / <code>SETA CIMA</code> / <code>TOQUE</code></p>
+      <p> Agachar / Cair Rápido: <code>SETA BAIXO</code></p>
     </div>
   </div>
 
   <script>
-    let score = 0;
-    let highScore = localStorage.getItem("dinoHighScore") || 0;
-    let level = 1;
+    // --- SINTETIZADOR DE ÁUDIO (Web Audio API) ---
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
 
-    let gameRunning = false;
-    let isJumping = false;
+    function playSound(type) {
+      try {
+        if (!audioCtx) audioCtx = new AudioCtx();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
 
-    let gameLoopInterval = null;
-    let obstacleInterval = null;
-    let spawnTimeout = null;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        const now = audioCtx.currentTime;
 
-    const dino = document.getElementById("dino");
-    const gameContainer = document.getElementById("gameContainer");
-    const scoreDisplay = document.getElementById("score");
-    const highScoreDisplay = document.getElementById("highScore");
-    const levelDisplay = document.getElementById("level");
-    const gameOverScreen = document.getElementById("gameOverScreen");
-    const finalScore = document.getElementById("finalScore");
-
-    highScoreDisplay.textContent = highScore;
-
-    function startGame() {
-      if (gameRunning) {
-        return;
-      }
-
-      score = 0;
-      level = 1;
-      gameRunning = true;
-      isJumping = false;
-
-      scoreDisplay.textContent = score;
-      levelDisplay.textContent = level;
-      gameOverScreen.style.display = "none";
-
-      removeObstacles();
-
-      dino.style.bottom = "60px";
-
-      gameLoopInterval = setInterval(checkCollisions, 10);
-
-      spawnObstacle();
+        if (type === 'jump') {
+          osc.frequency.setValueAtTime(150, now);
+          osc.frequency.exponentialRampToValueAtTime(600, now + 0.12);
+          gain.gain.setValueAtTime(0.1, now);
+          gain.gain.linearRampToValueAtTime(0.01, now + 0.12);
+          osc.start(now);
+          osc.stop(now + 0.12);
+        } else if (type === 'score') {
+          osc.frequency.setValueAtTime(523.25, now);
+          osc.frequency.setValueAtTime(659.25, now + 0.08);
+          gain.gain.setValueAtTime(0.1, now);
+          gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
+          osc.start(now);
+          osc.stop(now + 0.2);
+        } else if (type === 'hit') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(120, now);
+          osc.frequency.exponentialRampToValueAtTime(40, now + 0.22);
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.linearRampToValueAtTime(0.01, now + 0.22);
+          osc.start(now);
+          osc.stop(now + 0.22);
+        }
+      } catch (e) { }
     }
 
-    function jump() {
-      if (!gameRunning || isJumping) {
-        return;
-      }
+    // --- SPRITES EM MATRIZ DE PIXELS ---
+    const SPRITES_DEF = {
+      dinoStand: [
+        "                  XXXXXX",
+        "                  X XXXXX",
+        "                  XXXXXX",
+        "                  XXXXXX",
+        "                  XXXXXX",
+        "                  XXX",
+        "                 XXXXXXX",
+        "X               XXXXXXXX",
+        "XX             XXXXXXXXX",
+        "XXX           XXXXXXXXXX",
+        "XXXX         XXXXXXXXXXX",
+        "XXXXX       XXXXXXXXXXXX",
+        "XXXXXX     XXXXXXXXXXXXX",
+        " XXXXXXXXXX XXXXXXXXXXX",
+        "  XXXXXXXXXXXXXXXXXXXX",
+        "   XXXXXXXXXXXXXXXXXX",
+        "    XXXXXXXXXXXXXXXX",
+        "     XXXXXXXXXXXXXX",
+        "      XXXXXXXXXXXX",
+        "       XXXXXXXXXX",
+        "        XXXXXXXX",
+        "        XX    XX",
+        "        X      X",
+        "        XX     XX"
+      ],
+      dinoRun1: [
+        "                  XXXXXX",
+        "                  X XXXXX",
+        "                  XXXXXX",
+        "                  XXXXXX",
+        "                  XXXXXX",
+        "                  XXX",
+        "                 XXXXXXX",
+        "X               XXXXXXXX",
+        "XX             XXXXXXXXX",
+        "XXX           XXXXXXXXXX",
+        "XXXX         XXXXXXXXXXX",
+        "XXXXX       XXXXXXXXXXXX",
+        "XXXXXX     XXXXXXXXXXXXX",
+        " XXXXXXXXXX XXXXXXXXXXX",
+        "  XXXXXXXXXXXXXXXXXXXX",
+        "   XXXXXXXXXXXXXXXXXX",
+        "    XXXXXXXXXXXXXXXX",
+        "     XXXXXXXXXXXXXX",
+        "      XXXXXXXXXXXX",
+        "       XXXXXXXXXX",
+        "        XXXXXXXX",
+        "        XX    XXX",
+        "        X       ",
+        "        XX      "
+      ],
+      dinoRun2: [
+        "                  XXXXXX",
+        "                  X XXXXX",
+        "                  XXXXXX",
+        "                  XXXXXX",
+        "                  XXXXXX",
+        "                  XXX",
+        "                 XXXXXXX",
+        "X               XXXXXXXX",
+        "XX             XXXXXXXXX",
+        "XXX           XXXXXXXXXX",
+        "XXXX         XXXXXXXXXXX",
+        "XXXXX       XXXXXXXXXXXX",
+        "XXXXXX     XXXXXXXXXXXXX",
+        " XXXXXXXXXX XXXXXXXXXXX",
+        "  XXXXXXXXXXXXXXXXXXXX",
+        "   XXXXXXXXXXXXXXXXXX",
+        "    XXXXXXXXXXXXXXXX",
+        "     XXXXXXXXXXXXXX",
+        "      XXXXXXXXXXXX",
+        "       XXXXXXXXXX",
+        "        XXXXXXXX",
+        "         XXX  XX",
+        "               X",
+        "              XX"
+      ],
+      dinoDuck1: [
+        "                     XXXXXXXXXXXXXXXXXXXX",
+        "                     X XXXXXXXXXXXXXXXXXX",
+        "                     XXXXXXXXXXXXXXXXXXXX",
+        "                     XXXXXXXXXXXXXXXXXXXX",
+        "                     XXXXXXXXXXXXXXXXXXXX",
+        "X                   XXXXXXXXX",
+        "XX                 XXXXXXXXXX",
+        "XXX               XXXXXXXXXXX",
+        "XXXX             XXXXXXXXXXXX",
+        "XXXXX           XXXXXXXXXXXXX",
+        "XXXXXX         XXXXXXXXXXXXXX",
+        " XXXXXXXXXX   XXXXXXXXXXXXXXX",
+        "  XXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "   XXXXXXXXXXXXXXXXXXXXXXXXX",
+        "    XXXXXXXXXXXXXXXXXXXXXXX",
+        "     XXXXXXXXXXXXXXXXX",
+        "      XXXXXXXXXXXXXXX",
+        "       XXXXXXXXXXXXX",
+        "        XXXXXXXXXXX",
+        "        XX        XXX",
+        "        X            ",
+        "        XX           "
+      ],
+      dinoDuck2: [
+        "                     XXXXXXXXXXXXXXXXXXXX",
+        "                     X XXXXXXXXXXXXXXXXXX",
+        "                     XXXXXXXXXXXXXXXXXXXX",
+        "                     XXXXXXXXXXXXXXXXXXXX",
+        "                     XXXXXXXXXXXXXXXXXXXX",
+        "X                   XXXXXXXXX",
+        "XX                 XXXXXXXXXX",
+        "XXX               XXXXXXXXXXX",
+        "XXXX             XXXXXXXXXXXX",
+        "XXXXX           XXXXXXXXXXXXX",
+        "XXXXXX         XXXXXXXXXXXXXX",
+        " XXXXXXXXXX   XXXXXXXXXXXXXXX",
+        "  XXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "   XXXXXXXXXXXXXXXXXXXXXXXXX",
+        "    XXXXXXXXXXXXXXXXXXXXXXX",
+        "     XXXXXXXXXXXXXXXXX",
+        "      XXXXXXXXXXXXXXX",
+        "       XXXXXXXXXXXXX",
+        "        XXXXXXXXXXX",
+        "         XXX      XX",
+        "                   X",
+        "                  XX"
+      ],
+      dinoDead: [
+        "                  XXXXXX",
+        "                  X  X X",
+        "                  XX X X",
+        "                  XXXXXX",
+        "                  XXXXXX",
+        "                  XXX",
+        "                 XXXXXXX",
+        "X               XXXXXXXX",
+        "XX             XXXXXXXXX",
+        "XXX           XXXXXXXXXX",
+        "XXXX         XXXXXXXXXXX",
+        "XXXXX       XXXXXXXXXXXX",
+        "XXXXXX     XXXXXXXXXXXXX",
+        " XXXXXXXXXX XXXXXXXXXXX",
+        "  XXXXXXXXXXXXXXXXXXXX",
+        "   XXXXXXXXXXXXXXXXXX",
+        "    XXXXXXXXXXXXXXXX",
+        "     XXXXXXXXXXXXXX",
+        "      XXXXXXXXXXXX",
+        "       XXXXXXXXXX",
+        "        XXXXXXXX",
+        "        XX    XX",
+        "        X      X",
+        "        XX     XX"
+      ],
+      cactusSmall: [
+        "    XX    ",
+        "    XX    ",
+        "  X XX    ",
+        "  X XX  X ",
+        "  X XX  X ",
+        "  XXXXXXX ",
+        "    XX    ",
+        "    XX    ",
+        "    XX    ",
+        "    XX    ",
+        "    XX    ",
+        "    XX    ",
+        "    XX    "
+      ],
+      cactusLarge: [
+        "     XXX     ",
+        "     XXX     ",
+        "     XXX     ",
+        "  XX XXX     ",
+        "  XX XXX  XX ",
+        "  XX XXX  XX ",
+        "  XXXXXXXXXX ",
+        "     XXX     ",
+        "     XXX     ",
+        "     XXX     ",
+        "     XXX     ",
+        "     XXX     ",
+        "     XXX     ",
+        "     XXX     ",
+        "     XXX     "
+      ],
+      pterodactyl1: [
+        "        XXXX",
+        "       XXXXXX",
+        "      XXXXXXXX",
+        "     XXXXXXXXXX",
+        "    XXXXXXXXXXXX",
+        "   XXXXXXXXXXXXXX",
+        "  XXXXXXXXXXXXXXXX",
+        " XXXXXXXXXXXXXXXXXX",
+        "XXXXXXXXXXXXXXXXXXXX",
+        "      XXXXXXXX      ",
+        "       XXXXXX       ",
+        "        XXXX        ",
+        "  XXXXXXXXXXXXXXXXX ",
+        " XXXXXXXXXXXXXXXXXXX",
+        "XXXXXXXXXXXXXXXXXXXX"
+      ],
+      pterodactyl2: [
+        "  XXXXXXXXXXXXXXXXX ",
+        " XXXXXXXXXXXXXXXXXXX",
+        "XXXXXXXXXXXXXXXXXXXX",
+        "      XXXXXXXX      ",
+        "       XXXXXX       ",
+        "        XXXX        ",
+        "    XXXXXXXXXXXX",
+        "   XXXXXXXXXXXXXX",
+        "  XXXXXXXXXXXXXXXX",
+        " XXXXXXXXXXXXXXXXXX",
+        "XXXXXXXXXXXXXXXXXXXX",
+        "     XXXXXXXXXX",
+        "      XXXXXXXX",
+        "       XXXXXX",
+        "        XXXX"
+      ],
+      star: [
+        "  X  ",
+        " XXX ",
+        "XXXXX",
+        " XXX ",
+        "  X  "
+      ],
+      moon: [
+        "  XXXX",
+        " XX   ",
+        "XX    ",
+        "XX    ",
+        " XX   ",
+        "  XXXX"
+      ]
+    };
 
-      isJumping = true;
-
-      let position = 60;
-      let velocity = 18;
-      let gravity = 1;
-
-      const jumpInterval = setInterval(function () {
-        position += velocity;
-        velocity -= gravity;
-
-        if (position <= 60) {
-          position = 60;
-          dino.style.bottom = position + "px";
-          clearInterval(jumpInterval);
-          isJumping = false;
-          return;
+    function generateBitmap(matrix, pixelSize = 2, color = '#535353') {
+      const height = matrix.length;
+      const width = Math.max(...matrix.map(row => row.length));
+      const canvas = document.createElement('canvas');
+      canvas.width = width * pixelSize;
+      canvas.height = height * pixelSize;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = color;
+      for (let r = 0; r < height; r++) {
+        for (let c = 0; c < matrix[r].length; c++) {
+          if (matrix[r][c] === 'X') {
+            ctx.fillRect(c * pixelSize, r * pixelSize, pixelSize, pixelSize);
+          }
         }
+      }
+      return canvas;
+    }
 
-        dino.style.bottom = position + "px";
-      }, 20);
+    // --- CONFIGURAÇÕES DE JOGO E CANVAS ---
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let spritesLight = {};
+    let spritesDark = {};
+
+    function initSprites() {
+      for (let key in SPRITES_DEF) {
+        spritesLight[key] = generateBitmap(SPRITES_DEF[key], 2, '#535353');
+        spritesDark[key] = generateBitmap(SPRITES_DEF[key], 2, '#e8eaed');
+      }
+    }
+    initSprites();
+
+    const GROUND_Y = 170;
+    let gameRunning = false;
+    let gameOver = false;
+    let gameSpeed = 6;
+    let distance = 0;
+    let score = 0;
+    let highScore = localStorage.getItem('dino_hi_score') || 0;
+    let frameCount = 0;
+    let isNight = false;
+
+    let flashScoreTimer = 0;
+
+    // --- OBJETOS DO JOGO ---
+    const dino = {
+      x: 50,
+      y: GROUND_Y - 48,
+      width: 44,
+      height: 48,
+      vy: 0,
+      gravity: 0.6,
+      jumpForce: -11.5,
+      isJumping: false,
+      isDucking: false,
+      animFrame: 0,
+
+      reset() {
+        this.y = GROUND_Y - 48;
+        this.width = 44;
+        this.height = 48;
+        this.vy = 0;
+        this.isJumping = false;
+        this.isDucking = false;
+      },
+
+      jump() {
+        if (!this.isJumping) {
+          this.vy = this.jumpForce;
+          this.isJumping = true;
+          playSound('jump');
+        }
+      },
+
+      duck(enable) {
+        if (this.isJumping && enable) {
+          this.vy += 2.5; // Descida rápida no ar
+        }
+        if (!this.isJumping) {
+          this.isDucking = enable;
+          if (enable) {
+            this.height = 30;
+            this.y = GROUND_Y - 30;
+            this.width = 58;
+          } else {
+            this.height = 48;
+            this.y = GROUND_Y - 48;
+            this.width = 44;
+          }
+        }
+      },
+
+      update() {
+        if (this.isJumping) {
+          this.y += this.vy;
+          this.vy += this.gravity;
+
+          const currentHeight = this.isDucking ? 30 : 48;
+          if (this.y >= GROUND_Y - currentHeight) {
+            this.y = GROUND_Y - currentHeight;
+            this.isJumping = false;
+            this.vy = 0;
+          }
+        }
+      },
+
+      getBox() {
+        return {
+          x: this.x + 4,
+          y: this.y + 4,
+          width: this.width - 8,
+          height: this.height - 6
+        };
+      }
+    };
+
+    let obstacles = [];
+    let clouds = [];
+    let stars = [];
+    let groundTicks = [];
+
+    // Preenche irregularidades do chão
+    for (let i = 0; i < 800; i += 15) {
+      if (Math.random() > 0.6) {
+        groundTicks.push({ x: i, width: Math.random() * 3 + 1 });
+      }
     }
 
     function spawnObstacle() {
+      const minGap = 220;
+      const lastObs = obstacles[obstacles.length - 1];
+      if (lastObs && (canvas.width - lastObs.x) < minGap) return;
+
+      const rand = Math.random();
+      let type = 'cactusSmall';
+
+      // Pterodáctilos aparecem a partir dos 150 pontos
+      if (score > 150 && rand < 0.3) {
+        const heights = [GROUND_Y - 30, GROUND_Y - 52, GROUND_Y - 75];
+        const chosenY = heights[Math.floor(Math.random() * heights.length)];
+        obstacles.push({
+          type: 'pterodactyl',
+          x: canvas.width,
+          y: chosenY,
+          width: 40,
+          height: 30,
+          animFrame: 0
+        });
+      } else if (rand < 0.65) {
+        const count = Math.floor(Math.random() * 3) + 1;
+        obstacles.push({
+          type: 'cactusSmall',
+          x: canvas.width,
+          y: GROUND_Y - 28,
+          width: 20 * count,
+          height: 28,
+          count: count
+        });
+      } else {
+        const count = Math.floor(Math.random() * 2) + 1;
+        obstacles.push({
+          type: 'cactusLarge',
+          x: canvas.width,
+          y: GROUND_Y - 34,
+          width: 26 * count,
+          height: 34,
+          count: count
+        });
+      }
+    }
+
+    function spawnCloud() {
+      if (clouds.length < 3 && Math.random() < 0.01) {
+        clouds.push({
+          x: canvas.width,
+          y: Math.random() * 60 + 20,
+          speed: Math.random() * 0.5 + 0.5
+        });
+      }
+    }
+
+    function initStars() {
+      stars = [];
+      for (let i = 0; i < 6; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * 80 + 10
+        });
+      }
+    }
+    initStars();
+
+    // --- CONTROLES TECLADO E TOQUE ---
+    const keys = {};
+
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space' || e.code === 'ArrowUp') {
+        e.preventDefault();
+        if (!gameRunning) {
+          resetAndStart();
+        } else {
+          dino.jump();
+        }
+      }
+      if (e.code === 'ArrowDown') {
+        e.preventDefault();
+        if (gameRunning) dino.duck(true);
+      }
+    });
+
+    window.addEventListener('keyup', (e) => {
+      if (e.code === 'ArrowDown') {
+        if (gameRunning) dino.duck(false);
+      }
+    });
+
+    canvas.addEventListener('click', () => {
       if (!gameRunning) {
-        return;
+        resetAndStart();
+      } else {
+        dino.jump();
+      }
+    });
+
+    // --- LÓGICA PRINCIPAL E LOOP ---
+    function resetAndStart() {
+      gameRunning = true;
+      gameOver = false;
+      gameSpeed = 6;
+      distance = 0;
+      score = 0;
+      frameCount = 0;
+      obstacles = [];
+      clouds = [];
+      isNight = false;
+      document.body.classList.remove('dark-mode');
+      dino.reset();
+      document.getElementById('startBtn').blur();
+      requestAnimationFrame(gameLoop);
+    }
+
+    function checkCollision(a, b) {
+      return (
+        a.x < b.x + b.width &&
+        a.x + a.width > b.x &&
+        a.y < b.y + b.height &&
+        a.y + a.height > b.y
+      );
+    }
+
+    function gameLoop() {
+      if (!gameRunning) return;
+
+      frameCount++;
+      distance += gameSpeed * 0.025;
+      const newScore = Math.floor(distance);
+
+      if (newScore > score) {
+        score = newScore;
+        // Som e efeito visual a cada 100 pontos
+        if (score > 0 && score % 100 === 0) {
+          playSound('score');
+          flashScoreTimer = 30;
+        }
+        // Alterna dia/noite a cada 700 pontos
+        if (score > 0 && score % 700 === 0 && frameCount % 10 === 0) {
+          isNight = !isNight;
+          if (isNight) document.body.classList.add('dark-mode');
+          else document.body.classList.remove('dark-mode');
+        }
       }
 
-      const obstacle = document.createElement("div");
-      obstacle.className = "obstacle";
-      obstacle.style.right = "-40px";
+      // Aumento gradual da velocidade
+      gameSpeed = Math.min(13, 6 + score * 0.005);
 
-      gameContainer.appendChild(obstacle);
+      // Atualiza Dinossauro
+      dino.update();
 
-      let obstaclePosition = -40;
-      let speed = 7 + level;
+      // Gerencia Nuvens
+      spawnCloud();
+      clouds.forEach(c => c.x -= c.speed);
+      clouds = clouds.filter(c => c.x > -60);
 
-      obstacleInterval = setInterval(function () {
-        if (!gameRunning) {
-          clearInterval(obstacleInterval);
-          obstacle.remove();
+      // Gerencia Chão
+      groundTicks.forEach(t => {
+        t.x -= gameSpeed;
+        if (t.x < 0) t.x += canvas.width;
+      });
+
+      // Gerencia Obstáculos
+      if (frameCount % Math.max(40, Math.floor(90 - gameSpeed * 3)) === 0) {
+        spawnObstacle();
+      }
+
+      const activeSprites = isNight ? spritesDark : spritesLight;
+
+      // Colisões e atualização de obstáculos
+      for (let i = 0; i < obstacles.length; i++) {
+        const obs = obstacles[i];
+        obs.x -= gameSpeed;
+
+        // Animação do Pterodáctilo
+        if (obs.type === 'pterodactyl' && frameCount % 12 === 0) {
+          obs.animFrame = obs.animFrame === 0 ? 1 : 0;
+        }
+
+        // Checagem de Colisão
+        const dinoBox = dino.getBox();
+        const obsBox = {
+          x: obs.x + 3,
+          y: obs.y + 3,
+          width: obs.width - 6,
+          height: obs.height - 6
+        };
+
+        if (checkCollision(dinoBox, obsBox)) {
+          triggerGameOver();
           return;
         }
+      }
 
-        obstaclePosition += speed;
-        obstacle.style.right = obstaclePosition + "px";
+      obstacles = obstacles.filter(obs => obs.x > -100);
 
-        if (obstaclePosition > gameContainer.offsetWidth + 80) {
-          clearInterval(obstacleInterval);
-          obstacle.remove();
+      // --- RENDERIZAÇÃO ---
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-          score++;
-          scoreDisplay.textContent = score;
+      // Lua e Estrelas no Modo Noturno
+      if (isNight) {
+        ctx.drawImage(activeSprites.moon, 700, 30);
+        stars.forEach(s => ctx.drawImage(activeSprites.star, s.x, s.y));
+      }
 
-          if (score % 10 === 0) {
-            level++;
-            levelDisplay.textContent = level;
+      // Nuvens
+      clouds.forEach(c => {
+        ctx.fillStyle = isNight ? '#535353' : '#d3d3d3';
+        ctx.fillRect(c.x, c.y, 40, 12);
+        ctx.fillRect(c.x + 10, c.y - 6, 20, 6);
+      });
+
+      // Chão
+      ctx.strokeStyle = isNight ? '#e8eaed' : '#535353';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(0, GROUND_Y);
+      ctx.lineTo(canvas.width, GROUND_Y);
+      ctx.stroke();
+
+      ctx.fillStyle = isNight ? '#e8eaed' : '#535353';
+      groundTicks.forEach(t => {
+        ctx.fillRect(t.x, GROUND_Y + 4, t.width, 2);
+      });
+
+      // Desenha Obstáculos
+      obstacles.forEach(obs => {
+        if (obs.type === 'pterodactyl') {
+          const spriteKey = obs.animFrame === 0 ? 'pterodactyl1' : 'pterodactyl2';
+          ctx.drawImage(activeSprites[spriteKey], obs.x, obs.y);
+        } else if (obs.type === 'cactusSmall') {
+          for (let c = 0; c < obs.count; c++) {
+            ctx.drawImage(activeSprites.cactusSmall, obs.x + (c * 20), obs.y);
+          }
+        } else if (obs.type === 'cactusLarge') {
+          for (let c = 0; c < obs.count; c++) {
+            ctx.drawImage(activeSprites.cactusLarge, obs.x + (c * 26), obs.y);
           }
         }
-      }, 20);
-
-      let delay = 1600 - level * 80;
-
-      if (delay < 800) {
-        delay = 800;
-      }
-
-      spawnTimeout = setTimeout(spawnObstacle, delay);
-    }
-
-    function checkCollisions() {
-      if (!gameRunning) {
-        return;
-      }
-
-      const dinoRect = dino.getBoundingClientRect();
-      const obstacles = document.querySelectorAll(".obstacle");
-
-      obstacles.forEach(function (obstacle) {
-        const obstacleRect = obstacle.getBoundingClientRect();
-
-        const collision =
-          dinoRect.left < obstacleRect.right - 5 &&
-          dinoRect.right > obstacleRect.left + 5 &&
-          dinoRect.top < obstacleRect.bottom - 5 &&
-          dinoRect.bottom > obstacleRect.top + 5;
-
-        if (collision) {
-          endGame();
-        }
       });
+
+      // Desenha Dinossauro
+      let dinoSprite = activeSprites.dinoStand;
+      if (dino.isJumping) {
+        dinoSprite = activeSprites.dinoStand;
+      } else if (dino.isDucking) {
+        const leg = Math.floor(frameCount / 6) % 2;
+        dinoSprite = leg === 0 ? activeSprites.dinoDuck1 : activeSprites.dinoDuck2;
+      } else {
+        const leg = Math.floor(frameCount / 6) % 2;
+        dinoSprite = leg === 0 ? activeSprites.dinoRun1 : activeSprites.dinoRun2;
+      }
+
+      ctx.drawImage(dinoSprite, dino.x, dino.y);
+
+      // Placar e Recorde (HI 00000 00000)
+      ctx.font = '12px "Press Start 2P"';
+      ctx.fillStyle = isNight ? '#e8eaed' : '#535353';
+
+      const padScore = (num) => String(num).padStart(5, '0');
+      const hiText = `HI ${padScore(highScore)}  `;
+      const currentScoreText = padScore(score);
+
+      ctx.fillText(hiText, 520, 30);
+
+      // Efeito pisca no placar ao atingir centenas
+      if (flashScoreTimer > 0) {
+        flashScoreTimer--;
+        if (Math.floor(flashScoreTimer / 6) % 2 === 0) {
+          ctx.fillText(currentScoreText, 700, 30);
+        }
+      } else {
+        ctx.fillText(currentScoreText, 700, 30);
+      }
+
+      requestAnimationFrame(gameLoop);
     }
 
-    function endGame() {
+    function triggerGameOver() {
       gameRunning = false;
-
-      clearInterval(gameLoopInterval);
-      clearInterval(obstacleInterval);
-      clearTimeout(spawnTimeout);
+      gameOver = true;
+      playSound('hit');
 
       if (score > highScore) {
         highScore = score;
-        localStorage.setItem("dinoHighScore", highScore);
-        highScoreDisplay.textContent = highScore;
+        localStorage.setItem('dino_hi_score', highScore);
       }
 
-      finalScore.textContent = "Pontuação Final: " + score;
-      gameOverScreen.style.display = "block";
+      const activeSprites = isNight ? spritesDark : spritesLight;
+
+      // Desenha Dino Derrotado
+      ctx.fillStyle = isNight ? '#202124' : '#f7f7f7';
+      ctx.fillRect(dino.x, dino.y, dino.width, dino.height);
+      ctx.drawImage(activeSprites.dinoDead, dino.x, dino.y);
+
+      // Texto de Game Over
+      ctx.font = '16px "Press Start 2P"';
+      ctx.fillStyle = isNight ? '#e8eaed' : '#535353';
+      ctx.textAlign = 'center';
+      ctx.fillText('G A M E   O V E R', canvas.width / 2, 90);
+
+      // Ícone de Recomeçar
+      ctx.font = '10px "Press Start 2P"';
+      ctx.fillText('PRESSIONE ESPAÇO PARA JOGAR', canvas.width / 2, 120);
+      ctx.textAlign = 'left';
     }
 
-    function restartGame() {
-      clearInterval(gameLoopInterval);
-      clearInterval(obstacleInterval);
-      clearTimeout(spawnTimeout);
+    // Tela Inicial estática
+    function renderInitialState() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = '#535353';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(0, GROUND_Y);
+      ctx.lineTo(canvas.width, GROUND_Y);
+      ctx.stroke();
 
-      removeObstacles();
+      ctx.drawImage(spritesLight.dinoStand, dino.x, dino.y);
 
-      score = 0;
-      level = 1;
-      gameRunning = false;
-      isJumping = false;
-
-      scoreDisplay.textContent = score;
-      levelDisplay.textContent = level;
-      gameOverScreen.style.display = "none";
-      dino.style.bottom = "60px";
-
-      startGame();
+      ctx.font = '12px "Press Start 2P"';
+      ctx.fillStyle = '#535353';
+      ctx.fillText(`HI ${String(highScore).padStart(5, '0')}  00000`, 520, 30);
     }
 
-    function removeObstacles() {
-      const obstacles = document.querySelectorAll(".obstacle");
-
-      obstacles.forEach(function (obstacle) {
-        obstacle.remove();
-      });
-    }
-
-    document.addEventListener("keydown", function (event) {
-      if (event.code === "Space" || event.code === "ArrowUp") {
-        event.preventDefault();
-
-        if (!gameRunning) {
-          startGame();
-        } else {
-          jump();
-        }
-      }
-    });
-
-    gameContainer.addEventListener("click", function () {
-      if (!gameRunning) {
-        startGame();
-      } else {
-        jump();
-      }
-    });
+    renderInitialState();
   </script>
 </body>
 </html>
