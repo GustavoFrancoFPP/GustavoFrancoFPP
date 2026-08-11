@@ -230,36 +230,52 @@
     let assetLoaded = 0; // counts successful loads
     let assetTried = 0;  // counts loads + errors
     let assetsReady = false;
+    var gameStateReady = false;
+    function buildWeaponSprite() {
+      try {
+        if (imgAk.complete && imgAk.naturalWidth > 0) {
+          return createTransparentWeaponSprite(imgAk);
+        }
+      } catch (e) {
+        console.warn('Nao foi possivel recortar a arma; usando sprite reserva.', e);
+      }
+      return createFallbackWeaponSprite();
+    }
+
+    function markAssetDone(img, loaded) {
+      if (img._assetDone) return;
+      img._assetDone = true;
+      if (loaded) assetLoaded++;
+      assetTried++;
+      if (img === imgAk) {
+        akSprite = loaded ? buildWeaponSprite() : createFallbackWeaponSprite();
+      }
+      if (assetTried === assetList.length) enableStartIfReady();
+    }
+
     assetList.forEach(img => {
-      img.onload = () => {
-        assetLoaded++;
-        assetTried++;
-        if (img === imgAk) akSprite = createTransparentWeaponSprite(imgAk);
-        if (assetTried === assetList.length) enableStartIfReady();
-      };
+      img.onload = () => markAssetDone(img, true);
       img.onerror = () => {
-        assetTried++;
         console.warn('Erro ao carregar imagem:', img.src);
-        if (img === imgAk) akSprite = createFallbackWeaponSprite();
-        if (assetTried === assetList.length) enableStartIfReady();
+        markAssetDone(img, false);
       };
+
+      if (img.complete) {
+        markAssetDone(img, img.naturalWidth > 0);
+      }
     });
 
     function enableStartIfReady() {
       // mark assetsReady even if some images failed, but log which ones
       assetsReady = true;
       if (!akSprite) {
-        if (imgAk.complete && imgAk.naturalWidth > 0) {
-          akSprite = createTransparentWeaponSprite(imgAk);
-        } else {
-          akSprite = createFallbackWeaponSprite();
-        }
+        akSprite = buildWeaponSprite();
       }
       const btn = document.getElementById('startBtn');
       btn.disabled = false;
       btn.textContent = 'INICIAR JOGO';
       btn.onclick = resetAndStart;
-      if (typeof updateSuperButton === 'function') updateSuperButton();
+      if (gameStateReady) updateSuperButton();
     }
 
     // Safety fallback: if loading hangs, enable start after 4 seconds
@@ -412,7 +428,21 @@
     let gameSpeed = 6;
     let distance = 0;
     let score = 0;
-    let highScore = parseInt(localStorage.getItem('mj_hi') || '0', 10) || 0;
+    function getStoredHighScore() {
+      try {
+        return parseInt(localStorage.getItem('mj_hi') || '0', 10) || 0;
+      } catch (e) {
+        return 0;
+      }
+    }
+
+    function saveHighScore(value) {
+      try {
+        localStorage.setItem('mj_hi', value);
+      } catch (e) { }
+    }
+
+    let highScore = getStoredHighScore();
     let frameCount = 0;
     const SUPER_CHARGE_FRAMES = 900;
     const SUPER_DURATION_FRAMES = 210;
@@ -667,6 +697,9 @@
         superBtn.disabled = true;
       }
     }
+
+    gameStateReady = true;
+    updateSuperButton();
 
     function drawSuperShot() {
       if (superActiveFrames <= 0 && muzzleFlashes.length === 0 && smokePuffs.length === 0 && shellCasings.length === 0) return;
@@ -1108,7 +1141,7 @@
 
       if (score > highScore) {
         highScore = score;
-        localStorage.setItem('mj_hi', highScore);
+        saveHighScore(highScore);
       }
 
       renderScene();
