@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🕺 Michael Jackson Game - Gustavo Franco</title>
+  <title>Moonwalker Game - Gustavo Franco</title>
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
@@ -56,14 +56,16 @@
 
     #gameCanvas {
       background-color: #101820;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-bottom: 3px solid #c89d33;
-      border-radius: 6px;
+      border: 2px solid rgba(244, 211, 94, 0.38);
+      border-bottom: 4px solid #c89d33;
+      border-radius: 14px;
       width: 100%;
       max-width: 800px;
       height: auto;
       cursor: pointer;
-      box-shadow: 0 18px 48px rgba(0,0,0,0.55);
+      box-shadow:
+        0 22px 60px rgba(0,0,0,0.62),
+        inset 0 0 0 1px rgba(255,255,255,0.04);
     }
 
     .controls-hint {
@@ -89,7 +91,7 @@
       background: linear-gradient(180deg, #f4d35e, #c89d33);
       color: #141414;
       border: none;
-      border-radius: 4px;
+      border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
       transition: transform 0.1s, background-color 0.2s;
@@ -111,7 +113,7 @@
 <body>
   <div class="wrapper">
     <div class="header">
-      <h1>🕺 MOONWALKER GAME</h1>
+      <h1>MOONWALKER GAME</h1>
       <p>Desenvolvido por Gustavo Franco</p>
     </div>
 
@@ -125,7 +127,7 @@
     <div class="controls-hint">
       <p><strong>Controles:</strong></p>
       <p> Pular: <code>ESPAÇO</code> / <code>SETA CIMA</code> / <code>TOQUE</code></p>
-      <p> Agachar / Cair Rápido: <code>SETA BAIXO</code></p>
+      <p> Agachar / Cair rápido: <code>SETA BAIXO</code></p>
       <p> Super: <code>E</code> / <code>BOTÃO SUPER</code></p>
     </div>
   </div>
@@ -135,48 +137,80 @@
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
     let audioCtx = null;
 
+    function ensureAudio() {
+      if (!AudioCtx) return null;
+      if (!audioCtx) audioCtx = new AudioCtx();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      return audioCtx;
+    }
+
+    function tone(freq, duration, volume = 0.08, type = 'square', endFreq = null, delay = 0) {
+      const ctxAudio = ensureAudio();
+      if (!ctxAudio) return;
+
+      const start = ctxAudio.currentTime + delay;
+      const osc = ctxAudio.createOscillator();
+      const gain = ctxAudio.createGain();
+
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, start);
+      if (endFreq) {
+        osc.frequency.exponentialRampToValueAtTime(Math.max(1, endFreq), start + duration);
+      }
+
+      gain.gain.setValueAtTime(0.001, start);
+      gain.gain.linearRampToValueAtTime(volume, start + 0.012);
+      gain.gain.exponentialRampToValueAtTime(0.001, start + duration);
+
+      osc.connect(gain);
+      gain.connect(ctxAudio.destination);
+      osc.start(start);
+      osc.stop(start + duration + 0.03);
+    }
+
+    function noiseBurst(duration, volume = 0.08, delay = 0) {
+      const ctxAudio = ensureAudio();
+      if (!ctxAudio) return;
+
+      const sampleCount = Math.max(1, Math.floor(ctxAudio.sampleRate * duration));
+      const buffer = ctxAudio.createBuffer(1, sampleCount, ctxAudio.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < sampleCount; i++) {
+        data[i] = (Math.random() * 2 - 1) * (1 - i / sampleCount);
+      }
+
+      const source = ctxAudio.createBufferSource();
+      const gain = ctxAudio.createGain();
+      const start = ctxAudio.currentTime + delay;
+      source.buffer = buffer;
+      gain.gain.setValueAtTime(volume, start);
+      gain.gain.exponentialRampToValueAtTime(0.001, start + duration);
+      source.connect(gain);
+      gain.connect(ctxAudio.destination);
+      source.start(start);
+      source.stop(start + duration);
+    }
+
     function playSound(type) {
       try {
-        if (!audioCtx) audioCtx = new AudioCtx();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        const now = audioCtx.currentTime;
-
-        if (type === 'jump') {
-          osc.frequency.setValueAtTime(200, now);
-          osc.frequency.exponentialRampToValueAtTime(800, now + 0.15);
-          gain.gain.setValueAtTime(0.1, now);
-          gain.gain.linearRampToValueAtTime(0.01, now + 0.15);
-          osc.start(now);
-          osc.stop(now + 0.15);
+        if (type === 'start') {
+          tone(330, 0.08, 0.045, 'square', null, 0);
+          tone(440, 0.08, 0.045, 'square', null, 0.08);
+          tone(660, 0.12, 0.05, 'square', null, 0.16);
+        } else if (type === 'jump') {
+          tone(220, 0.14, 0.06, 'square', 620);
         } else if (type === 'score') {
-          osc.frequency.setValueAtTime(523.25, now);
-          osc.frequency.setValueAtTime(659.25, now + 0.08);
-          gain.gain.setValueAtTime(0.1, now);
-          gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
-          osc.start(now);
-          osc.stop(now + 0.2);
+          tone(523.25, 0.06, 0.045, 'square', null, 0);
+          tone(659.25, 0.06, 0.045, 'square', null, 0.07);
+          tone(783.99, 0.08, 0.05, 'square', null, 0.14);
         } else if (type === 'hit') {
-          osc.type = 'sawtooth';
-          osc.frequency.setValueAtTime(150, now);
-          osc.frequency.exponentialRampToValueAtTime(30, now + 0.25);
-          gain.gain.setValueAtTime(0.15, now);
-          gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
-          osc.start(now);
-          osc.stop(now + 0.25);
+          noiseBurst(0.12, 0.055);
+          tone(150, 0.28, 0.07, 'sawtooth', 35);
         } else if (type === 'super') {
-          osc.type = 'square';
-          osc.frequency.setValueAtTime(220, now);
-          osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
-          osc.frequency.exponentialRampToValueAtTime(110, now + 0.35);
-          gain.gain.setValueAtTime(0.12, now);
-          gain.gain.linearRampToValueAtTime(0.01, now + 0.35);
-          osc.start(now);
-          osc.stop(now + 0.35);
+          noiseBurst(0.22, 0.06);
+          tone(180, 0.12, 0.055, 'sawtooth', 520);
+          tone(520, 0.2, 0.05, 'square', 130, 0.08);
+          tone(880, 0.08, 0.035, 'triangle', null, 0.18);
         }
       } catch (e) { }
     }
@@ -382,24 +416,24 @@
     let frameCount = 0;
     const SUPER_CHARGE_FRAMES = 900;
     const SUPER_DURATION_FRAMES = 210;
-    const PLAYER_NORMAL = { width: 44, height: 56 };
-    const PLAYER_DUCK = { width: 42, height: 36 };
-    const TOWER_SCALE = 0.078;
-    const AIRPLANE_SCALE = 0.07;
-    const WEAPON_WIDTH_RUN = 58;
-    const WEAPON_WIDTH_JUMP = 52;
-    const OBSTACLE_MIN_GAP = 240;
+    const PLAYER_NORMAL = { width: 50, height: 64 };
+    const PLAYER_DUCK = { width: 48, height: 38 };
+    const TOWER_SIZE = { width: 34, height: 58 };
+    const AIRPLANE_SIZE = { width: 66, height: 26 };
+    const WEAPON_WIDTH_RUN = 46;
+    const WEAPON_WIDTH_JUMP = 42;
     const HITBOX_INSETS = {
-      player: { left: 12, top: 8, right: 9, bottom: 5 },
-      playerDuck: { left: 9, top: 8, right: 8, bottom: 4 },
-      tower: { left: 0.28, top: 0.08, right: 0.24, bottom: 0.02 },
-      airplane: { left: 0.13, top: 0.32, right: 0.16, bottom: 0.28 }
+      player: { left: 14, top: 10, right: 12, bottom: 6 },
+      playerDuck: { left: 10, top: 8, right: 9, bottom: 4 },
+      tower: { left: 0.2, top: 0.08, right: 0.2, bottom: 0.03 },
+      airplane: { left: 0.14, top: 0.25, right: 0.16, bottom: 0.26 }
     };
     let superCharge = 0;
     let superActiveFrames = 0;
     let muzzleFlashes = [];
     let smokePuffs = [];
     let shellCasings = [];
+    let obstacleDistanceRemaining = 330;
 
     // --- PERSONAGEM (MICHAEL JACKSON) ---
     const mj = {
@@ -478,8 +512,8 @@
         const bob = this.isJumping ? 0 : Math.sin(frameCount / 5) * 1.5;
         const weaponWidth = this.isJumping ? WEAPON_WIDTH_JUMP : WEAPON_WIDTH_RUN;
         const weaponHeight = weaponWidth * (akSprite.height / akSprite.width);
-        const weaponX = this.x + 24;
-        const weaponY = this.y + (this.isJumping ? 25 : 34) + bob;
+        const weaponX = this.x + 27;
+        const weaponY = this.y + (this.isJumping ? 29 : 39) + bob;
 
         ctx.save();
         const previousSmoothing = ctx.imageSmoothingEnabled;
@@ -544,37 +578,42 @@
 
     let obstacles = [];
 
+    function randomBetween(min, max) {
+      return min + Math.random() * (max - min);
+    }
+
+    function getNextObstacleGap() {
+      const difficulty = Math.min(1, score / 1400);
+      const minGap = 255 - difficulty * 25;
+      const maxGap = 500 - difficulty * 65;
+      return randomBetween(minGap, maxGap);
+    }
+
     function spawnObstacle() {
       if (superActiveFrames > 0) return;
 
-      const lastObs = obstacles[obstacles.length - 1];
-      if (lastObs && (canvas.width - lastObs.x) < OBSTACLE_MIN_GAP) return;
+      const airplaneChance = score > 120
+        ? Math.min(0.46, 0.28 + score / 5000)
+        : 0;
 
-      const rand = Math.random();
-
-      if (score > 120 && rand < 0.35) {
-        const airplaneWidth = Math.floor(imgAirplane.width * AIRPLANE_SCALE);
-        const airplaneHeight = Math.floor(imgAirplane.height * AIRPLANE_SCALE);
-        const heights = [GROUND_Y - 50, GROUND_Y - 72, GROUND_Y - 94];
-        const chosenY = heights[Math.floor(Math.random() * heights.length)];
+      if (Math.random() < airplaneChance) {
+        const chosenY = randomBetween(GROUND_Y - 60, GROUND_Y - 52);
         obstacles.push({
           type: 'airplane',
           x: canvas.width,
           y: chosenY,
           baseY: chosenY,
           phase: Math.random() * Math.PI * 2,
-          width: airplaneWidth,
-          height: airplaneHeight
+          width: AIRPLANE_SIZE.width,
+          height: AIRPLANE_SIZE.height
         });
       } else {
-        const towerWidth = Math.floor(imgTower.width * TOWER_SCALE);
-        const towerHeight = Math.floor(imgTower.height * TOWER_SCALE);
         obstacles.push({
           type: 'tower',
           x: canvas.width,
-          y: GROUND_Y - towerHeight,
-          width: towerWidth,
-          height: towerHeight
+          y: GROUND_Y - TOWER_SIZE.height,
+          width: TOWER_SIZE.width,
+          height: TOWER_SIZE.height
         });
       }
     }
@@ -632,8 +671,8 @@
     function drawSuperShot() {
       if (superActiveFrames <= 0 && muzzleFlashes.length === 0 && smokePuffs.length === 0 && shellCasings.length === 0) return;
 
-      const originX = mj.x + 24 + (mj.isJumping ? WEAPON_WIDTH_JUMP : WEAPON_WIDTH_RUN);
-      const originY = mj.y + (mj.isJumping ? 25 : 34);
+      const originX = mj.x + 27 + (mj.isJumping ? WEAPON_WIDTH_JUMP : WEAPON_WIDTH_RUN);
+      const originY = mj.y + (mj.isJumping ? 29 : 39);
 
       if (superActiveFrames > 0 && frameCount % 2 === 0) {
         const spreads = [
@@ -671,8 +710,8 @@
 
         for (let i = 0; i < 3; i++) {
           shellCasings.push({
-            x: mj.x + 68,
-            y: mj.y + 26,
+            x: originX - 8,
+            y: originY - 3,
             dx: -3 - Math.random() * 4,
             dy: -4 - Math.random() * 4,
             spin: Math.random() * Math.PI,
@@ -822,9 +861,11 @@
       smokePuffs = [];
       shellCasings = [];
       obstacles = [];
+      obstacleDistanceRemaining = randomBetween(300, 420);
       mj.reset();
       document.getElementById('startBtn').blur();
       updateSuperButton();
+      playSound('start');
       requestAnimationFrame(gameLoop);
     }
 
@@ -839,9 +880,9 @@
 
     function drawBackground() {
       const sky = ctx.createLinearGradient(0, 0, 0, GROUND_Y);
-      sky.addColorStop(0, '#223247');
-      sky.addColorStop(0.46, '#647b8f');
-      sky.addColorStop(1, '#c0a777');
+      sky.addColorStop(0, '#172536');
+      sky.addColorStop(0.48, '#536d82');
+      sky.addColorStop(1, '#c59b62');
       ctx.fillStyle = sky;
       ctx.fillRect(0, 0, canvas.width, GROUND_Y);
 
@@ -890,9 +931,9 @@
 
     function drawGround() {
       const ground = ctx.createLinearGradient(0, GROUND_Y, 0, canvas.height);
-      ground.addColorStop(0, '#3b3630');
-      ground.addColorStop(0.45, '#24211f');
-      ground.addColorStop(1, '#121212');
+      ground.addColorStop(0, '#40372f');
+      ground.addColorStop(0.42, '#27221f');
+      ground.addColorStop(1, '#101112');
       ctx.fillStyle = ground;
       ctx.fillRect(0, GROUND_Y, canvas.width, canvas.height - GROUND_Y);
 
@@ -962,7 +1003,7 @@
     function drawHud() {
       const padScore = (num) => String(num).padStart(5, '0');
       ctx.save();
-      ctx.fillStyle = 'rgba(8, 9, 10, 0.55)';
+      ctx.fillStyle = 'rgba(8, 10, 13, 0.72)';
       ctx.fillRect(12, 10, 150, 40);
       ctx.fillRect(508, 10, 280, 32);
 
@@ -1030,8 +1071,10 @@
       mj.update();
 
       // Gerencia Obstáculos
-      if (frameCount % Math.max(40, Math.floor(90 - gameSpeed * 3)) === 0) {
+      obstacleDistanceRemaining -= gameSpeed;
+      if (obstacleDistanceRemaining <= 0) {
         spawnObstacle();
+        obstacleDistanceRemaining = getNextObstacleGap();
       }
 
       for (let i = 0; i < obstacles.length; i++) {
@@ -1039,7 +1082,7 @@
         obs.x -= gameSpeed;
 
         if (obs.type === 'airplane') {
-          obs.y = obs.baseY + Math.sin(frameCount / 18 + obs.phase) * 3;
+          obs.y = obs.baseY + Math.sin(frameCount / 20 + obs.phase) * 2;
         }
 
         const mjBox = mj.getBox();
