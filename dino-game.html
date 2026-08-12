@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Moonwalker Game - Gustavo Franco</title>
+  <title>Moonwalker Game - Deluxe Edition</title>
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
@@ -49,12 +49,6 @@
       letter-spacing: 0.05em;
     }
 
-    .header p {
-      font-size: 0.68rem;
-      opacity: 0.8;
-      color: #c0c6d0;
-    }
-
     .top-ui {
       width: 100%;
       display: flex;
@@ -68,27 +62,20 @@
       border: 1px solid rgba(244, 211, 94, 0.2);
     }
 
-    .difficulty-group {
+    .group {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       gap: 10px;
     }
 
-    .difficulty-label {
+    .label {
       font-size: 0.62rem;
       color: #f4d35e;
       letter-spacing: 0.08em;
     }
 
-    .diff-buttons {
-      display: flex;
-      gap: 8px;
-    }
-
-    .diff-button,
-    .audio-button,
-    .game-button {
+    select, .game-btn {
       font-family: 'Press Start 2P', monospace;
       font-size: 0.65rem;
       padding: 8px 14px;
@@ -98,43 +85,23 @@
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.15s ease;
-      text-align: center;
+      outline: none;
     }
 
-    .diff-button.active {
+    select { padding: 6px 10px; }
+
+    .game-btn.active {
       background: linear-gradient(180deg, #f4d35e 0%, #c89d33 100%);
       color: #0d131d;
-      font-weight: bold;
       border-color: #fff9b2;
-      box-shadow: 0 0 10px rgba(244, 211, 94, 0.4);
     }
 
-    .audio-button.active {
-      background: linear-gradient(180deg, #38ef7d 0%, #11998e 100%);
-      color: #0d131d;
-      border-color: #a8ff78;
-    }
-
-    .audio-button.muted {
-      background: linear-gradient(180deg, #eb3349 0%, #f45c43 100%);
-      color: #ffffff;
-      border-color: #ff9a9e;
-    }
-
-    .diff-button:hover:not(:disabled),
-    .audio-button:hover:not(:disabled),
-    .game-button:hover:not(:disabled) {
+    .game-btn:hover:not(:disabled), select:hover {
       transform: translateY(-2px);
       filter: brightness(1.15);
     }
-
-    .diff-button:disabled,
-    .audio-button:disabled,
-    .game-button:disabled {
-      cursor: not-allowed;
-      opacity: 0.5;
-      transform: none;
-    }
+    
+    .game-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
     .message-panel {
       width: 100%;
@@ -143,20 +110,12 @@
       border: 1px solid rgba(244, 211, 94, 0.25);
       border-radius: 10px;
       padding: 10px 14px;
-      color: #f1f0dc;
       text-align: center;
-      line-height: 1.5;
       font-size: 0.62rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 4px;
+      line-height: 1.5;
     }
 
-    .message-title {
-      font-size: 0.68rem;
-      color: #f4d35e;
-    }
+    .message-title { font-size: 0.68rem; color: #f4d35e; display: block; margin-bottom: 4px; }
 
     .canvas-container {
       width: 100%;
@@ -173,61 +132,34 @@
       width: 100%;
       max-width: 900px;
       aspect-ratio: 4 / 1;
-      cursor: pointer;
-      box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.75),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-      display: block;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
     }
 
-    .btn-container {
+    /* Mobile Controls */
+    .mobile-controls {
+      display: none;
       width: 100%;
-      display: flex;
+      gap: 12px;
       justify-content: center;
-      gap: 16px;
+      margin-top: 5px;
     }
 
-    .game-button {
-      min-width: 170px;
-      padding: 12px 20px;
-      font-size: 0.72rem;
-      background: linear-gradient(180deg, #f4d35e 0%, #c89d33 100%);
-      color: #0d131d;
-      border-color: #fff9b2;
-    }
-
-    .game-button#superBtn.ready {
-      background: linear-gradient(180deg, #ff416c 0%, #ff4b2b 100%);
-      color: #ffffff;
-      border-color: #ff8a00;
-      animation: super-pulse 0.8s infinite alternate;
-    }
-
-    @keyframes super-pulse {
-      from { box-shadow: 0 0 8px rgba(255, 65, 108, 0.6); transform: scale(1); }
-      to { box-shadow: 0 0 20px rgba(255, 75, 43, 0.95); transform: scale(1.04); }
-    }
-
-    .controls-hint {
-      width: 100%;
-      font-size: 0.6rem;
-      line-height: 1.8;
-      text-align: center;
-      color: #a0a8b8;
-      padding: 10px;
+    .mobile-btn {
+      flex: 1;
+      padding: 18px 0;
+      font-size: 0.8rem;
+      background: #171f2c;
+      border: 2px solid #f4d35e;
       border-radius: 10px;
-      background: rgba(5, 8, 14, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: #f4d35e;
+      touch-action: manipulation;
     }
 
-    code {
-      display: inline-block;
-      padding: 2px 6px;
-      background: rgba(244, 211, 94, 0.15);
-      border: 1px solid rgba(244, 211, 94, 0.3);
-      border-radius: 4px;
-      color: #f4d35e;
-      font-size: 0.62rem;
+    .mobile-btn:active { background: #f4d35e; color: #171f2c; }
+
+    @media (max-width: 768px) {
+      .mobile-controls { display: flex; }
+      .controls-hint { display: none; }
     }
   </style>
 </head>
@@ -236,125 +168,76 @@
   <div class="wrapper">
     <div class="header">
       <h1>MOONWALKER GAME</h1>
-      <p>Desenvolvido por Gustavo Franco — Edição Arcade Retro</p>
     </div>
 
     <div class="top-ui">
-      <div class="difficulty-group">
-        <span class="difficulty-label">DIFICULDADE:</span>
-        <div class="diff-buttons">
-          <button class="diff-button" id="easyBtn">FÁCIL</button>
-          <button class="diff-button" id="normalBtn">NORMAL</button>
-          <button class="diff-button" id="hardBtn">DIFÍCIL</button>
-        </div>
+      <div class="group">
+        <span class="label">TRAJE:</span>
+        <select id="skinSelect">
+          <option value="smooth">Smooth Criminal</option>
+          <option value="thriller">Thriller</option>
+          <option value="bad">Bad</option>
+        </select>
       </div>
-      <button class="audio-button active" id="audioToggle">🔊 SOM: ON</button>
+      <div class="group">
+        <button class="game-btn active" id="normalBtn">NORMAL</button>
+        <button class="game-btn" id="hardBtn">DIFÍCIL</button>
+        <button class="game-btn active" id="audioToggle">🔊 SOM: ON</button>
+      </div>
     </div>
 
-    <div class="message-panel" id="messagePanel">
-      <span class="message-title" id="messageTitle">SELECIONE UMA DIFICULDADE E INICIE</span>
-      <span id="messageText">Pressione ESPAÇO para pular, SETA PARA BAIXO para agachar e F para disparar o SUPER AK-47.</span>
+    <div class="message-panel">
+      <span class="message-title" id="messageTitle">SELECIONE O TRAJE E INICIE</span>
+      <span id="messageText">ESPAÇO para pular, BAIXO para agachar, F para SUPER. Colete Power-ups!</span>
     </div>
 
     <div class="canvas-container">
       <canvas id="gameCanvas" width="800" height="200"></canvas>
     </div>
 
-    <div class="btn-container">
-      <button class="game-button" id="startBtn">INICIA JOGO</button>
-      <button class="game-button" id="superBtn" disabled>SUPER 0%</button>
+    <div class="group" style="width:100%; justify-content:center;">
+      <button class="game-btn active" id="startBtn" style="padding: 14px 30px;">INICIA JOGO</button>
+      <button class="game-btn" id="superBtn" disabled style="padding: 14px 30px; background: #333;">SUPER 0%</button>
     </div>
 
-    <div class="controls-hint">
-      <p><strong>Controles:</strong> Pular: <code>ESPAÇO</code> / <code>W</code> / <code>SETA CIMA</code> | Agachar: <code>S</code> / <code>SETA BAIXO</code> | Super AK-47: <code>F</code> | Hitboxes (Debug): <code>H</code></p>
+    <!-- Controles Touch (Visível apenas em Mobile) -->
+    <div class="mobile-controls">
+      <button class="mobile-btn" id="mDuck">AGACHA</button>
+      <button class="mobile-btn" id="mJump">PULA</button>
+      <button class="mobile-btn" id="mSuper" style="border-color: #ff4757; color: #ff4757;">SUPER</button>
     </div>
   </div>
 
   <script>
     // ==========================================
-    // 1. CONFIGURAÇÕES & ESTADO DO JOGO
+    // ESTADO E CONFIGURAÇÕES DO JOGO
     // ==========================================
-    const DEBUG_HITBOX = false;
-    let showHitboxes = DEBUG_HITBOX;
-
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
     ctx.imageSmoothingEnabled = false;
 
     const GROUND_Y = 165;
-    const HORIZON_Y = 96;
+    let gameRunning = false, gameOver = false;
+    let gameSpeed = 6, distance = 0, score = 0, frameCount = 0;
+    
+    // Super & Power-ups
+    const SUPER_CHARGE_FRAMES = 900, SUPER_DURATION_FRAMES = 180; // 3 Segundos Mecha
+    let superCharge = 0, superActiveFrames = 0;
+    let slowMoTimer = 0, shieldActive = false;
 
-    let gameRunning = false;
-    let gameOver = false;
-    let gameSpeed = 6;
-    let distance = 0;
-    let score = 0;
-    let frameCount = 0;
-    let screenShakeTimer = 0;
-    let screenFlashAlpha = 0;
-
-    const SUPER_CHARGE_FRAMES = 900; // 15 segundos a 60fps
-    const SUPER_DURATION_FRAMES = 60; // 1 segundo de rajada devastadora
-    let superCharge = 0;
-    let superActiveFrames = 0;
-
-    // Configurações de Dificuldade
-    const difficulties = {
-      easy: {
-        label: 'FÁCIL',
-        startSpeed: 5.0,
-        speedFactor: 0.0035,
-        maxSpeed: 10.5,
-        minGapBase: 320,
-        maxGapBase: 500,
-        airplaneChanceBase: 0.15,
-        storageKey: 'mj_hi_easy'
-      },
-      normal: {
-        label: 'NORMAL',
-        startSpeed: 6.0,
-        speedFactor: 0.0048,
-        maxSpeed: 12.8,
-        minGapBase: 260,
-        maxGapBase: 440,
-        airplaneChanceBase: 0.25,
-        storageKey: 'mj_hi_normal'
-      },
-      hard: {
-        label: 'DIFÍCIL',
-        startSpeed: 7.2,
-        speedFactor: 0.0060,
-        maxSpeed: 15.0,
-        minGapBase: 210,
-        maxGapBase: 380,
-        airplaneChanceBase: 0.38,
-        storageKey: 'mj_hi_hard'
-      }
+    // Skins[cite: 2]
+    const SKINS = {
+      smooth: { primary: '#fff', secondary: '#0055ff', hat: true },
+      thriller: { primary: '#e74c3c', secondary: '#c0392b', hat: false },
+      bad: { primary: '#222', secondary: '#000', hat: false }
     };
-    let selectedDifficulty = 'normal';
-
-    function getHighScore(diffKey) {
-      try {
-        const key = difficulties[diffKey].storageKey;
-        return parseInt(localStorage.getItem(key) || '0', 10) || 0;
-      } catch (e) {
-        return 0;
-      }
-    }
-
-    function saveHighScore(diffKey, val) {
-      try {
-        const key = difficulties[diffKey].storageKey;
-        localStorage.setItem(key, val);
-      } catch (e) {}
-    }
+    let currentSkin = 'smooth';
 
     // ==========================================
-    // 2. SISTEMA DE SÍNTESE DE ÁUDIO (Web Audio API)
+    // AUDIO API: SINTETIZADOR 8-BIT
     // ==========================================
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    let audioCtx = null;
-    let audioEnabled = true;
+    let audioCtx = null, audioEnabled = true, bgmOsc = null, bgmInterval = null;
 
     function ensureAudio() {
       if (!AudioCtx) return null;
@@ -364,41 +247,301 @@
     }
 
     function playSound(type) {
-      if (!audioEnabled) return;
-      const ctxA = ensureAudio();
-      if (!ctxA) return;
+      if (!audioEnabled || !ensureAudio()) return;
+      const now = audioCtx.currentTime;
 
-      const now = ctxA.currentTime;
+      if (type === 'heehee') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(800, now);
+        osc.frequency.setValueAtTime(1200, now + 0.1);
+        gain.gain.setValueAtTime(0.1, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.3);
+        osc.connect(gain); gain.connect(audioCtx.destination);
+        osc.start(now); osc.stop(now + 0.3);
+      } else if (type === 'pickup') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(600, now);
+        osc.frequency.exponentialRampToValueAtTime(1200, now + 0.1);
+        gain.gain.setValueAtTime(0.1, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.1);
+        osc.connect(gain); gain.connect(audioCtx.destination);
+        osc.start(now); osc.stop(now + 0.1);
+      } else if (type === 'shoot') {
+        const osc = audioCtx.createOscillator();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(150, now);
+        osc.frequency.exponentialRampToValueAtTime(40, now + 0.1);
+        const gain = audioCtx.createGain();
+        gain.gain.setValueAtTime(0.1, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+        osc.connect(gain); gain.connect(audioCtx.destination);
+        osc.start(now); osc.stop(now + 0.1);
+      }
+    }
 
-      if (type === 'start') {
-        const osc = ctxA.createOscillator();
-        const gain = ctxA.createGain();
-        osc.type = 'square';
-        osc.frequency.setValueAtTime(260, now);
-        osc.frequency.exponentialRampToValueAtTime(660, now + 0.18);
-        gain.gain.setValueAtTime(0.08, now);
-        gain.gain.linearRampToValueAtTime(0.001, now + 0.2);
-        osc.connect(gain);
-        gain.connect(ctxA.destination);
-        osc.start(now);
-        osc.stop(now + 0.2);
-      } else if (type === 'jump') {
-        const osc = ctxA.createOscillator();
-        const gain = ctxA.createGain();
-        osc.type = 'square';
-        osc.frequency.setValueAtTime(180, now);
-        osc.frequency.exponentialRampToValueAtTime(580, now + 0.12);
-        gain.gain.setValueAtTime(0.09, now);
-        gain.gain.linearRampToValueAtTime(0.001, now + 0.13);
-        osc.connect(gain);
-        gain.connect(ctxA.destination);
-        osc.start(now);
-        osc.stop(now + 0.13);
-      } else if (type === 'land') {
-        const osc = ctxA.createOscillator();
-        const gain = ctxA.createGain();
+    function startBGM() {
+      if (!audioEnabled || !ensureAudio() || bgmInterval) return;
+      const notes = [220, 220, 330, 293, 261, 261, 293, 330]; // Bassline retrô
+      let step = 0;
+      bgmInterval = setInterval(() => {
+        if (!gameRunning) return stopBGM();
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
         osc.type = 'triangle';
-        osc.frequency.setValueAtTime(120, now);
+        osc.frequency.value = notes[step % notes.length];
+        gain.gain.setValueAtTime(0.05, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+        osc.connect(gain); gain.connect(audioCtx.destination);
+        osc.start(now); osc.stop(now + 0.15);
+        step++;
+      }, 250);
+    }
+    
+    function stopBGM() {
+      clearInterval(bgmInterval);
+      bgmInterval = null;
+    }
+
+    // ==========================================
+    // ENTIDADES
+    // ==========================================
+    const mj = {
+      x: 70, y: GROUND_Y - 62, width: 48, height: 62, vy: 0, isJumping: false, isDucking: false,
+      jump() {
+        if (!this.isJumping) { this.vy = -11.8; this.isJumping = true; }
+      },
+      duck(en) {
+        if (!this.isJumping) {
+          this.isDucking = en;
+          this.height = en ? 38 : 62;
+          this.y = GROUND_Y - this.height;
+        }
+      },
+      update() {
+        if (this.isJumping) {
+          this.y += this.vy;
+          this.vy += 0.58;
+          if (this.y >= GROUND_Y - this.height) {
+            this.y = GROUND_Y - this.height;
+            this.isJumping = false;
+          }
+        }
+      },
+      draw(ctx) {
+        if (superActiveFrames > 0) {
+          // MECHA ROBOT TRANSFORMATION
+          ctx.fillStyle = '#b2bec3';
+          ctx.fillRect(this.x, this.y, 50, 62); // Corpo
+          ctx.fillStyle = '#636e72';
+          ctx.fillRect(this.x + 10, this.y + 10, 30, 20); // Peito
+          ctx.fillStyle = '#0984e3'; // Olho cylon
+          ctx.fillRect(this.x + 35, this.y + 4, 15, 6);
+          // Arma Mecha
+          ctx.fillStyle = '#d63031';
+          ctx.fillRect(this.x + 40, this.y + 25, 30, 8);
+        } else {
+          // Fallbacks baseados na Skin[cite: 2]
+          const s = SKINS[currentSkin];
+          ctx.fillStyle = s.primary;
+          ctx.fillRect(this.x + 10, this.y + (this.isDucking?10:0), 28, this.height - (this.isDucking?10:0));
+          ctx.fillStyle = s.secondary;
+          ctx.fillRect(this.x + 14, this.y + (this.isDucking?14:24), 20, 20);
+          
+          if (s.hat) {
+            ctx.fillStyle = '#eee';
+            ctx.fillRect(this.x + 8, this.y - 4, 32, 6);
+            ctx.fillRect(this.x + 14, this.y - 12, 20, 8);
+          }
+          
+          if (shieldActive) {
+            ctx.strokeStyle = '#74b9ff';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.arc(this.x + 24, this.y + 30, 40, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+        }
+      },
+      getBox() { return { x: this.x + 10, y: this.y + 5, width: 28, height: this.height - 10 }; }
+    };
+
+    let obstacles = [], powerups = [];
+
+    function spawnPowerUp() {
+      const types = ['hat', 'watch', 'notes'];
+      const type = types[Math.floor(Math.random() * types.length)];
+      powerups.push({ type, x: canvas.width + 50, y: GROUND_Y - 40 - Math.random() * 40, width: 20, height: 20 });
+    }
+
+    // ==========================================
+    // LOOP DO JOGO E MECÂNICAS
+    // ==========================================
+    function triggerSuper() {
+      if (superCharge >= SUPER_CHARGE_FRAMES && superActiveFrames === 0 && gameRunning) {
+        superCharge = 0; superActiveFrames = SUPER_DURATION_FRAMES;
+        playSound('heehee');
+        obstacles = []; // Limpa a tela
+      }
+    }
+
+    function checkCollision(a, b) {
+      return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
+    }
+
+    function gameLoop() {
+      if (!gameRunning) return;
+      frameCount++;
+      
+      // Lógica Slow Motion e Dificuldade
+      let currentSpeed = gameSpeed;
+      if (slowMoTimer > 0) {
+        currentSpeed *= 0.5;
+        slowMoTimer--;
+      }
+      distance += currentSpeed * 0.025;
+      
+      if (Math.floor(distance) > score) {
+        score = Math.floor(distance);
+        if (score % 100 === 0) playSound('heehee');
+      }
+
+      mj.update();
+
+      // Super Attack
+      if (superActiveFrames > 0) {
+        superActiveFrames--;
+        if (frameCount % 5 === 0) {
+           playSound('shoot');
+           // Destrói os obstáculos automaticamente à frente no modo Mecha
+           obstacles = obstacles.filter(o => o.x > mj.x + 300);
+        }
+      } else if (superCharge < SUPER_CHARGE_FRAMES) {
+        superCharge++;
+      }
+
+      // Spawns
+      if (Math.random() < 0.015) {
+        obstacles.push({ x: canvas.width, y: GROUND_Y - 40, width: 30, height: 40 });
+      }
+      if (Math.random() < 0.005) spawnPowerUp();
+
+      // Movimentação & Colisão - Power-ups
+      for (let i = powerups.length - 1; i >= 0; i--) {
+        let p = powerups[i];
+        p.x -= currentSpeed;
+        if (checkCollision(mj.getBox(), p)) {
+          playSound('pickup');
+          if (p.type === 'hat') shieldActive = true;
+          if (p.type === 'watch') slowMoTimer = 300;
+          if (p.type === 'notes') score += 50;
+          powerups.splice(i, 1);
+        } else if (p.x < -50) powerups.splice(i, 1);
+      }
+
+      // Movimentação & Colisão - Obstáculos
+      for (let i = obstacles.length - 1; i >= 0; i--) {
+        let obs = obstacles[i];
+        obs.x -= currentSpeed;
+        
+        if (checkCollision(mj.getBox(), obs)) {
+          if (superActiveFrames > 0) {
+            // Invulnerável, destrói obstáculo
+            obstacles.splice(i, 1);
+          } else if (shieldActive) {
+            shieldActive = false;
+            obstacles.splice(i, 1);
+            playSound('pickup');
+          } else {
+            gameRunning = false; gameOver = true; stopBGM();
+            document.getElementById('messageTitle').innerText = "GAME OVER";
+          }
+        }
+      }
+      obstacles = obstacles.filter(o => o.x > -50);
+
+      render();
+      requestAnimationFrame(gameLoop);
+    }
+
+    function render() {
+      // Fundo e Chão[cite: 2]
+      ctx.fillStyle = '#070b12'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#1a1e24'; ctx.fillRect(0, GROUND_Y, canvas.width, canvas.height - GROUND_Y);
+      ctx.fillStyle = '#f4d35e'; ctx.fillRect(0, GROUND_Y, canvas.width, 3);
+
+      mj.draw(ctx);
+
+      // Desenhar Obstáculos[cite: 2]
+      ctx.fillStyle = '#636e72';
+      obstacles.forEach(o => ctx.fillRect(o.x, o.y, o.width, o.height));
+
+      // Desenhar Power-ups
+      powerups.forEach(p => {
+        ctx.fillStyle = p.type === 'hat' ? '#fff' : p.type === 'watch' ? '#f1c40f' : '#9b59b6';
+        ctx.beginPath(); ctx.arc(p.x + 10, p.y + 10, 10, 0, Math.PI*2); ctx.fill();
+      });
+
+      // HUD UI[cite: 2]
+      ctx.fillStyle = '#f4d35e';
+      ctx.font = '12px "Press Start 2P"';
+      ctx.fillText(`SCORE: ${score}`, 20, 30);
+      
+      const pct = Math.min(100, Math.floor((superCharge / SUPER_CHARGE_FRAMES) * 100));
+      const btnSuper = document.getElementById('superBtn');
+      const mBtnSuper = document.getElementById('mSuper');
+      
+      if (superActiveFrames > 0) {
+         btnSuper.innerText = mBtnSuper.innerText = 'MECHA ATIVO!';
+         btnSuper.disabled = true;
+      } else {
+         btnSuper.innerText = mBtnSuper.innerText = `SUPER ${pct}%`;
+         btnSuper.disabled = (pct < 100);
+         if(pct === 100) { btnSuper.style.background = '#ff4757'; } else { btnSuper.style.background = '#333'; }
+      }
+    }
+
+    // ==========================================
+    // LISTENERS & INICIALIZAÇÃO
+    // ==========================================
+    document.getElementById('startBtn').addEventListener('click', () => {
+      currentSkin = document.getElementById('skinSelect').value;
+      mj.y = GROUND_Y - mj.height;
+      score = distance = superCharge = superActiveFrames = slowMoTimer = 0;
+      shieldActive = false; obstacles = []; powerups = [];
+      gameRunning = true; gameOver = false;
+      ensureAudio(); startBGM(); playSound('heehee');
+      requestAnimationFrame(gameLoop);
+    });
+
+    document.getElementById('audioToggle').addEventListener('click', () => {
+      audioEnabled = !audioEnabled;
+      document.getElementById('audioToggle').innerText = audioEnabled ? '🔊 SOM: ON' : '🔇 SOM: MUTE';
+    });
+
+    document.getElementById('superBtn').addEventListener('click', triggerSuper);
+    document.getElementById('mSuper').addEventListener('click', triggerSuper);
+    
+    // Touch/Mobile e Teclado[cite: 2]
+    document.getElementById('mJump').addEventListener('touchstart', (e) => { e.preventDefault(); mj.jump(); });
+    document.getElementById('mDuck').addEventListener('touchstart', (e) => { e.preventDefault(); mj.duck(true); });
+    document.getElementById('mDuck').addEventListener('touchend', (e) => { e.preventDefault(); mj.duck(false); });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') { if(gameRunning) mj.jump(); }
+      if (e.code === 'ArrowDown') mj.duck(true);
+      if (e.code === 'KeyF') triggerSuper();
+    });
+    window.addEventListener('keyup', (e) => { if (e.code === 'ArrowDown') mj.duck(false); });
+
+    render(); // Draw inicial
+  </script>
+</body>
+</html>
         osc.frequency.exponentialRampToValueAtTime(40, now + 0.08);
         gain.gain.setValueAtTime(0.08, now);
         gain.gain.linearRampToValueAtTime(0.001, now + 0.08);
