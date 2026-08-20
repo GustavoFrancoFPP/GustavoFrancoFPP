@@ -1,25 +1,23 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of 7943ae1 (.)
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
+
   <title>Moonwalker Game - Deluxe Edition</title>
-=======
+
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Moonwalker Game - Gustavo Franco</title>
->>>>>>> parent of 35eafa0 (.)
-=======
+
   <title>Moonwalker Game - Gustavo Franco</title>
->>>>>>> parent of 7943ae1 (.)
+
+  <title>Moonwalker Game - Gustavo Franco</title>
+
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
@@ -246,6 +244,7 @@
     let assetLoaded = 0; // counts successful loads
     let assetTried = 0;  // counts loads + errors
     let assetsReady = false;
+
     assetList.forEach(img => {
       img.onload = () => {
         assetLoaded++;
@@ -277,6 +276,56 @@
       btn.onclick = resetAndStart;
       if (typeof updateSuperButton === 'function') updateSuperButton();
     }
+
+
+    var gameStateReady = false;
+    function buildWeaponSprite() {
+      try {
+        if (imgAk.complete && imgAk.naturalWidth > 0) {
+          return createTransparentWeaponSprite(imgAk);
+        }
+      } catch (e) {
+        console.warn('Nao foi possivel recortar a arma; usando sprite reserva.', e);
+      }
+      return createFallbackWeaponSprite();
+    }
+
+    function markAssetDone(img, loaded) {
+      if (img._assetDone) return;
+      img._assetDone = true;
+      if (loaded) assetLoaded++;
+      assetTried++;
+      if (img === imgAk) {
+        akSprite = loaded ? buildWeaponSprite() : createFallbackWeaponSprite();
+      }
+      if (assetTried === assetList.length) enableStartIfReady();
+    }
+
+    assetList.forEach(img => {
+      img.onload = () => markAssetDone(img, true);
+      img.onerror = () => {
+        console.warn('Erro ao carregar imagem:', img.src);
+        markAssetDone(img, false);
+      };
+
+      if (img.complete) {
+        markAssetDone(img, img.naturalWidth > 0);
+      }
+    });
+
+    function enableStartIfReady() {
+      // mark assetsReady even if some images failed, but log which ones
+      assetsReady = true;
+      if (!akSprite) {
+        akSprite = buildWeaponSprite();
+      }
+      const btn = document.getElementById('startBtn');
+      btn.disabled = false;
+      btn.textContent = 'INICIAR JOGO';
+      btn.onclick = resetAndStart;
+      if (gameStateReady) updateSuperButton();
+    }
+
 
     // Safety fallback: if loading hangs, enable start after 4 seconds
     setTimeout(() => {
@@ -340,7 +389,7 @@
         queueEdgePixel(width - 1, y);
       }
 
-<<<<<<< HEAD
+
         .header h1 {
           font-size: clamp(1.5rem, 3vw, 2.2rem);
           margin-bottom: 6px;
@@ -348,7 +397,7 @@
           text-shadow: 0 3px 12px rgba(0, 0, 0, 0.75);
         }
 
-<<<<<<< HEAD
+
     .top-ui {
       width: 100%;
       display: flex;
@@ -416,7 +465,7 @@
     }
 
     .message-title { font-size: 0.68rem; color: #f4d35e; display: block; margin-bottom: 4px; }
-=======
+
         .header p {
           font-size: 0.72rem;
           opacity: 0.75;
@@ -537,13 +586,12 @@
           background: rgba(4, 8, 14, 0.5);
           border: 1px solid rgba(255,255,255,0.08);
         }
->>>>>>> parent of 35eafa0 (.)
 
         .btn-container {
           gap: 14px;
         }
 
-<<<<<<< HEAD
+
     #gameCanvas {
       background-color: #070b12;
       border: 2px solid rgba(244, 211, 94, 0.35);
@@ -976,7 +1024,7 @@
         const data = buffer.getChannelData(0);
         for (let i = 0; i < bufSize; i++) {
           data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufSize * 0.3));
-=======
+
         .game-button {
           min-width: 160px;
         }
@@ -1050,7 +1098,7 @@
           if (!audioCtx) audioCtx = new AudioCtx();
           if (audioCtx.state === 'suspended') audioCtx.resume();
           return audioCtx;
->>>>>>> parent of 35eafa0 (.)
+
         }
 
         function tone(freq, duration, volume = 0.08, type = 'square', endFreq = null, delay = 0) {
@@ -1231,7 +1279,8 @@
 
           if (img.complete) {
             markAssetDone(img, img.naturalWidth > 0);
-=======
+
+ parent of 7943ae1 (.)
       while (stack.length) {
         const [x, y] = stack.pop();
         const neighbors = [[x + 1, y], [x - 1, y], [x, y + 1], [x, y - 1]];
@@ -1241,7 +1290,10 @@
           if (!visited[index] && isNearBlack(nx, ny)) {
             visited[index] = 1;
             stack.push([nx, ny]);
->>>>>>> parent of 7943ae1 (.)
+
+ parent of 7943ae1 (.)
+
+ parent of 7943ae1 (.)
           }
         });
       }
@@ -1321,7 +1373,25 @@
     let gameSpeed = 6;
     let distance = 0;
     let score = 0;
+
     let highScore = parseInt(localStorage.getItem('mj_hi') || '0', 10) || 0;
+
+    function getStoredHighScore() {
+      try {
+        return parseInt(localStorage.getItem('mj_hi') || '0', 10) || 0;
+      } catch (e) {
+        return 0;
+      }
+    }
+
+    function saveHighScore(value) {
+      try {
+        localStorage.setItem('mj_hi', value);
+      } catch (e) { }
+    }
+
+    let highScore = getStoredHighScore();
+ parent of 7943ae1 (.)
     let frameCount = 0;
     const SUPER_CHARGE_FRAMES = 900;
     const SUPER_DURATION_FRAMES = 210;
@@ -1576,6 +1646,10 @@
         superBtn.disabled = true;
       }
     }
+
+
+    gameStateReady = true;
+    updateSuperButton();
 
     function drawSuperShot() {
       if (superActiveFrames <= 0 && muzzleFlashes.length === 0 && smokePuffs.length === 0 && shellCasings.length === 0) return;
@@ -2017,7 +2091,11 @@
 
       if (score > highScore) {
         highScore = score;
+
         localStorage.setItem('mj_hi', highScore);
+
+        saveHighScore(highScore);
+ parent of 7943ae1 (.)
       }
 
       renderScene();
